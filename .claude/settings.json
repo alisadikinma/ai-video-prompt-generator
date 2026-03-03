@@ -1,0 +1,47 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep",
+      "Write",
+      "Edit",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(mkdir *)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c \"INPUT=$(cat); echo \\\"$INPUT\\\" | grep -q '\\\"references/' && echo '[hook] Modifying reference file — run /validate-video-refs after' >&2 || true\""
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c \"INPUT=$(cat); echo \\\"$INPUT\\\" | grep -qE '(plugin\\.json|marketplace\\.json|hooks\\.json)' && echo '[hook] BLOCKED: Infrastructure file — confirm with user before editing' >&2 && exit 2 || true\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c \"INPUT=$(cat); echo \\\"$INPUT\\\" | grep -q '\\\"references/' && echo '[hook] Reference file modified — run /validate-video-refs to check consistency' >&2 || true\""
+          }
+        ]
+      }
+    ]
+  }
+}

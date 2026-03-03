@@ -1,0 +1,25 @@
+{
+  "name": "ai-video-prompt-generator",
+  "description": "Standalone AI video prompt generator. Converts any image to platform-optimized video prompts for Grok 3, VEO 3.1, Sora 2, Kling 2.5, and Seedance 2.0. Supports single image, batch processing, and carousel integration.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Ali Sadikin",
+    "url": "https://github.com/alisadikinma"
+  },
+  "homepage": "https://github.com/alisadikinma/ai-video-prompt-generator",
+  "repository": "https://github.com/alisadikinma/ai-video-prompt-generator",
+  "license": "MIT",
+  "keywords": [
+    "video-prompt",
+    "image-to-video",
+    "grok-3",
+    "veo-3",
+    "sora-2",
+    "kling",
+    "seedance",
+    "ai-video",
+    "content-creation",
+    "social-media",
+    "claude-code"
+  ]
+}
