@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "alisadikinma-ai-agent-expert",
-  "description": "AI video prompt generator for 5 platforms — Grok 3, VEO 3.1, Sora 2, Kling 2.5, Seedance 2.0",
+  "name": "alisadikinma-ai-content-suite",
+  "description": "AI content creation suite — image prompts, video prompts, scripts, and more",
   "owner": {
     "name": "Ali Sadikin",
     "url": "https://github.com/alisadikinma"
@@ -9,9 +9,18 @@
   "plugins": [
     {
       "name": "ai-video-prompt-generator",
-      "description": "2 skills + 1 agent + 15 reference docs for image-to-video prompt generation across 5 AI video platforms",
+      "description": "3 skills + 2 agents + 15 reference docs for image-to-video prompt generation across 5 AI video platforms",
       "version": "1.0.0",
       "source": "./"
+    },
+    {
+      "name": "ai-image-carousel-prompt-gen",
+      "description": "3 skills + 1 agent + 13 reference docs for cinematic carousel image prompt production (Instagram, TikTok, LinkedIn, Threads)",
+      "version": "2.16.0",
+      "source": {
+        "source": "git",
+        "url": "https://github.com/alisadikinma/sosmed-carousel-prompt-generator.git"
+      }
     }
   ]
 }
