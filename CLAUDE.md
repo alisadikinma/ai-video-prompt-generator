@@ -18,7 +18,6 @@
 | Path | Purpose |
 |------|---------|
 | `.claude-plugin/plugin.json` | Plugin metadata (name, version, author) |
-| `.claude-plugin/marketplace.json` | Marketplace listing |
 | `hooks/hooks.json` | SessionStart hook definition |
 | `hooks/session-start.sh` | Session start — announces available skills |
 | `skills/image-to-video/SKILL.md` | Main skill — image → video prompt generation |
