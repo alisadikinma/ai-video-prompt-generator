@@ -47,9 +47,9 @@ Or via **Manage Plugins UI** → **Marketplaces** tab → paste `alisadikinma/ai
 
 | Skill | Invoke | Description |
 |-------|--------|-------------|
-| `image-to-video` | `/image-to-video` | Main skill — convert image(s) to video prompts |
-| `validate-video-refs` | `/validate-video-refs` | Cross-file consistency checker (6 checks) |
-| `add-platform` | `/add-platform` | Scaffold all files for a new AI video platform |
+| `video-gen` | `/video-gen` | Main skill — convert image(s) to video prompts |
+| `video-validate` | `/video-validate` | Cross-file consistency checker (6 checks) |
+| `video-add-platform` | `/video-add-platform` | Scaffold all files for a new AI video platform |
 
 ## Agents
 
@@ -61,7 +61,7 @@ Or via **Manage Plugins UI** → **Marketplaces** tab → paste `alisadikinma/ai
 ## Quick Start
 
 1. Install the plugin (see above)
-2. Invoke: `/image-to-video`
+2. Invoke: `/video-gen`
 3. Provide image path
 4. Get platform-optimized video prompt
 

@@ -1,5 +1,5 @@
 ---
-name: add-platform
+name: video-add-platform
 description: |
   Scaffold all files needed to add a new AI video platform to the plugin.
   Creates platform guide, updates cross-references in SKILL.md, agent, CLAUDE.md,
@@ -53,7 +53,7 @@ Read `references/grok-3-guide.md` as a template for structure. The new guide mus
 
 ---
 
-## Step 2: Update `skills/image-to-video/SKILL.md`
+## Step 2: Update `skills/video-gen/SKILL.md`
 
 Add entries in these locations:
 
@@ -120,7 +120,7 @@ Check and update if relevant:
 
 ## Step 7: Validate
 
-Run `/validate-video-refs` to check consistency across all files.
+Run `/video-validate` to check consistency across all files.
 
 If validation fails, fix the reported issues before completing.
 
@@ -137,7 +137,7 @@ After completing all steps, report:
 - `references/{platform-id}-guide.md`
 
 ## Files Updated
-- `skills/image-to-video/SKILL.md` — reference table, specs, decision tree
+- `skills/video-gen/SKILL.md` — reference table, specs, decision tree
 - `agents/image-to-video-batch.md` — reference table
 - `CLAUDE.md` — overview, references, priority, specs, debugging
 - `references/global-video-config.md` — priority, specs, output conventions
@@ -146,5 +146,5 @@ After completing all steps, report:
 - [other files if updated]
 
 ## Validation
-[Result of /validate-video-refs]
+[Result of /video-validate]
 ```

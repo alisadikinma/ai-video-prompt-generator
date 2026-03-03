@@ -20,9 +20,9 @@
 | `.claude-plugin/plugin.json` | Plugin metadata (name, version, author) |
 | `hooks/hooks.json` | SessionStart hook definition |
 | `hooks/session-start.sh` | Session start — announces available skills |
-| `skills/image-to-video/SKILL.md` | Main skill — image → video prompt generation |
-| `skills/validate-video-refs/SKILL.md` | Cross-file consistency checker (6 checks) |
-| `skills/add-platform/SKILL.md` | Scaffold new platform (automates 7-step process) |
+| `skills/video-gen/SKILL.md` | Main skill — image → video prompt generation |
+| `skills/video-validate/SKILL.md` | Cross-file consistency checker (6 checks) |
+| `skills/video-add-platform/SKILL.md` | Scaffold new platform (automates 7-step process) |
 | `agents/image-to-video-batch.md` | Subagent for batch processing folders |
 | `agents/quality-reviewer.md` | Subagent for parallel quality gate verification |
 | `references/` | 15 reference docs read on-demand by skill/agent |
@@ -109,7 +109,7 @@ NEVER duplicate visual details already in the image inside the video prompt.
 7. **Text preservation** — detect and preserve text overlays in image-to-video conversion
 8. **SFX/audio direction** — detailed, specific audio cues matching scene content
 9. **Creator identity** (optional) — maintain face/brand consistency from reference images
-10. **Add platform** — scaffold all files for a new video platform via `/add-platform`
+10. **Add platform** — scaffold all files for a new video platform via `/video-add-platform`
 11. **Quality review** — parallel quality gate verification via `quality-reviewer` subagent
 
 ## Conventions
@@ -119,14 +119,14 @@ NEVER duplicate visual details already in the image inside the video prompt.
 2. No need to edit other files — they all reference global-video-config.md
 
 ### Adding a New Platform Guide
-Use `/add-platform` skill to automate the full 7-step scaffold, or manually:
+Use `/video-add-platform` skill to automate the full 7-step scaffold, or manually:
 1. Create `.md` file in `references/` (e.g., `new-platform-guide.md`)
-2. Add entry to Reference Files table in `skills/image-to-video/SKILL.md`
+2. Add entry to Reference Files table in `skills/video-gen/SKILL.md`
 3. Add entry to Reference Files table in `agents/image-to-video-batch.md`
 4. Update this CLAUDE.md file
 5. Update `references/global-video-config.md` Platform Specs table
 6. Update supporting references (prompt-templates, quality-checklist)
-7. Run `/validate-video-refs` to verify consistency
+7. Run `/video-validate` to verify consistency
 
 ### File Naming
 - Reference files: lowercase, kebab-case (e.g., `grok-3-guide.md`)
@@ -156,9 +156,9 @@ Use `/add-platform` skill to automate the full 7-step scaffold, or manually:
 
 | Hook | Type | Trigger | Behavior |
 |------|------|---------|----------|
-| Reference edit warning | PreToolUse | Edit/Write on `references/` | Warns to run `/validate-video-refs` |
+| Reference edit warning | PreToolUse | Edit/Write on `references/` | Warns to run `/video-validate` |
 | Infrastructure guard | PreToolUse | Edit/Write on `plugin.json`, `marketplace.json`, `hooks.json` | Blocks edit, requires user confirmation |
-| Reference edit reminder | PostToolUse | Edit/Write on `references/` | Reminds to run `/validate-video-refs` after edit |
+| Reference edit reminder | PostToolUse | Edit/Write on `references/` | Reminds to run `/video-validate` after edit |
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: image-to-video
+name: video-gen
 description: |
   Standalone AI video prompt generator. Converts any image to platform-optimized
   video prompts for Grok 3 (PRIMARY), VEO 3.1, Sora 2, Kling 2.5, and Seedance 2.0.

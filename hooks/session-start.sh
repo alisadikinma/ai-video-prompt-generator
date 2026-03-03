@@ -1,8 +1,8 @@
 #!/bin/bash
 echo "ai-video-prompt-generator loaded. Skills available:"
-echo "  image-to-video — convert any image to platform-optimized video prompts (Grok 3 PRIMARY, VEO 3.1, Sora 2, Kling 2.5, Seedance 2.0)"
-echo "  validate-video-refs — cross-file consistency checker (6 checks)"
-echo "  add-platform — scaffold all files for a new AI video platform"
+echo "  video-gen — convert any image to platform-optimized video prompts (Grok 3 PRIMARY, VEO 3.1, Sora 2, Kling 2.5, Seedance 2.0)"
+echo "  video-validate — cross-file consistency checker (6 checks)"
+echo "  video-add-platform — scaffold all files for a new AI video platform"
 echo ""
 echo "Agents available:"
 echo "  image-to-video-batch — subagent for batch processing folders of images"

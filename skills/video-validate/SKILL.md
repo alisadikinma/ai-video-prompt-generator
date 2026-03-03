@@ -1,5 +1,5 @@
 ---
-name: validate-video-refs
+name: video-validate
 description: |
   Cross-file consistency checker for image-to-video-prompt-generator references.
   Run after editing any reference file, before commits, or after adding new platform guides.
@@ -29,7 +29,7 @@ Compare platform specs across these files — all must agree:
 - `references/sora-2-guide.md` specs
 - `references/kling-25-guide.md` specs
 - `references/seedance-20-guide.md` specs
-- `skills/image-to-video/SKILL.md` Fixed Technical Specs table
+- `skills/video-gen/SKILL.md` Fixed Technical Specs table
 - `CLAUDE.md` platform specs
 
 **Fields to verify:** duration, resolution, audio, lip-sync, negative prompt, image input, orientations.
@@ -50,7 +50,7 @@ Search all `.md` files for duration mentions and verify consistency.
 Camera movement terms in `references/camera-movement-library.md` must match terms used in:
 - Platform guides (grok-3, veo-31, sora-2, kling-25, seedance-20)
 - `references/prompt-templates.md`
-- `skills/image-to-video/SKILL.md`
+- `skills/video-gen/SKILL.md`
 
 No guide should reference a camera term not in the library.
 
@@ -59,7 +59,7 @@ No guide should reference a camera term not in the library.
 Quality gate must be consistent across:
 - `references/global-video-config.md` Section 6 (8 points, min 6/8)
 - `references/quality-checklist.md` Section 1 (8 factors)
-- `skills/image-to-video/SKILL.md` Step 4
+- `skills/video-gen/SKILL.md` Step 4
 - `CLAUDE.md` quality gate reference
 
 Same 8 factors, same minimum score.
@@ -68,7 +68,7 @@ Same 8 factors, same minimum score.
 
 Priority order must match across:
 - `references/global-video-config.md` Section 1 (master)
-- `skills/image-to-video/SKILL.md` Platform Decision Tree
+- `skills/video-gen/SKILL.md` Platform Decision Tree
 - `CLAUDE.md` platform priority
 - `hooks/session-start.sh` announcement
 
@@ -79,7 +79,7 @@ Grok 3 must be PRIMARY everywhere.
 The golden rule "IMAGE = VISUALS, VIDEO = MOTION ONLY" must appear in:
 - `references/global-video-config.md` Section 7
 - `references/prompt-templates.md`
-- `skills/image-to-video/SKILL.md` Hard Rules
+- `skills/video-gen/SKILL.md` Hard Rules
 - `CLAUDE.md` Key Concepts
 
 ## Output Format
