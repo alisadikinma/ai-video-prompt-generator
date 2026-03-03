@@ -29,12 +29,15 @@ Standalone Claude Code plugin that converts any image to platform-optimized vide
 
 ## Install
 
-```bash
-# Step 1 — Add marketplace
-/plugin marketplace add alisadikinma/ai-video-prompt-generator
+**Via Manage Plugins UI:**
+1. Open **Manage Plugins** → **Marketplaces** tab
+2. Paste `alisadikinma/ai-video-prompt-generator` → click **Add**
+3. Go to **Plugins** tab → install `ai-video-prompt-generator`
 
-# Step 2 — Install plugin
-/plugin install ai-video-prompt-generator@alisadikinma-ai-content-suite
+**Via CLI:**
+```bash
+claude plugins marketplace add alisadikinma/ai-video-prompt-generator
+claude plugins install ai-video-prompt-generator@alisadikinma-ai-content-suite
 ```
 
 ## Skills
