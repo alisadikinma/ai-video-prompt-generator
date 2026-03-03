@@ -23,34 +23,49 @@ Standalone Claude Code plugin that converts any image to platform-optimized vide
 - Unified camera movement library
 - Carousel integration (reads carousel-prompt.md for context)
 - Multi-platform export
+- New platform scaffolding (automates 7-step setup)
+- Parallel quality review via subagent
 - Indonesian localization
+
+## Install
+
+### Option 1: Add as Custom Marketplace
+
+```bash
+# Step 1 — Add marketplace
+/plugin marketplace add alisadikinma/ai-video-prompt-generator
+
+# Step 2 — Install plugin
+/plugin install ai-video-prompt-generator@alisadikinma-ai-agent-expert
+```
+
+### Option 2: Install Directly from GitHub
+
+```bash
+claude plugin install --from https://github.com/alisadikinma/ai-video-prompt-generator.git
+```
 
 ## Skills
 
-| Skill | Description |
-|-------|-------------|
-| `image-to-video` | Main skill — convert image(s) to video prompts |
-| `validate-video-refs` | Cross-file consistency checker (6 checks) |
+| Skill | Invoke | Description |
+|-------|--------|-------------|
+| `image-to-video` | `/image-to-video` | Main skill — convert image(s) to video prompts |
+| `validate-video-refs` | `/validate-video-refs` | Cross-file consistency checker (6 checks) |
+| `add-platform` | `/add-platform` | Scaffold all files for a new AI video platform |
 
-## Agent
+## Agents
 
 | Agent | Description |
 |-------|-------------|
-| `image-to-video-batch` | Subagent for batch processing folders of images |
+| `image-to-video-batch` | Batch processing folders of images |
+| `quality-reviewer` | Parallel quality gate verification (8-point scoring) |
 
 ## Quick Start
 
-```bash
-# Install from marketplace
-claude plugin install ai-video-prompt-generator
-
-# Or install from GitHub
-claude plugin install https://github.com/alisadikinma/ai-video-prompt-generator.git
-```
-
-1. Invoke: `/image-to-video`
-2. Provide image path
-3. Get platform-optimized video prompt
+1. Install the plugin (see above)
+2. Invoke: `/image-to-video`
+3. Provide image path
+4. Get platform-optimized video prompt
 
 ## Golden Rule
 
