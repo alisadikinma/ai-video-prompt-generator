@@ -37,11 +37,11 @@ Compare platform specs across these files — all must agree:
 ### Check 2: Duration Values
 
 All duration references must match global-video-config.md:
-- Grok 3: 6s / 10s / 15s
-- VEO 3.1: 8s
-- Sora 2: 10s / 15s
-- Kling 2.5: 10s
-- Seedance 2.0: 4s - 15s
+- Grok 3: 1s-15s (granular); UI: 6s / 10s / 15s
+- VEO 3.1: 4s / 6s / 8s
+- Sora 2: 4s / 8s / 12s (API); 20s (Pro)
+- Kling 3.0: 5s / 10s / 15s
+- Seedance 2.0: 3s - 12s
 
 Search all `.md` files for duration mentions and verify consistency.
 

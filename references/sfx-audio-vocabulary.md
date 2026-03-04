@@ -200,7 +200,35 @@
 
 ---
 
-## 12. Domestic / Indoor
+## 12. Enterprise / Industrial / Manufacturing
+
+| SFX Term | Description |
+|----------|-------------|
+| `factory machinery hum` | Continuous industrial equipment operation background |
+| `production line rhythm` | Mechanical repetitive assembly sounds |
+| `conveyor belt rolling` | Belt and roller movement carrying items |
+| `forklift beep` | Warning alarm of industrial vehicle reversing |
+| `hydraulic press slam` | Heavy metal-on-metal stamping impact |
+| `pneumatic hiss` | Compressed air release from tools or systems |
+| `welding arc crackle` | Electrical sparking of metal joining |
+| `safety alarm beacon` | Rotating amber/red warning light with intermittent alarm |
+| `emergency siren wail` | Sustained alarm indicating danger or evacuation |
+| `walkie-talkie crackle` | Radio communication burst with static |
+| `PA system announcement` | Public address speaker with reverb/echo |
+| `hard hat impact` | Protective helmet being struck or donned |
+| `safety boot on metal grating` | Heavy footfall on industrial flooring |
+| `warehouse echo` | Sounds reverberating in large open industrial space |
+| `loading dock rumble` | Heavy cargo movement and truck activity |
+| `badge scanner beep` | Access control card reader confirmation tone |
+| `turnstile click` | Personnel entry gate mechanical release |
+| `access gate mechanism` | Motorized barrier opening/closing |
+| `server room drone` | Data center continuous cooling and equipment hum |
+| `UPS beep` | Uninterruptible power supply status alert |
+| `control room ambient` | Monitor hum, alert chimes, radio static composite |
+
+---
+
+## 13. Domestic / Indoor
 
 | SFX Term | Description |
 |----------|-------------|
@@ -219,16 +247,22 @@
 
 ## Platform-Specific Audio Rules
 
-### Grok 3 (Aurora Engine)
-- **Audio generation:** Automatic SFX based on prompt description
+### Grok 3 (Aurora Engine — Grok Imagine v1.0+)
+- **Audio generation:** Native audio in single forward pass — SFX + dialogue + background music
 - **Format:** Describe sounds naturally within the motion prompt
 - **No separate audio block** -- SFX vocabulary weaved into main prompt text
 - **Best practice:** Be specific, not generic. Write `"rapid gunfire bursts, shell casings clinking on stone"` not just `"action sounds"`
-- **Limitation:** No dialogue/speech generation. Audio is environmental only
-- **Example:**
+- **Dialogue:** Supported via `Speech: [text]` in Custom mode — triggers lip-sync (single character)
+- **WARNING:** Without explicit audio direction, Grok adds generic background music (often undesirable). Always specify audio explicitly.
+- **Example (SFX only):**
   ```
   Loud rapid gunfire bursts, bullet ricochets on metal shield,
   shell casings clinking on stone ground, dramatic cinematic bass impact.
+  ```
+- **Example (with dialogue):**
+  ```
+  Speech: Every worker, every zone, every second. Warm room ambient,
+  soft HVAC hum behind voice, natural breath sounds between phrases.
   ```
 
 ### VEO 3.1
@@ -257,7 +291,7 @@
   - Effects: subtle ambient only, no music
   ```
 
-### Kling 2.5
+### Kling 3.0
 - **Audio generation:** Limited native audio. Environmental SFX only
 - **No dialogue support** -- plan all speech for post-production
 - **Format:** Include audio description as part of overall prompt

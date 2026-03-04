@@ -89,12 +89,27 @@ All text, headline, branding remain sharp and readable throughout. [Interactive 
 | Grok 3 | Manual in prompt | Best — explicitly state in prompt, model respects it well |
 | VEO 3.1 | Manual in prompt | Add "no text overlays" to prevent model adding its own text |
 | Sora 2 | Manual in prompt | Add preservation instruction, keep camera subtle |
-| Kling 2.5 | Manual in prompt | Include in prompt, use static/drift camera |
+| Kling 3.0 | Manual in prompt | Include in prompt, use static/drift camera |
 | Seedance 2.0 | Manual in prompt | Include in prompt, avoid complex camera on text areas |
 
 ---
 
-## 6. Common Mistakes
+## 6. Carousel vs Product/Social Video — Animation Rules
+
+| Aspect | Carousel Animation | Product / Social Video |
+|--------|-------------------|----------------------|
+| **Design** | PRESERVE — do not change | TRANSFORM — go wild |
+| **Animation** | Subtle only (drift, pulse, glow) | Dramatic & wow (zoom, orbit, morph) |
+| **Headlines** | MUST persist start-to-finish | Optional — can animate in/out |
+| **Camera** | Static or slow drift ONLY | Any movement — bold encouraged |
+| **New elements** | NEVER add objects not in image | Can add effects, particles, etc. |
+| **Goal** | Bring the slide to life gently | Stop the scroll with impact |
+
+> **Key rule:** Carousel = the image IS the design, animate it subtly. Product/social = the image is a starting point, create cinema.
+
+---
+
+## 7. Common Mistakes
 
 | Mistake | Fix |
 |---------|-----|

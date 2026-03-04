@@ -40,9 +40,9 @@ If a check fails:
 
 ## 3. Per-Platform Checklist Variations
 
-### Grok 3 (PRIMARY)
-- [ ] Duration: 6s, 10s, or 15s
-- [ ] Orientation set (16:9 / 9:16 / 1:1 / 2:3 / 3:2)
+### Grok 3 (PRIMARY — Grok Imagine v1.0+)
+- [ ] Duration: 1s-15s (granular); UI presets: 6s, 10s, or 15s
+- [ ] Orientation set (16:9 / 9:16 / 1:1 / 4:3 / 3:4 / 2:3 / 3:2)
 - [ ] First 20-30 words contain most important elements
 - [ ] No negative prompt used (Grok doesn't support it)
 - [ ] SFX/audio direction specific and detailed
@@ -52,7 +52,7 @@ If a check fails:
 - [ ] Prompt length: 50-100 words (optimal)
 
 ### VEO 3.1
-- [ ] Duration: max 8s
+- [ ] Duration: 4s / 6s / 8s
 - [ ] Resolution: 1080p
 - [ ] Aspect: 9:16 or 16:9
 - [ ] Camera movement uses VEO-verified term
@@ -64,8 +64,8 @@ If a check fails:
 - [ ] Negative prompt included
 
 ### Sora 2
-- [ ] Duration: 10s or 15s
-- [ ] Resolution: 720p
+- [ ] Duration: 4s / 8s / 12s (API); up to 20s (Pro)
+- [ ] Resolution: 720p (standard) / 1080p (Pro)
 - [ ] ONE camera move only
 - [ ] ONE subject action only
 - [ ] Beat-based timing included (turns 0-2s, pauses 2-4s, completes 4-6s)
@@ -73,8 +73,8 @@ If a check fails:
 - [ ] No visual re-description
 - [ ] Negative prompt included
 
-### Kling 2.5
-- [ ] Duration: 5s or 10s
+### Kling 3.0
+- [ ] Duration: 5s / 10s / 15s
 - [ ] Camera movement described
 - [ ] Subject motion described
 - [ ] Ambient motion (if applicable)
@@ -82,7 +82,7 @@ If a check fails:
 - [ ] cfg_scale: 0.5
 
 ### Seedance 2.0
-- [ ] Duration: 4s-15s
+- [ ] Duration: 3s - 12s
 - [ ] Resolution: up to 2K
 - [ ] Clear concrete prompt (not vague)
 - [ ] Camera movement keyword included

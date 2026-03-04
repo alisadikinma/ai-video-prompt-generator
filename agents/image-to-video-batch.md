@@ -19,8 +19,8 @@ You are a batch video prompt processor. You read a folder of images, analyze eac
 For each image in the folder (sorted by filename):
 
 1. **READ** the image using Read tool (Claude multimodal vision)
-2. **ANALYZE** using the 6-element framework from `references/image-analysis-framework.md`:
-   - Subject, Motion Cues, Camera/Composition, Lighting, Environment, Mood/Style
+2. **ANALYZE** using the 7-element framework from `references/image-analysis-framework.md`:
+   - Subject, Motion Cues, Camera/Composition, Lighting, Environment, Mood/Style, Text Detection
 3. **SELECT** camera movement from `references/camera-movement-library.md`
    - VARY camera movements across the sequence — don't use the same one for every image
 4. **DESCRIBE** motion from `references/motion-description-library.md`
@@ -58,7 +58,7 @@ Load on-demand — only the files needed for the current task:
 | Grok 3 | `references/grok-3-guide.md` |
 | VEO 3.1 | `references/veo-31-guide.md` |
 | Sora 2 | `references/sora-2-guide.md` |
-| Kling 2.5 | `references/kling-25-guide.md` |
+| Kling 3.0 | `references/kling-25-guide.md` |
 | Seedance 2.0 | `references/seedance-20-guide.md` |
 | Camera | `references/camera-movement-library.md` |
 | Motion | `references/motion-description-library.md` |

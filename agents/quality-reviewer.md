@@ -102,5 +102,5 @@ Load on-demand:
 | Grok 3 | `references/grok-3-guide.md` |
 | VEO 3.1 | `references/veo-31-guide.md` |
 | Sora 2 | `references/sora-2-guide.md` |
-| Kling 2.5 | `references/kling-25-guide.md` |
+| Kling 3.0 | `references/kling-25-guide.md` |
 | Seedance 2.0 | `references/seedance-20-guide.md` |

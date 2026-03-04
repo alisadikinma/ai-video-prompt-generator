@@ -6,20 +6,20 @@ Standalone Claude Code plugin that converts any image to platform-optimized vide
 
 | Platform | Priority | Duration | Best For |
 |----------|----------|----------|----------|
-| **Grok 3** | PRIMARY | 6s / 10s / 15s | Default for all I2V conversion |
-| VEO 3.1 | Secondary | 8s | Lip-sync, dialogue, talking head |
-| Seedance 2.0 | Secondary | 4s - 15s | Multi-shot, audio sync, 2K |
-| Sora 2 | Tertiary | 10s / 15s | Complex physics, elaborate motion |
-| Kling 2.5 | Tertiary | 10s | Motion fluidity, cinematic |
+| **Grok 3** | PRIMARY | 1s-15s (UI: 6s/10s/15s) | Default for all I2V, lip-sync, native audio |
+| VEO 3.1 | Secondary | 4s / 6s / 8s | Best lip-sync, dialogue, talking head |
+| Seedance 2.0 | Secondary | 3s - 12s | Multi-shot, audio sync, 2K |
+| Sora 2 | Tertiary | 4s / 8s / 12s | Complex physics, elaborate motion |
+| Kling 3.0 | Tertiary | 5s / 10s / 15s | Motion fluidity, multi-shot, voice ref |
 
 ## Features
 
 - Single image or batch folder processing
-- Structured 6-element image analysis via Claude Vision
+- Structured 7-element image analysis via Claude Vision (incl. text detection)
 - Platform-specific prompt optimization
 - 8-point video quality gate (min 6/8)
 - Text preservation for images with baked-in text
-- 12+ SFX/audio categories
+- 13+ SFX/audio categories (incl. enterprise/industrial)
 - Unified camera movement library
 - Carousel integration (reads carousel-prompt.md for context)
 - Multi-platform export

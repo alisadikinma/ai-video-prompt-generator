@@ -2,7 +2,7 @@
 name: video-gen
 description: |
   Standalone AI video prompt generator. Converts any image to platform-optimized
-  video prompts for Grok 3 (PRIMARY), VEO 3.1, Sora 2, Kling 2.5, and Seedance 2.0.
+  video prompts for Grok 3 (PRIMARY), VEO 3.1, Sora 2, Kling 3.0, and Seedance 2.0.
   Use this skill whenever the user wants to:
   - Convert an image to a video animation prompt
   - Generate video prompts from carousel slides
@@ -28,7 +28,7 @@ Every video must feel alive — natural motion, cinematic camera, immersive audi
 | Grok 3 prompt (DEFAULT) | + `references/grok-3-guide.md` (PRIMARY platform) |
 | VEO 3.1 prompt | + `references/veo-31-guide.md` (lip-sync, dialogue) |
 | Sora 2 prompt | + `references/sora-2-guide.md` (complex physics) |
-| Kling 2.5 prompt | + `references/kling-25-guide.md` (motion fluidity) |
+| Kling 3.0 prompt | + `references/kling-25-guide.md` (motion fluidity, multi-shot) |
 | Seedance 2.0 prompt | + `references/seedance-20-guide.md` (multi-shot, audio sync) |
 | Camera movement selection | + `references/camera-movement-library.md` |
 | Motion description | + `references/motion-description-library.md` |
@@ -75,15 +75,16 @@ Every video must feel alive — natural motion, cinematic camera, immersive audi
 
 ## Fixed Technical Specs
 
-| Setting | Grok 3 (PRIMARY) | VEO 3.1 | Sora 2 | Kling 2.5 | Seedance 2.0 |
+| Setting | Grok 3 (PRIMARY) | VEO 3.1 | Sora 2 | Kling 3.0 | Seedance 2.0 |
 |---------|-----------------|---------|--------|-----------|-------------|
-| Duration | 6s / 10s / 15s | 8s | 10s / 15s | 10s | 4s - 15s |
-| Resolution | 720p HD | 1080p | 720p | auto | 2K |
-| Audio | Auto SFX | Native | Plan ADR | No | Native sync |
-| Lip-sync | No | Yes | Limited | No | Yes |
+| Duration | 1s-15s (granular); UI: 6s/10s/15s | 4s / 6s / 8s | 4s / 8s / 12s (API); 20s (Pro) | 5s / 10s / 15s | 3s - 12s |
+| Resolution | 720p HD (default 480p — request 720p) | 1080p | 720p (standard) / 1080p (Pro) | 1080p | Up to 2K |
+| Audio | Native (SFX + dialogue + music) | Native (dialogue+SFX) | Native (comprehensive) | Native (voice reference) | Native sync |
+| Lip-sync | Yes (single char, v1.0+) | Yes (best) | Limited | Yes | Yes |
+| Dialogue | `Speech: [text]` | `says: "text"` | Quotes below prose | Via audio section | Voice ref + text |
 | Neg. prompt | No | Yes | Yes | Yes | Yes |
 | Image input | Reference | Up to 3 | First frame | image_url | Up to 9 |
-| Prompt length | 50-100 words | 100-150 words | 150+ words | 50-150 words | 50-150 words |
+| Prompt length | 50-100 words | 100-150 words | 50-200 words | 50-150 words | 30-80 words |
 
 ---
 
@@ -102,7 +103,7 @@ Ask the user:
 
 ### Step 1: IMAGE ANALYSIS (Structured — Claude Vision)
 
-Read the image using Claude's multimodal Read tool. Extract structured 6-element analysis:
+Read the image using Claude's multimodal Read tool. Extract structured 7-element analysis:
 
 ```
 ## Image Analysis
@@ -138,6 +139,12 @@ Read the image using Claude's multimodal Read tool. Extract structured 6-element
 - Emotional tone: [peaceful/dramatic/eerie/joyful/tense]
 - Visual style: [photorealistic/cinematic/stylized]
 - Color palette: [warm/cool/saturated/muted]
+
+### 7. Text Detection
+- Headlines/Titles: [any large text visible]
+- Body text/Labels: [smaller text, stats, captions]
+- Branding/Logos: [company logos, watermarks]
+- Text preservation needed: [YES/NO]
 ```
 
 ### Step 2: PLATFORM ROUTING
@@ -146,12 +153,14 @@ Read the image using Claude's multimodal Read tool. Extract structured 6-element
 
 ```
 Platform Decision Tree:
-├── DEFAULT → Grok 3 (PRIMARY)
-├── Need lip-sync/dialogue? → VEO 3.1
+├── DEFAULT → Grok 3 (PRIMARY — fastest, cheapest, lip-sync + native audio)
+├── Need BEST lip-sync/dialogue? → VEO 3.1 (production-grade)
+├── Need budget lip-sync? → Grok 3 (social media grade, Speech: syntax)
 ├── Complex physics/elaborate motion? → Sora 2
 ├── Need highest resolution (2K)? → Seedance 2.0
-├── Multi-shot narrative + audio? → Seedance 2.0
-├── Motion fluidity priority? → Kling 2.5
+├── Multi-shot narrative + audio? → Seedance 2.0 or Kling 3.0
+├── Multi-character dialogue? → Seedance 2.0 or Kling 3.0
+├── Motion fluidity priority? → Kling 3.0
 └── User override? → use specified platform
 ```
 
@@ -187,7 +196,7 @@ Score the prompt against the 8-point quality checklist:
 # Video Prompt — [Platform Name]
 
 **Source Image:** `[filename]`
-**Platform:** [Grok 3 / VEO 3.1 / Sora 2 / Kling 2.5 / Seedance 2.0]
+**Platform:** [Grok 3 / VEO 3.1 / Sora 2 / Kling 3.0 / Seedance 2.0]
 **Duration:** [N]s | **Resolution:** [res] | **Orientation:** [ratio]
 
 ## Image Analysis Summary
@@ -312,7 +321,8 @@ When a `carousel-prompt.md` file exists in the input folder:
 | Simple ambient scene | 6s | Grok 3 |
 | Standard action/motion | 10s | Grok 3 |
 | Complex dramatic scene | 10-15s | Grok 3 / Seedance 2.0 |
-| Dialogue / talking head | 8s | VEO 3.1 |
+| Dialogue / talking head (budget) | 6s-10s | Grok 3 (Speech: syntax) |
+| Dialogue / talking head (quality) | 8s | VEO 3.1 (says: syntax) |
 | Physics simulation | 10-15s | Sora 2 |
 | Multi-shot narrative | 10-15s | Seedance 2.0 |
 | Quick ambient loop | 4-6s | Seedance 2.0 / Grok 3 |

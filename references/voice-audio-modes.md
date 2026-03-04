@@ -21,20 +21,42 @@
 
 The carousel image IS the video frame — Grok 3 animates it with motion + auto-generated SFX.
 
+### 2.1 Core Rules
+
 - Prompt describes ONLY what **MOVES** and what **SOUNDS**
 - No dialogue, no narration, no voiceover
 - SFX and ambient audio only
-- Text preservation for baked-in headlines/branding
 - Duration: 6s default, 10s for dramatic/CTA
 
-**Prompt formula:**
+### 2.2 Design Preservation (CRITICAL)
+
+**DO NOT change the image design.** The image is a finished carousel slide — animate what's already there, don't add or alter visual elements.
+
+| Rule | Description |
+|------|-------------|
+| **Animate existing elements** | Only animate objects/elements already visible in the image |
+| **No new objects** | Never add characters, objects, or effects not in the original image |
+| **No layout changes** | Keep composition, framing, and layout exactly as designed |
+| **Subtle motion only** | Gentle drift, pulse, glow, particle float — NOT dramatic transforms |
+| **Preserve color grading** | Don't alter the color palette or visual style |
+
+### 2.3 Headline Persistence (MANDATORY)
+
+**All headlines and text MUST remain visible and readable from FIRST frame to LAST frame of the video.**
+
+- Explicitly state: "All headlines, text, branding, and watermarks remain sharp, visible, and readable from start to finish"
+- Use STATIC or SLOW DRIFT camera — never fast movement that blurs text
+- Never crop, obscure, or animate away any text element
+- Text zones must stay stable — animate the scene AROUND the text, not the text itself
+
+### 2.4 Prompt Formula
 ```
-[motion description] + [camera movement] + [text preservation] + [SFX/ambient audio]
+[subtle motion of existing elements] + [slow/static camera] + [headline persistence instruction] + [SFX/ambient audio]
 ```
 
-**Example:**
+### 2.5 Example
 ```
-The holographic data displays pulse with live updates, golden arcs animate across the world map connecting nodes. Camera gently drifts right. All text and branding remain sharp and readable throughout. Command center ambient hum, console alert tones, keyboard typing clicks, digital interface whooshes.
+The holographic data displays pulse with live updates, golden arcs animate across the world map connecting nodes. Camera gently drifts right. All headlines, text, branding, and watermarks remain sharp, visible, and readable from start to finish. Command center ambient hum, console alert tones, keyboard typing clicks, digital interface whooshes.
 ```
 
 ---
@@ -42,6 +64,16 @@ The holographic data displays pulse with live updates, golden arcs animate acros
 ## 3. Short Video / Product Promo Mode (TikTok, Reels, Shorts)
 
 **Rule: Creator voice ANCHOR throughout entire video. Lip-sync on face shots, narration on B-roll.**
+
+### Animation Freedom: WOW & AMAZING encouraged!
+
+Unlike carousel mode (which preserves the design), short video and product promo content SHOULD use dramatic, eye-catching animations:
+
+- **Bold camera movements** — dynamic push-ins, orbits, crane shots, whip pans
+- **Dramatic transitions** — morphs, reveals, parallax depth effects
+- **Cinematic motion** — full subject animation, environmental effects, particle systems
+- **Creative freedom** — transform, distort, add visual effects for maximum impact
+- **Goal: stop the scroll** — make viewers pause with stunning visual motion
 
 ### 3.1 Creator Voice Anchor (CRITICAL)
 
@@ -55,7 +87,7 @@ The creator's voice must be **consistent and present throughout the ENTIRE video
 
 **Key rules:**
 1. **Same voice throughout** — the creator's voice never changes or disappears
-2. **Lip-sync ONLY when face is visible** — use VEO 3.1 for face segments (best lip-sync)
+2. **Lip-sync ONLY when face is visible** — use VEO 3.1 (best quality) or Grok 3 (budget, `Speech:` syntax)
 3. **Narration continues on B-roll** — voice continues as voiceover even when face not on screen
 4. **No awkward silence** — every segment has either speech or ambient (never dead silence)
 5. **Voice tone consistency** — same energy, pace, and personality across all segments
@@ -64,13 +96,22 @@ The creator's voice must be **consistent and present throughout the ENTIRE video
 
 #### Face Segments (Creator On-Screen)
 ```
-Platform: VEO 3.1 (best lip-sync)
-Audio: [Creator] says: "[dialogue — max 12-15 words per 8s]"
-       Quiet ambient: [room tone or environment]. No background music.
-       No subtitles, no audience sounds.
+Platform: VEO 3.1 (production-grade lip-sync) or Grok 3 (budget lip-sync)
+
+VEO 3.1 syntax:
+  [Creator] says: "[dialogue — max 12-15 words per 8s]"
+  Quiet ambient: [room tone or environment]. No background music.
+  No subtitles, no audience sounds.
+
+Grok 3 syntax:
+  Speech: [dialogue — max 12-15 words per 10s]
+  [Ambient SFX description]
+
 Face: >=20% of frame, MCU or CU shot
-Lip-sync: colon syntax required for VEO
+Lip-sync: colon syntax for VEO, Speech: prefix for Grok
 ```
+
+See `voice-emotion-direction.md` for emotion modifiers, pacing, and anti-robotic techniques.
 
 #### B-Roll Segments (Creator Off-Screen Narration)
 ```
@@ -100,10 +141,12 @@ This profile anchors the AI-generated voice (VEO) or TTS voice (Chatterbox) to m
 ### 3.4 Platform Routing for Voice Content
 
 ```
-Face segment (lip-sync needed) → VEO 3.1 (ONLY platform with reliable lip-sync)
-B-roll with narration → Grok 3 (add narration as audio direction) or VEO 3.1
-B-roll without narration → Grok 3 (SFX only)
-Product demo → Grok 3 (SFX) or Seedance 2.0 (audio sync)
+Face segment (best lip-sync)      → VEO 3.1 (production-grade, says: syntax)
+Face segment (budget lip-sync)    → Grok 3 (social media grade, Speech: syntax)
+Multi-character dialogue           → Seedance 2.0 or Kling 3.0
+B-roll with narration              → Grok 3 (add narration as audio direction) or VEO 3.1
+B-roll without narration           → Grok 3 (SFX only)
+Product demo                       → Grok 3 (SFX) or Seedance 2.0 (audio sync)
 ```
 
 ### 3.5 Script-to-Segment Mapping
