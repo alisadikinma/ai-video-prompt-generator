@@ -99,13 +99,14 @@ All text, headline, branding remain sharp and readable throughout. [Interactive 
 | Aspect | Carousel Animation | Product / Social Video |
 |--------|-------------------|----------------------|
 | **Design** | PRESERVE — do not change | TRANSFORM — go wild |
-| **Animation** | Subtle only (drift, pulse, glow) | Dramatic & wow (zoom, orbit, morph) |
+| **Animation** | Subtle only (drift, pulse, glow) | Hollywood quality (zoom, orbit, morph) |
+| **Voice** | NO voice — SFX only | YES — voiceover + lip-sync mandatory |
 | **Headlines** | MUST persist start-to-finish | Optional — can animate in/out |
 | **Camera** | Static or slow drift ONLY | Any movement — bold encouraged |
 | **New elements** | NEVER add objects not in image | Can add effects, particles, etc. |
-| **Goal** | Bring the slide to life gently | Stop the scroll with impact |
+| **Goal** | Bring the slide to life gently | Stop the scroll with Hollywood impact |
 
-> **Key rule:** Carousel = the image IS the design, animate it subtly. Product/social = the image is a starting point, create cinema.
+> **Key rule:** Carousel = the image IS the design, animate it subtly, SFX only. Product/social = Hollywood quality cinema with voiceover lip-sync.
 
 ---
 

@@ -65,15 +65,28 @@ The holographic data displays pulse with live updates, golden arcs animate acros
 
 **Rule: Creator voice ANCHOR throughout entire video. Lip-sync on face shots, narration on B-roll.**
 
-### Animation Freedom: WOW & AMAZING encouraged!
+### Animation: HOLLYWOOD QUALITY — WOW & AMAZING!
 
-Unlike carousel mode (which preserves the design), short video and product promo content SHOULD use dramatic, eye-catching animations:
+Unlike carousel mode (which preserves the design), short video and product promo content MUST aim for **Hollywood-grade cinematic quality**:
 
 - **Bold camera movements** — dynamic push-ins, orbits, crane shots, whip pans
 - **Dramatic transitions** — morphs, reveals, parallax depth effects
 - **Cinematic motion** — full subject animation, environmental effects, particle systems
 - **Creative freedom** — transform, distort, add visual effects for maximum impact
 - **Goal: stop the scroll** — make viewers pause with stunning visual motion
+
+### Voice & Lip-sync: MANDATORY for non-carousel
+
+Every short video and product promo MUST include voiceover with lip-sync:
+
+| Scenario | Platform | Syntax |
+|----------|----------|--------|
+| Face on screen (best quality) | VEO 3.1 | `[Creator] says: "dialogue"` |
+| Face on screen (budget) | Grok 3 | `Speech: [dialogue]` |
+| B-roll (off-screen narration) | Grok 3 / VEO 3.1 | `Creator narrates off-screen: "text"` |
+| Multi-character | Seedance 2.0 / Kling 3.0 | Via audio section / voice ref |
+
+> **No silent videos** — every non-carousel video has creator voice from start to finish.
 
 ### 3.1 Creator Voice Anchor (CRITICAL)
 

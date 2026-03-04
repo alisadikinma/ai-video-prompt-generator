@@ -52,16 +52,16 @@ OVERRIDE ONLY WHEN: need production-grade lip-sync (VEO 3.1), complex physics (S
 
 ## 3. Content Type Animation Rules (CRITICAL)
 
-| Content Type | Animation Style | Design Preservation | Headlines |
-|-------------|----------------|--------------------|-----------|
-| **Carousel Animation** | SUBTLE — drift, pulse, glow only | YES — do NOT change image design | MUST persist start-to-finish |
-| **Short Video** | WOW — dramatic, cinematic, bold | NO — creative freedom | Optional |
-| **Product Promo** | WOW — dramatic, cinematic, bold | NO — creative freedom | Optional |
-| **Pure B-Roll** | WOW — cinematic motion encouraged | NO — creative freedom | N/A |
+| Content Type | Animation Style | Voice / Lip-sync | Design Preservation | Headlines |
+|-------------|----------------|------------------|--------------------|-----------|
+| **Carousel Animation** | SUBTLE — drift, pulse, glow only | NO voice, NO narration — SFX only | YES — do NOT change image design | MUST persist start-to-finish |
+| **Short Video** | HOLLYWOOD QUALITY — dramatic, cinematic, bold | YES — creator voice anchor + lip-sync | NO — creative freedom | Optional |
+| **Product Promo** | HOLLYWOOD QUALITY — dramatic, cinematic, bold | YES — creator voice anchor + lip-sync | NO — creative freedom | Optional |
+| **Pure B-Roll** | HOLLYWOOD QUALITY — cinematic motion | NO voice — SFX only | NO — creative freedom | N/A |
 
 ```
-CAROUSEL  = Subtle animation + preserve design + headlines always visible
-PRODUCT   = Dramatic animation + creative freedom + stop the scroll
+CAROUSEL  = Subtle animation + SFX only + preserve design + headlines always visible
+NON-CAROUSEL = Hollywood quality animation + voiceover lip-sync + creative freedom + stop the scroll
 ```
 
 ---

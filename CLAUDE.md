@@ -58,16 +58,16 @@ Carousel Animation (LinkedIn/IG):
   Text   → Headlines MUST persist start-to-finish, always visible & readable
 
 Short Video (TikTok/Reels/Shorts):
-  Audio  → Creator voice ANCHOR throughout
-  Motion → WOW & AMAZING — dramatic, cinematic, bold animations encouraged
+  Audio  → Creator voice ANCHOR + lip-sync (MANDATORY)
+  Motion → HOLLYWOOD QUALITY — dramatic, cinematic, bold, stop the scroll
 
 Product Promo:
-  Audio  → Creator voice ANCHOR throughout
-  Motion → WOW & AMAZING — creative freedom, stop the scroll
+  Audio  → Creator voice ANCHOR + lip-sync (MANDATORY)
+  Motion → HOLLYWOOD QUALITY — creative freedom, maximum impact
 
 Pure B-Roll:
   Audio  → SFX only, no voice
-  Motion → WOW & AMAZING — cinematic motion encouraged
+  Motion → HOLLYWOOD QUALITY — cinematic motion encouraged
 ```
 
 ### Golden Rule
