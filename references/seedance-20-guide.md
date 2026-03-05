@@ -310,19 +310,19 @@ Ambient sound: wind, distant bird calls, water lapping.
 ### Do NOT Use Seedance 2.0 When
 
 - Simple talking head with dialogue only -- use VEO 3.1 (better lip-sync control via colon syntax)
-- Budget is extremely tight -- Kling 2.5 Turbo is cheaper (~$0.10/video)
+- Budget is extremely tight -- Kling 3.0 is cheaper (~$0.10/video)
 - Need video extensions/chaining -- use VEO 3.1 (up to 148s via extensions)
 - Need Cameo/personalization features -- use Sora 2
 
 ### Platform Comparison
 
-| Capability | Seedance 2.0 | VEO 3.1 | Sora 2 | Kling 2.5 |
+| Capability | Seedance 2.0 | VEO 3.1 | Sora 2 | Kling 3.0 |
 |------------|-------------|---------|--------|-----------|
-| Max Resolution | 2K | 1080p | 720p | auto |
-| Max Duration | 12s | 8s (148s via ext) | 20s (Pro) | 10s |
-| Native Audio | Yes (dual-branch) | Yes | Yes (weaker) | No |
-| Multi-Shot | Native | Via extensions | Via stitching | No |
-| Lip-Sync Quality | Excellent (8+ langs) | Best (colon syntax) | Good (plan ADR) | N/A |
+| Max Resolution | 2K | 1080p | 720p / 1080p (Pro) | 1080p |
+| Max Duration | 12s | 8s (148s via ext) | 12s (API) / 20s (Pro) | 15s |
+| Native Audio | Yes (dual-branch) | Yes | Yes (weaker) | Yes (voice ref) |
+| Multi-Shot | Native | Via extensions | Via stitching | Multi-shot native |
+| Lip-Sync Quality | Excellent (8+ langs) | Best (colon syntax) | Good (plan ADR) | Yes (voice ref) |
 | Reference Images | Up to 9 | Up to 3 | 1 | 1 |
 | Physics | Strong | Strong (short clips) | Best overall | Good |
 | Cost (per clip) | ~$0.18-0.20/5s | ~$1.20-3.20/8s | ~$0.40-4.00/4-8s | ~$0.10/video |

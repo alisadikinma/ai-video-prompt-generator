@@ -65,7 +65,26 @@
 
 ---
 
-## 6. Stylistic
+## 6. Zoom
+
+| Term | Effect | Emotional Impact | When to Use | Prompt Phrase |
+|------|--------|------------------|-------------|---------------|
+| `slow zoom in` | Gradual magnification | Focus, emphasis, growing importance | Highlighting detail, emphasizing subject, building importance | `"slow zoom in toward subject"` |
+| `slow zoom out` | Gradual reduction | Context reveal, emotional distance, broadening perspective | Revealing environment, showing scale, creating space | `"slow zoom out revealing full scene"` |
+
+---
+
+## 7. Follow / Aerial
+
+| Term | Effect | Emotional Impact | When to Use | Prompt Phrase |
+|------|--------|------------------|-------------|---------------|
+| `follow shot` | Camera follows subject from behind | Companionship, journey, pursuit | Walking sequences, following someone, immersive POV | `"camera follows subject from behind"` |
+| `aerial drone shot` | Bird's-eye descending/ascending | Grand scale, establishment, cinematic scope | Establishing shots, landscape reveals, factory overviews | `"aerial drone shot slowly descending"` |
+| `Dutch angle` | Tilted horizon line | Unease, disorientation, dramatic tension | Tension scenes, villain reveals, psychological discomfort | `"Dutch angle, tilted horizon"` |
+
+---
+
+## 8. Stylistic
 
 | Term | Effect | Emotional Impact | When to Use | Prompt Phrase |
 |------|--------|------------------|-------------|---------------|
@@ -80,7 +99,7 @@
 
 Which camera movement terms are recognized and produce reliable results on each platform.
 
-| Movement Term | Grok 3 | VEO 3.1 | Sora 2 | Kling 2.5 | Seedance 2.0 |
+| Movement Term | Grok 3 | VEO 3.1 | Sora 2 | Kling 3.0 | Seedance 2.0 |
 |---------------|--------|---------|--------|-----------|--------------|
 | `static shot` | Yes | Yes | Yes | Yes | Yes |
 | `locked-off shot` | -- | Yes | Yes | -- | -- |
@@ -99,9 +118,13 @@ Which camera movement terms are recognized and produce reliable results on each 
 | `tilt up/down` | Yes | Yes | Yes | Yes | Yes |
 | `crane shot rising` | -- | Yes | Yes | Yes | -- |
 | `crane shot descending` | -- | Yes | Yes | -- | -- |
-| `orbit shot` | -- | Yes | Yes | Yes | Yes |
+| `orbit shot` | Yes | Yes | Yes | Yes | Yes |
 | `180-degree arc` | -- | Yes | Yes | -- | -- |
 | `Steadicam` | -- | Yes | Yes | -- | -- |
+| `slow zoom in/out` | Yes | Yes | Yes | Yes | Yes |
+| `follow shot` | Yes | Yes | Yes | Yes | Yes |
+| `aerial drone shot` | -- | Yes | Yes | -- | Yes |
+| `Dutch angle` | -- | Yes | Yes | -- | -- |
 | `handheld camera` | Yes | Yes | Yes | Yes | Yes |
 | `documentary-style` | -- | Yes | Yes | -- | -- |
 | `shaky cam` | -- | Yes | Yes | -- | -- |
@@ -112,7 +135,7 @@ Which camera movement terms are recognized and produce reliable results on each 
 - **Grok 3:** Keep movements simple. Best with: static, slow push-in, slow pull-out, slow pan, tilt, slight drift, handheld. ONE movement per prompt mandatory.
 - **VEO 3.1:** Full library supported. All VEO-verified terms in this document produce reliable results.
 - **Sora 2:** Strong movement support. ONE camera move + ONE subject action per shot. Beat-based timing recommended.
-- **Kling 2.5:** Reliable with standard movements. Avoid highly specific compound terms.
+- **Kling 3.0:** Reliable with standard movements. Avoid highly specific compound terms.
 - **Seedance 2.0:** Basic movement set. Stick to universal terms (static, push-in, pull-back, pan, orbit, handheld).
 
 ---

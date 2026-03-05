@@ -100,6 +100,25 @@ Identify the overall emotional and aesthetic character.
 
 ---
 
+### Element 7: Text Detection
+
+Identify any readable text elements in the image. This triggers text preservation rules.
+
+| Aspect | What to Extract | Why It Matters for Video |
+|--------|----------------|--------------------------|
+| **Headlines/Titles** | Large text, headings, slide titles | Must remain sharp and readable throughout — add text preservation instruction |
+| **Body Text/Labels** | Smaller informational text, captions, stats | Must stay legible — avoid camera moves that blur small text |
+| **Branding/Logos** | Company logos, brand marks, watermarks | Must remain visible and unobstructed |
+| **UI Elements** | Dashboard labels, button text, interface text | Keep stable — avoid extreme camera movement |
+| **Signage** | Signs, banners, placards in scene | Include in preservation if important to context |
+| **Text Position** | Where text is located in frame (top/bottom/center/edges) | Camera push-in must not crop text zones |
+| **Text Language** | Language of text (English, Indonesian, etc.) | Relevant for localization context |
+| **CTA Elements** | Call-to-action buttons or interactive text | May be candidates for subtle animation (pulse, glow) |
+
+**If text is detected:** Add `"All text, headlines, branding, and overlays remain sharp and readable throughout."` to video prompt. See `text-preservation-rules.md` for full rules.
+
+---
+
 ## Analysis Output Template
 
 Use this template to structure your analysis before writing the video prompt. Fill in every field.
@@ -154,6 +173,16 @@ Use this template to structure your analysis before writing the video prompt. Fi
 - **Genre Cues:** [any genre-specific visual elements]
 - **Energy Level:** [LOW/MEDIUM/HIGH]
 - **Production Value:** [high-end/mid-range/casual]
+
+---
+
+### 7. TEXT DETECTION
+- **Headlines/Titles:** [any large text visible]
+- **Body Text/Labels:** [any smaller text, stats, captions]
+- **Branding/Logos:** [company logos, watermarks]
+- **UI Elements:** [dashboard labels, button text]
+- **Text Position:** [location in frame — top/bottom/center/edges]
+- **Text Preservation Needed:** [YES/NO — if YES, include preservation instruction in prompt]
 
 ---
 

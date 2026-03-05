@@ -1,8 +1,9 @@
-# Grok 3 Image-to-Video Reference Guide
+# Grok Imagine (Grok 3) Image-to-Video Reference Guide
 
-> **PRIMARY PLATFORM** -- Grok 3 is the default for ALL image-to-video conversion.
-> Override only when a specific feature is needed that Grok 3 does not support (e.g., lip-sync, dialogue).
+> **PRIMARY PLATFORM** -- Grok Imagine is the default for ALL image-to-video conversion.
+> Now supports lip-sync (single character) and native audio (dialogue + SFX + music) as of v1.0 (Feb 2026).
 > For configurable values (durations, orientations, quality gate), see `global-video-config.md`.
+> For voice emotion and natural delivery direction, see `voice-emotion-direction.md`.
 
 ---
 
@@ -10,18 +11,35 @@
 
 | Setting | Value |
 |---------|-------|
-| Model | Grok 3 (Aurora autoregressive engine) |
-| Mode | Basic prompt (single text field) + Image Reference |
-| Capability | Image-to-video animation with auto-generated SFX/audio |
-| Architecture | Aurora mixture-of-experts; predicts image tokens sequentially (NOT diffusion-based) |
-| Resolution | 720p (HD) recommended |
-| Duration | **6s** (default) / **10s** / **15s** |
-| Orientations | Landscape 16:9, Portrait 9:16, Square 1:1, Vertical 2:3, Horizontal 3:2 |
+| Product | **Grok Imagine** v1.0 (Feb 2026) |
+| Engine | Aurora autoregressive engine (mixture-of-experts; predicts tokens sequentially, NOT diffusion) |
+| Mode | Basic prompt (single text field) + Image Reference + Custom mode |
+| Resolution | **720p HD** (must explicitly request — API default is 480p) |
+| Duration | **1s-15s** (granular, any integer); UI presets: **6s / 10s / 15s** |
+| Orientations | 16:9, 9:16, 1:1, **4:3, 3:4**, 2:3, 3:2 (7 ratios) |
 | Negative prompts | **Not supported** -- describe only what you WANT |
 | Prompt weighting | First 20-30 words receive priority weighting |
-| Optimal prompt length | 50-200 words (longer risks dilution) |
-| Audio | Auto-generated SFX from prompt direction |
-| Lip-sync | Not supported (use VEO 3.1 for dialogue) |
+| Optimal prompt length | 50-100 words (max ~150; >200 risks dilution) |
+| Audio | **Native** -- SFX + dialogue + background music in single generation pass |
+| Lip-sync | **Yes** (single character, v1.0+). Multi-character unreliable. |
+| Dialogue syntax | `Speech: [text]` in Custom mode |
+| Video extension | Chain clips up to 30s (use last frame as next input) |
+| Generation speed | ~30 seconds (fastest among top-tier models) |
+| Cost | ~$0.05/second (cheapest among top-tier models) |
+| API model | `grok-imagine-video` at `api.x.ai/v1/videos/generations` |
+
+### Lip-Sync Notes (v1.0+)
+- **Single character** lip-sync works reliably with `Speech:` syntax
+- **Multi-character** lip-sync applies globally — unreliable, generates separate clips per speaker
+- **Quality:** Social media grade, not production-grade. For best lip-sync, use VEO 3.1
+- **Voice emotion:** Controlled through prompt context (see `voice-emotion-direction.md`)
+
+### Audio Generation Notes (v1.0+)
+- Aurora generates audio tokens in the same forward pass as video tokens (shared latent space)
+- **Without explicit audio direction:** Grok adds generic background music (often undesirable)
+- **Always specify audio explicitly** to get matched, contextual SFX
+- Dialogue triggered by `Speech: [text]` — generates voice + lip-sync
+- Cannot upload custom music — audio style controlled via prompt description only
 
 ---
 
@@ -50,8 +68,10 @@ NEVER re-describe static elements already visible in the image.
 ### The Prompt Formula
 
 ```
-[Primary motion description] + [Camera movement] + [Text preservation if applicable] + [SFX/audio direction]
+[Primary motion description] + [Camera movement] + [Text preservation if applicable] + [Dialogue if applicable] + [SFX/audio direction]
 ```
+
+For dialogue scenes, add `Speech: [text]` after motion description (see Section 6a).
 
 ### Prompt Structure Tips (Aurora Architecture)
 
@@ -180,6 +200,19 @@ Grok 3 auto-generates SFX from prompt direction. Be specific -- generic instruct
 - Force field ripple, teleportation pop
 - Crystal resonance, arcane energy pulse
 
+### Enterprise / Industrial / Manufacturing
+- Factory machinery hum, production line rhythm, conveyor belt rolling
+- Forklift beep, hydraulic press slam, pneumatic hiss
+- Welding arc crackle, metal grinding, drill whir
+- Safety alarm beacon rotating, emergency siren wail
+- Walkie-talkie crackle, PA system announcement echo
+- Hard hat impact, safety boot on metal grating
+- Warehouse echo, loading dock rumble, cargo door sliding
+- Office ambient: keyboard typing, phone ringing, printer whir
+- Server room drone, cooling fan hum, UPS beep
+- Badge scanner beep, turnstile click, access gate mechanism
+- Control room ambient: monitor hum, alert chimes, radio static
+
 ### Music / Tonal
 - Acoustic guitar strum, electric guitar riff
 - Drum roll, snare hit, timpani boom
@@ -259,12 +292,70 @@ Grok 3 auto-generates SFX from prompt direction. Be specific -- generic instruct
 ### Dialogue / Talking Head / Presenter
 | Aspect | Recommendation |
 |--------|---------------|
-| Duration | 6s (short expression) or 10s (longer delivery) |
-| Motion | Facial expression shifts, subtle gestures, head turns, eye movement, natural body sway |
+| Duration | 6s-10s (budget lip-sync) — see `global-video-config.md` |
+| Motion | Facial expression shifts, subtle gestures, head turns, eye movement, natural body sway, lip-sync |
 | Camera | Very slow push-in for intimacy, or static |
 | SFX | Warm ambient background, subtle room tone |
-| Tips | Grok 3 does NOT support lip-sync. For actual dialogue, use VEO 3.1 instead. Grok works for silent expression and gesture. |
-| Limitation | Avoid complex hand/finger motion -- Grok struggles with detailed hand animation |
+| Dialogue | Use `Speech: [text]` syntax in Custom mode — triggers lip-sync generation (v1.0+) |
+| Tips | Single character lip-sync works well. For production-grade quality, use VEO 3.1 instead. |
+| Limitation | Multi-character lip-sync unreliable — generate separate clips per speaker. Avoid complex hand/finger motion. |
+
+See Section 6a below for detailed dialogue prompting and `voice-emotion-direction.md` for emotion control.
+
+---
+
+## 6a. Dialogue Prompting (v1.0+)
+
+### Speech Syntax
+
+In **Custom mode**, use the `Speech:` prefix to trigger lip-sync generation:
+
+```
+Speech: [dialogue text here]
+```
+
+### Dialogue Prompt Template
+
+```
+[Subject micro-motion -- expression shift, gesture, body language].
+Camera [single slow movement].
+Speech: [dialogue text -- max 12-15 words per 10s clip].
+[Ambient SFX -- room tone, environment, NOT music].
+```
+
+### Example Dialogue Prompts
+
+**Creator talking head (10s):**
+> Subject shifts weight slightly, expression warming into genuine confidence, subtle nod as emphasis.
+> Camera slowly pushes in from medium close-up toward tight close-up.
+> Speech: You can see every worker. Right now. On one screen.
+> Warm room ambient, soft HVAC hum, natural breath sounds between phrases.
+
+**Presenter CTA (6s):**
+> Subject leans forward slightly, open hand gesture toward camera, warm half-smile.
+> Camera stays locked, static.
+> Speech: Start your free pilot today.
+> Soft ambient tone, warm atmospheric swell resolving gently.
+
+### Dialogue Rules
+
+| Rule | Details |
+|------|---------|
+| Max words | 12-15 words per 10s clip (8-12 words for 6s) |
+| Min words | 3+ words — fewer triggers silence or gibberish |
+| Sweet spot | 3-5 seconds of speech per line |
+| Multi-speaker | **Unreliable** — generate separate clips per character |
+| Emotion control | Via prompt context + physical expressions (see `voice-emotion-direction.md`) |
+| Voice consistency | Per-clip only — no cross-clip voice continuity (plan for post-production VO) |
+
+### When to Use VEO 3.1 Instead
+
+- Production-grade lip-sync quality needed
+- Multi-character dialogue
+- Precise emotion control via colon syntax (`says:`)
+- Professional/broadcast content
+
+---
 
 ### Product / Showcase
 | Aspect | Recommendation |
@@ -334,6 +425,9 @@ All text, headlines, branding, and overlays remain sharp and readable throughout
 **Landscape -- mountain lake sunrise (10s):**
 > Golden sunrise light gradually spreads across the mountain peaks and reflects on the still lake surface, gentle mist drifts above the water, a flock of birds rises from the treeline in the distance. Camera slowly pans right across the panoramic vista. Morning birdsong, gentle water lapping, soft wind through pine trees, distant bird calls.
 
+**Dialogue -- creator talking head (10s):**
+> Subject shifts weight slightly, expression warming into genuine confidence, subtle nod for emphasis, right hand opens in presenting gesture. Camera slowly pushes in from medium close-up to tight close-up. Speech: Every worker, every zone, every second — that's what real-time means. Warm room ambient, soft HVAC hum behind voice, natural breath sounds between phrases.
+
 **Portrait with text overlay -- motivational quote (6s):**
 > The subject's expression shifts subtly into a confident half-smile, soft bokeh lights drift slowly in the warm background, a gentle breeze moves through their hair. Camera slowly pushes in toward the subject's face. All text, headlines, branding, and overlays remain sharp and readable throughout. Warm ambient music, soft inspirational piano notes, gentle atmospheric swell.
 
@@ -389,7 +483,8 @@ Every Grok 3 video prompt must pass at least 6 of these 8 checks before delivery
 | Extreme camera movement | Fast zooms and rapid pans blur text and confuse scene coherence | Keep camera movements slow and subtle |
 | Text zone cropped by push-in | Camera pushes past text overlays, making them unreadable or cut off | Frame push-in so text zones are never cropped |
 | Burying key action mid-prompt | The model weights the first 20-30 words most heavily; late content may be ignored | Front-load the primary action in the first sentence |
-| Requesting lip-sync/dialogue | Grok 3 does not support lip-sync; speech will look unnatural | Use VEO 3.1 for any scene requiring spoken dialogue |
+| Multi-character dialogue | Grok applies lip-sync globally — multi-character speech is unreliable | Generate separate clips per speaker; for multi-character, use Seedance 2.0 or Kling 3.0 |
+| Dialogue too long | Speech >15 words per 10s clip produces rushed, garbled audio | Keep to 3-5 seconds per spoken line, max 12-15 words (see `voice-emotion-direction.md`) |
 | Mixing styles in one prompt | Asking for both "photorealistic" and "anime style" produces incoherent output | Commit to one visual style per prompt |
 | Prompting for image generation | Writing prompts that describe what the image should look like, not how it should move | Remember: the image already exists. Prompt for ANIMATION only |
 
@@ -417,7 +512,8 @@ Every Grok 3 video prompt must pass at least 6 of these 8 checks before delivery
 | 4:5 (IG feed) | Vertical (2:3) -- closest match |
 | 3:2 (classic photo) | Horizontal (3:2) |
 | 2:3 (portrait photo) | Vertical (2:3) |
-| 4:3 | Horizontal (3:2) -- closest match |
+| 4:3 (presentation) | Horizontal (4:3) -- native match |
+| 3:4 (portrait) | Vertical (3:4) -- native match |
 | 21:9 (ultrawide) | Landscape (16:9) -- closest match |
 
 ### Workflow Steps
@@ -427,7 +523,7 @@ Every Grok 3 video prompt must pass at least 6 of these 8 checks before delivery
 3. Select orientation matching the source image
 4. Set resolution to 720p HD
 5. Choose duration (6s default, adjust per content type)
-6. Write prompt following the formula: `[motion] + [camera] + [text preservation] + [SFX]`
+6. Write prompt following the formula: `[motion] + [camera] + [text preservation] + [Speech: if dialogue] + [SFX]`
 7. Generate and review
 8. If text is blurred or motion is wrong, adjust prompt and regenerate
 
@@ -436,7 +532,7 @@ Every Grok 3 video prompt must pass at least 6 of these 8 checks before delivery
 ## Quick Reference Card
 
 ```
-FORMULA:   [motion] + [camera] + [text preservation if needed] + [SFX]
+FORMULA:   [motion] + [camera] + [text preservation if needed] + [Speech: if dialogue] + [SFX]
 PRIORITY:  First 20-30 words matter most
 LENGTH:    50-100 words optimal (max 200)
 NEGATIVES: NOT SUPPORTED -- describe only what you want
@@ -445,5 +541,7 @@ DURATION:  6s default / 10s action / 15s cinematic
 TEXT:      Explicitly state "all text remains sharp and readable" when present
 AUDIO:     Always name specific sounds -- never generic
 HANDS:     Keep simple or out of frame
-LIP-SYNC:  Not supported -- use VEO 3.1 for dialogue
+LIP-SYNC:  Yes (single character, v1.0+) -- Speech: [text] syntax
+DIALOGUE:  Max 12-15 words per 10s clip -- see voice-emotion-direction.md
+BEST SYNC: VEO 3.1 for production-grade lip-sync quality
 ```

@@ -11,7 +11,7 @@
 | Output | Platform-optimized video prompts (markdown) |
 | Primary Platform | **Grok 3** (default for ALL conversions) |
 | Secondary | VEO 3.1 (lip-sync), Seedance 2.0 (multi-shot) |
-| Tertiary | Sora 2 (physics), Kling 2.5 (motion fluidity) |
+| Tertiary | Sora 2 (physics), Kling 3.0 (motion fluidity, multi-shot) |
 
 ## Architecture
 
@@ -25,38 +25,50 @@
 | `skills/video-add-platform/SKILL.md` | Scaffold new platform (automates 7-step process) |
 | `agents/image-to-video-batch.md` | Subagent for batch processing folders |
 | `agents/quality-reviewer.md` | Subagent for parallel quality gate verification |
-| `references/` | 15 reference docs read on-demand by skill/agent |
+| `references/` | 16 reference docs read on-demand by skill/agent |
 
 ### Reference Files
 
 | File | When Used |
 |------|-----------|
 | `global-video-config.md` | ALWAYS (read FIRST) — single source of truth for all configurable values |
-| `grok-3-guide.md` | Grok 3 prompts (PRIMARY) — Aurora engine, SFX vocab, text preservation, camera movements |
+| `grok-3-guide.md` | Grok Imagine (Grok 3) prompts (PRIMARY) — Aurora engine, lip-sync, native audio, dialogue (Speech:), SFX, text preservation |
 | `veo-31-guide.md` | VEO 3.1 prompts — lip-sync, dialogue, audio constraints, VEO-verified camera terms |
 | `sora-2-guide.md` | Sora 2 prompts — I2V specs, beat-based timing, ONE move + ONE action |
-| `kling-25-guide.md` | Kling 2.5 prompts — Turbo + Wan 2.5 specs, motion fluidity |
+| `kling-25-guide.md` | Kling 2.5/3.0 prompts — Turbo + Wan 2.5 specs, motion fluidity |
 | `seedance-20-guide.md` | Seedance 2.0 prompts — quad-modal input, multi-shot, audio sync |
 | `camera-movement-library.md` | Unified camera movement library (all platforms, cross-referenced) |
 | `motion-description-library.md` | Subject micro-movements, ambient motion, emotion-based intensity |
-| `sfx-audio-vocabulary.md` | SFX vocabulary by 12+ categories, platform-specific audio rules |
-| `image-analysis-framework.md` | 6-element structured analysis for extracting video-relevant info from images |
+| `sfx-audio-vocabulary.md` | SFX vocabulary by 13+ categories (incl. enterprise/industrial), platform-specific audio rules |
+| `image-analysis-framework.md` | 7-element structured analysis for extracting video-relevant info from images (incl. text detection) |
 | `prompt-templates.md` | Per-platform prompt templates with fill-in sections and examples |
 | `text-preservation-rules.md` | Text preservation for images with baked-in text overlays |
 | `quality-checklist.md` | 8-point video quality gate, per-platform variations, common mistakes |
 | `voice-audio-modes.md` | Content type audio rules: carousel (SFX only) vs short video (creator voice anchor) vs product promo |
+| `voice-emotion-direction.md` | Voice emotion control, natural delivery, anti-robotic techniques, dialogue pacing, platform voice capabilities |
 | `localization-id.md` | Indonesian SFX terms, motion descriptions, cultural context |
 
 ## Key Concepts
 
-### Content Type → Audio Mode (CRITICAL)
+### Content Type → Audio + Animation Mode (CRITICAL)
 ```
-Carousel Animation (LinkedIn/IG) → SFX only, NO voice, NO narration
-Short Video (TikTok/Reels/Shorts) → Creator voice ANCHOR throughout:
-  - Face on screen = lip-sync (VEO 3.1)
-  - B-roll = off-screen narration (same creator voice)
-Product Promo → Same as short video (creator voice anchor)
-Pure B-Roll → SFX only, no voice
+Carousel Animation (LinkedIn/IG):
+  Audio  → SFX only, NO voice, NO narration
+  Motion → SIMPLE but MINDBLOWING — minimal movement, maximum creative impact
+  Duration → 6s (default) or 10s (dramatic/CTA) only
+  Text   → Headlines MUST persist start-to-finish, always visible & readable
+
+Short Video (TikTok/Reels/Shorts):
+  Audio  → Creator voice ANCHOR + lip-sync (MANDATORY)
+  Motion → HOLLYWOOD QUALITY — dramatic, cinematic, bold, stop the scroll
+
+Product Promo:
+  Audio  → Creator voice ANCHOR + lip-sync (MANDATORY)
+  Motion → HOLLYWOOD QUALITY — creative freedom, maximum impact
+
+Pure B-Roll:
+  Audio  → SFX only, no voice
+  Motion → HOLLYWOOD QUALITY — cinematic motion encouraged
 ```
 
 ### Golden Rule
@@ -70,27 +82,28 @@ NEVER duplicate visual details already in the image inside the video prompt.
 ```
 🟢 PRIMARY   → Grok 3 (default for ALL image-to-video conversion)
 🟡 SECONDARY → VEO 3.1 (lip-sync, dialogue), Seedance 2.0 (multi-shot, audio sync)
-🔵 TERTIARY  → Sora 2 (complex physics), Kling 2.5 (motion fluidity)
+🔵 TERTIARY  → Sora 2 (complex physics), Kling 3.0 (motion fluidity, multi-shot)
 ```
 
 ### Platform Specs
 
-| Platform | Duration | Resolution | Audio | Lip-sync |
-|----------|----------|------------|-------|----------|
-| **Grok 3** | **6s / 10s / 15s** | 720p | Auto SFX | No |
-| VEO 3.1 | 8s | 1080p | Native | Yes |
-| Sora 2 | 10s / 15s | 720p | Plan ADR | Limited |
-| Kling 2.5 | 10s | auto | No | No |
-| Seedance 2.0 | 4s - 15s | 2K | Native sync | Yes |
+| Platform | Duration | Resolution | Audio | Lip-sync | Dialogue |
+|----------|----------|------------|-------|----------|----------|
+| **Grok 3** | **1s-15s** (UI: 6s/10s/15s) | 720p | Native (SFX+dialogue+music) | Yes (single char) | `Speech: [text]` |
+| VEO 3.1 | 4s / 6s / 8s | 1080p | Native | Yes (best) | `says: "text"` |
+| Sora 2 | 4s / 8s / 12s | 720p / 1080p (Pro) | Native | Limited | Quotes below prose |
+| Kling 3.0 | 5s / 10s / 15s | 1080p | Native (voice ref) | Yes | Voice ref + text |
+| Seedance 2.0 | 3s - 12s | Up to 2K | Native sync | Yes | Audio section |
 
 ### Image Analysis Framework
-6-element structured analysis via Claude Vision:
+7-element structured analysis via Claude Vision:
 1. Subject (who/what, appearance, position, expression)
 2. Motion Cues (implied movement, frozen action, directional elements)
 3. Camera/Composition (framing, angle, DOF, depth layers)
 4. Lighting (direction, quality, color temp, time of day)
 5. Environment (location, atmosphere, background elements)
 6. Mood/Style (emotional tone, visual style, color palette)
+7. Text Detection (headlines, branding, labels — triggers text preservation)
 
 ### Quality Gate
 - 8-point checklist per video prompt
@@ -146,7 +159,8 @@ Use `/video-add-platform` skill to automate the full 7-step scaffold, or manuall
 | Text blurred in video | Slow down camera, add text preservation instruction |
 | Text cropped | Avoid push-in that frames out text areas |
 | Wrong platform | Check platform decision tree — Grok 3 is default |
-| Lip-sync not working | Switch to VEO 3.1, face >=20% frame, MCU/CU shot |
+| Lip-sync not working (Grok) | Check Speech: syntax in Custom mode, single character only, face >=20% frame |
+| Lip-sync not working (VEO) | Use says: colon syntax, face >=20% frame, MCU/CU shot |
 | Quality too low | Min 6/8 — check each of 8 factors is addressed |
 | Negative prompt in Grok 3 | Grok 3 does NOT support negative prompts — remove them |
 | Duration mismatch | Check global-video-config.md for platform durations |

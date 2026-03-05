@@ -13,18 +13,20 @@
 |-----------|-------|
 | Max Duration | 6s / 10s / 15s |
 | Resolution | 720p (HD) |
-| Orientations | 16:9, 9:16, 1:1, 2:3, 3:2 |
+| Orientations | 16:9, 9:16, 1:1, 4:3, 3:4, 2:3, 3:2 (7 ratios) |
 | Prompt Weight | First 20-30 words weighted most heavily |
 | Word Count | 50-100 words optimal |
 | Negative Prompts | NOT supported |
-| Audio | Auto-generated SFX from description |
-| Dialogue | NOT supported |
+| Audio | Native (SFX + dialogue + music) |
+| Lip-sync | Yes (single character, v1.0+) |
+| Dialogue | `Speech: [text]` in Custom mode (see `voice-emotion-direction.md`) |
 
 ### Template
 ```
 [MOTION DESCRIPTION — what moves in the visual scene, 2-3 sentences].
 [CAMERA MOVEMENT — one single move: slow push-in / slow pan / static / slight drift / tilt].
 [TEXT PRESERVATION — "all text, headline, branding, and watermark remain sharp and readable throughout" if applicable].
+[DIALOGUE — Speech: [text] if lip-sync needed (optional)].
 [SFX/AUDIO — specific sounds matching the scene and emotional beat].
 ```
 
@@ -43,6 +45,11 @@ The creator's expression shifts into a warm curious smile, eyebrow raises slight
 ### Example: Complex (Action Scene)
 ```
 Bullets slam into the bronze shield creating sparks and metal fragments flying outward, the warrior flinches and screams behind the shield, smoke and dust swirl around the impact zone. Camera stays locked with subtle shake from impacts. All text, headline, branding, and watermark remain sharp and readable throughout, the SWIPE text gently slides right repeatedly. Loud rapid gunfire bursts, bullet ricochets on metal shield, shell casings clinking on stone ground, dramatic cinematic bass impact.
+```
+
+### Example: Dialogue (Creator Talking Head, 10s)
+```
+Subject shifts weight slightly, expression warming into genuine confidence, subtle nod as emphasis, right hand opens in presenting gesture. Camera slowly pushes in from medium close-up toward tight close-up. Speech: You can see every worker, right now, on one screen. Warm room ambient, soft HVAC hum behind voice, natural breath sounds between phrases.
 ```
 
 ---
@@ -144,8 +151,8 @@ Negative: no blurry face, no distorted hands, no text overlays, no watermarks,
 ### Platform Specs
 | Parameter | Value |
 |-----------|-------|
-| Max Duration | 10s / 15s |
-| Resolution | 720p |
+| Max Duration | 4s / 8s / 12s (API); 20s (Pro) |
+| Resolution | 720p (standard) / 1080p (Pro) |
 | Aspect Ratios | 16:9, 9:16, 1:1 |
 | Key Rule | ONE camera move + ONE subject action per shot |
 | Dialogue Limit | 15-20 words per 10s clip |
@@ -239,13 +246,13 @@ Maintain exact appearance and lighting from reference. No text overlays, no morp
 
 ---
 
-## 4. Kling 2.5 Template
+## 4. Kling 3.0 Template
 
 ### Platform Specs
 | Parameter | Value |
 |-----------|-------|
-| Max Duration | 10s |
-| Resolution | auto |
+| Max Duration | 5s / 10s / 15s |
+| Resolution | 1080p |
 | Aspect Ratios | 9:16, 16:9 |
 | Negative Prompts | Supported |
 | Dialogue | NOT natively supported |
@@ -309,7 +316,7 @@ morphing, unnatural colors, compression artifacts.
 ### Platform Specs
 | Parameter | Value |
 |-----------|-------|
-| Max Duration | 4s - 15s |
+| Max Duration | 3s - 12s |
 | Resolution | Up to 2K |
 | Aspect Ratios | 16:9, 9:16, 1:1 |
 | Audio | Native audio-video sync |
@@ -380,14 +387,14 @@ Never leave audio unspecified. Every platform will guess if you do not specify, 
 | Grok 3 | 50-100 words | ~150 words |
 | VEO 3.1 | 100-150 words | 1,024 tokens |
 | Sora 2 | 80-120 words | ~200 words |
-| Kling 2.5 | 50-100 words | ~150 words |
+| Kling 3.0 | 50-100 words | ~150 words |
 | Seedance 2.0 | 40-80 words | ~120 words |
 
 ### Dialogue Limits
 | Platform | Max Words per Clip | Format |
 |----------|-------------------|--------|
-| Grok 3 | N/A (no dialogue) | N/A |
+| Grok 3 | 12-15 words / 10s | `Speech: [text]` (Custom mode) |
 | VEO 3.1 | 12-15 words / 8s | `says: "dialogue"` (colon syntax) |
 | Sora 2 | 15-20 words / 10s | `"Character: dialogue"` |
-| Kling 2.5 | N/A (no dialogue) | Plan for post-production ADR |
+| Kling 3.0 | Via voice reference | Voice ref URL + dialogue text |
 | Seedance 2.0 | 5-10 words / 5-8s | Short phrases only |
