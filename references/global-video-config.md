@@ -54,13 +54,13 @@ OVERRIDE ONLY WHEN: need production-grade lip-sync (VEO 3.1), complex physics (S
 
 | Content Type | Animation Style | Voice / Lip-sync | Design Preservation | Headlines |
 |-------------|----------------|------------------|--------------------|-----------|
-| **Carousel Animation** | SUBTLE — drift, pulse, glow only | NO voice, NO narration — SFX only | YES — do NOT change image design | MUST persist start-to-finish |
+| **Carousel Animation** | SIMPLE but MINDBLOWING — minimal movement, maximum creative impact | NO voice, NO narration — SFX only | YES — do NOT change image design | MUST persist start-to-finish |
 | **Short Video** | HOLLYWOOD QUALITY — dramatic, cinematic, bold | YES — creator voice anchor + lip-sync | NO — creative freedom | Optional |
 | **Product Promo** | HOLLYWOOD QUALITY — dramatic, cinematic, bold | YES — creator voice anchor + lip-sync | NO — creative freedom | Optional |
 | **Pure B-Roll** | HOLLYWOOD QUALITY — cinematic motion | NO voice — SFX only | NO — creative freedom | N/A |
 
 ```
-CAROUSEL  = Subtle animation + SFX only + preserve design + headlines always visible
+CAROUSEL  = Simple but mindblowing animation + SFX only + preserve design + headlines always visible
 NON-CAROUSEL = Hollywood quality animation + voiceover lip-sync + creative freedom + stop the scroll
 ```
 
@@ -72,7 +72,7 @@ NON-CAROUSEL = Hollywood quality animation + voiceover lip-sync + creative freed
 |-------------|-----------------|----------|-------|
 | Standard scene | 6s | Grok Imagine | Default choice |
 | Hook / high-energy | 10s | Grok Imagine | Front-load action |
-| Climax / dramatic payoff | 10s - 15s | Grok Imagine | Reserve 15s for most important |
+| Climax / dramatic payoff | 10s | Grok Imagine | Maximum impact at 10s |
 | CTA / engagement | 10s | Grok Imagine | Bookend with hook |
 | Dialogue / talking head (budget) | 6s - 10s | Grok Imagine | `Speech:` syntax, single character lip-sync |
 | Dialogue / talking head (quality) | 8s | VEO 3.1 | Best lip-sync, production-grade |

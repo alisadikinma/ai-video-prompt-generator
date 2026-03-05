@@ -54,7 +54,8 @@
 ```
 Carousel Animation (LinkedIn/IG):
   Audio  → SFX only, NO voice, NO narration
-  Motion → SUBTLE only (drift, pulse, glow) — do NOT change image design
+  Motion → SIMPLE but MINDBLOWING — minimal movement, maximum creative impact
+  Duration → 6s (default) or 10s (dramatic/CTA) only
   Text   → Headlines MUST persist start-to-finish, always visible & readable
 
 Short Video (TikTok/Reels/Shorts):

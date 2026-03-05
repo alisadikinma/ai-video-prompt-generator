@@ -26,19 +26,20 @@ The carousel image IS the video frame — Grok 3 animates it with motion + auto-
 - Prompt describes ONLY what **MOVES** and what **SOUNDS**
 - No dialogue, no narration, no voiceover
 - SFX and ambient audio only
-- Duration: 6s default, 10s for dramatic/CTA
+- Duration: **6s** (default) or **10s** (dramatic/CTA) — only these two options
 
-### 2.2 Design Preservation (CRITICAL)
+### 2.2 Animation Philosophy: SIMPLE but MINDBLOWING
 
-**DO NOT change the image design.** The image is a finished carousel slide — animate what's already there, don't add or alter visual elements.
+**Keep the animation minimal in complexity but maximum in creative impact.** The image is a finished carousel slide — animate what's already there with clever, unexpected motion that makes viewers stop scrolling.
 
 | Rule | Description |
 |------|-------------|
 | **Animate existing elements** | Only animate objects/elements already visible in the image |
 | **No new objects** | Never add characters, objects, or effects not in the original image |
 | **No layout changes** | Keep composition, framing, and layout exactly as designed |
-| **Subtle motion only** | Gentle drift, pulse, glow, particle float — NOT dramatic transforms |
+| **Simple but creative motion** | Pick ONE clever animation idea — a single unexpected movement that creates a "wow" moment (e.g., parallax depth pop, cinematic light sweep, element isolation float, dramatic reveal timing) |
 | **Preserve color grading** | Don't alter the color palette or visual style |
+| **Less is more** | One well-chosen creative motion beats five generic ones |
 
 ### 2.3 Headline Persistence (MANDATORY)
 
@@ -51,12 +52,17 @@ The carousel image IS the video frame — Grok 3 animates it with motion + auto-
 
 ### 2.4 Prompt Formula
 ```
-[subtle motion of existing elements] + [slow/static camera] + [headline persistence instruction] + [SFX/ambient audio]
+[ONE clever creative motion] + [slow/static camera] + [headline persistence instruction] + [SFX/ambient audio]
 ```
 
-### 2.5 Example
+### 2.5 Examples
 ```
-The holographic data displays pulse with live updates, golden arcs animate across the world map connecting nodes. Camera gently drifts right. All headlines, text, branding, and watermarks remain sharp, visible, and readable from start to finish. Command center ambient hum, console alert tones, keyboard typing clicks, digital interface whooshes.
+# Simple but mindblowing — parallax depth pop
+Background world map slowly recedes while foreground data cards lift forward creating dramatic 3D depth separation. Camera holds static. All headlines, text, branding, and watermarks remain sharp, visible, and readable from start to finish. Deep bass hum, crisp digital chirps on each data point activation.
+```
+```
+# Simple but mindblowing — cinematic light sweep
+A golden light beam sweeps diagonally across the entire frame, each element it touches briefly glows and sharpens. Camera static. All headlines, text, branding, and watermarks remain sharp, visible, and readable from start to finish. Warm cinematic whoosh, subtle sparkle chimes on contact.
 ```
 
 ---
