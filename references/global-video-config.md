@@ -50,6 +50,32 @@ OVERRIDE ONLY WHEN: need production-grade lip-sync (VEO 3.1), complex physics (S
 
 ---
 
+## 2a. Grok Complexity Limits (HARD RULES)
+
+> **Grok Imagine is fast and cheap but has strict complexity limits. Exceeding them produces illogical, chaotic animation.**
+
+```
+GROK SIMPLICITY RULE:
+  Subject motions:  Max 2 (1 primary + 1 secondary)
+  Camera:           1 movement OR static (Grok-verified terms only)
+  Ambient motion:   Max 1 element (particles, light shift, foliage — pick ONE)
+  SFX layers:       2-3 (1 foreground + 1 ambient + optional accent)
+  TOTAL elements:   ~5 MAX
+
+  Lip-sync camera:  STATIC or very slow push-in ONLY
+  Lip-sync face:    >=20% of frame, MCU/CU required
+  Lip-sync words:   8-10 (6s) / 12-15 (10s) / 20-25 (15s)
+  Emotion:          ONE tone per clip (no progressions)
+
+  Physics:          SIMPLE ONLY (drift, sway, settle — no collisions, liquid, cloth sim)
+  Hands:            Simple gestures only (open hand, point) — no finger detail
+  Concurrent UI:    Max 2-3 animations, sequenced temporally not simultaneous
+```
+
+**LESS IS MORE:** Grok fills creative gaps on its own. Over-specifying forces the model into impossible territory and produces illogical results.
+
+---
+
 ## 3. Content Type Animation Rules (CRITICAL)
 
 | Content Type | Animation Style | Voice / Lip-sync | Design Preservation | Headlines |
@@ -110,9 +136,9 @@ NON-CAROUSEL = Hollywood quality animation + voiceover lip-sync + creative freed
 
 | Setting | Value |
 |---------|-------|
-| `quality_gate_points` | 8 |
-| `minimum_pass` | 6/8 |
-| `auto_revise_below` | 6/8 |
+| `quality_gate_points` | 9 |
+| `minimum_pass` | 7/9 |
+| `auto_revise_below` | 7/9 |
 
 ---
 

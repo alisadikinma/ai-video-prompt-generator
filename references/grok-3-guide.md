@@ -28,11 +28,31 @@
 | Cost | ~$0.05/second (cheapest among top-tier models) |
 | API model | `grok-imagine-video` at `api.x.ai/v1/videos/generations` |
 
-### Lip-Sync Notes (v1.0+)
-- **Single character** lip-sync works reliably with `Speech:` syntax
-- **Multi-character** lip-sync applies globally — unreliable, generates separate clips per speaker
-- **Quality:** Social media grade, not production-grade. For best lip-sync, use VEO 3.1
-- **Voice emotion:** Controlled through prompt context (see `voice-emotion-direction.md`)
+### Lip-Sync Rules (v1.0+ — STRICT)
+
+**Prerequisites for lip-sync to work:**
+- Face must be **>=20% of frame area** (MCU or CU shot required)
+- **Single character only** — multi-character lip-sync is unreliable
+- Camera must be **static or very slow push-in** — movement kills lip-sync accuracy
+- Use **Custom mode** with `Speech:` prefix
+- **Short dialogue only:** 8-10 words for 6s, max 12-15 words for 10s
+- Min 3 words — fewer triggers silence or gibberish
+
+**Quality expectations:**
+- Social media grade — NOT production-grade
+- Voice emotion control is LIMITED — keep direction simple (one tone, not progression)
+- Voice consistency is per-clip only — no cross-clip continuity
+- For production-grade lip-sync → route to **VEO 3.1**
+
+**Common lip-sync failures:**
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| Mouth doesn't move | Face too small in frame | Use MCU/CU, face >=20% of frame |
+| Garbled/rushed speech | Too many words | Cut to 8-10 words max |
+| Lip-sync out of sync | Camera moving during speech | Use static camera or very slow push-in |
+| Robotic voice | No emotion context in prompt | Add simple physical expression: "warm smile, confident posture" |
+| Both characters talk | Multi-character scene | Generate separate clips per speaker |
+| Silent output | <3 words in Speech: | Use at least 3-4 words minimum |
 
 ### Audio Generation Notes (v1.0+)
 - Aurora generates audio tokens in the same forward pass as video tokens (shared latent space)
@@ -40,6 +60,48 @@
 - **Always specify audio explicitly** to get matched, contextual SFX
 - Dialogue triggered by `Speech: [text]` — generates voice + lip-sync
 - Cannot upload custom music — audio style controlled via prompt description only
+
+---
+
+## 1a. Grok Limitations (CRITICAL — Read Before Prompting)
+
+> **Grok Imagine is FAST and CHEAP but has hard limits. Respect them or get garbage output.**
+
+### What Grok CANNOT Do Well
+
+| Limitation | What Happens | Workaround |
+|-----------|-------------|------------|
+| **Complex physics** | Momentum, gravity, collisions are unreliable — objects float, bounce wrong, defy logic | Keep physics simple: falling, swaying, drifting. For complex physics use Sora 2 |
+| **Multi-object interactions** | 3+ moving objects compete and produce chaos | Max 2-3 animated elements per prompt. Sequence them temporally, don't stack simultaneously |
+| **Hand/finger detail** | 6 fingers, merged limbs, wrong thumb placement | Keep hands simple (open gesture, point) or crop hands out of frame entirely |
+| **Fast action sequences** | Artifacts, motion blur, unrealistic movement | Use slow/medium motion. Fast whip pans and rapid action = artifacts |
+| **Cloth/liquid/hair physics** | Fabric clips through body, water behaves unnaturally, hair moves wrong | Describe gentle/subtle motion only: "hair shifts gently" not "hair whips violently" |
+| **Multiple simultaneous UI animations** | Elements compete, produce visual noise | Sequence animations: Element A (0-5s) then Element B (5-10s). Max 2 at once |
+| **Complex emotion progressions** | Voice stays flat or shifts unnaturally | One emotion per clip. "Confident" not "uncertain then confident then warm" |
+| **Multi-character lip-sync** | Speech applies globally, both mouths move to same words | Generate separate clips per speaker |
+| **Long dialogue** | Speech becomes rushed, garbled, unintelligible | Max 8-10 words for 6s, 12-15 for 10s. Shorter = better |
+| **Production-grade quality** | 720p cap, social media grade audio/lip-sync | For broadcast/production, route to VEO 3.1 |
+
+### The SIMPLICITY Rule (HARD RULE #0)
+
+```
+GROK SIMPLICITY LIMIT:
+- Max 2 subject motions (1 primary + 1 secondary)
+- 1 camera movement (or static)
+- 1 ambient motion element
+- 2-3 SFX layers (1 foreground + 1 ambient + optional accent)
+- TOTAL: ~5 moving/sounding elements MAX
+
+LESS IS MORE: Minimal prompts often produce BETTER results.
+Grok fills creative gaps on its own — over-specifying forces impossible territory.
+```
+
+### I2V Quality Tips
+
+- **Darker base images** produce better I2V results (confirmed by user testing)
+- **High facial detail** in source image improves character animation realism
+- **Simple compositions** (1 subject, clear background) animate better than busy scenes
+- **Source image IS the first frame** — every visual detail is already there, prompt only adds MOTION
 
 ---
 
@@ -68,10 +130,27 @@ NEVER re-describe static elements already visible in the image.
 ### The Prompt Formula
 
 ```
-[Primary motion description] + [Camera movement] + [Text preservation if applicable] + [Dialogue if applicable] + [SFX/audio direction]
+[Primary action — first 20 words] + [Camera movement — within first 2 sentences] + [Secondary motion] + [Text preservation if applicable] + [Speech: if dialogue] + [SFX/audio direction]
 ```
 
+Camera movement MUST appear within the first 2 sentences, not buried after motion descriptions.
 For dialogue scenes, add `Speech: [text]` after motion description (see Section 6a).
+
+### Prompt Depth by Duration
+
+| Duration | Motion Beats | Prompt Depth | Focus |
+|----------|-------------|-------------|-------|
+| 6s       | 1-2 beats   | Concise -- 1 primary action + camera + SFX | Single moment |
+| 10s      | 2-3 beats   | Moderate -- action sequence + camera + layered SFX | Short arc |
+| 15s      | 3-5 beats   | Rich -- multi-beat choreography + camera + full soundscape | Mini story |
+
+For 15s clips:
+- Structure as 3-act micro-narrative: SETUP (0-5s) -> DEVELOP (5-10s) -> PAYOFF (10-15s)
+- Use semicolons to separate temporal beats
+- Layer SFX: foreground action + mid-ground ambient + background atmosphere
+- Camera movement can be slow and sustained (15s gives time for full arc)
+- Every word must earn its place -- describe MOTION, not what's already visible
+- 15s prompts can be 100-150 words of PURE motion/sound direction (no re-description)
 
 ### Prompt Structure Tips (Aurora Architecture)
 
@@ -341,12 +420,16 @@ Speech: [dialogue text -- max 12-15 words per 10s clip].
 
 | Rule | Details |
 |------|---------|
-| Max words | 12-15 words per 10s clip (8-12 words for 6s) |
-| Min words | 3+ words — fewer triggers silence or gibberish |
-| Sweet spot | 3-5 seconds of speech per line |
+| Max words (6s) | **8-10 words** — shorter is better, clearer output |
+| Max words (10s) | **12-15 words** — split into 2 short phrases if possible |
+| Max words (15s) | **20-25 words** — use pauses between phrases |
+| Min words | **3+ words** — fewer triggers silence or gibberish |
+| Sweet spot | **3-5 seconds of speech per line** |
+| Face size | **>=20% of frame** — MCU or CU required for lip-sync |
+| Camera during speech | **Static or very slow push-in ONLY** — movement kills sync |
 | Multi-speaker | **Unreliable** — generate separate clips per character |
-| Emotion control | Via prompt context + physical expressions (see `voice-emotion-direction.md`) |
-| Voice consistency | Per-clip only — no cross-clip voice continuity (plan for post-production VO) |
+| Emotion control | **Keep SIMPLE** — one tone per clip: "confident" or "warm", not complex progressions |
+| Voice consistency | **Per-clip only** — no cross-clip continuity (plan for post-production VO) |
 
 ### When to Use VEO 3.1 Instead
 
@@ -487,6 +570,8 @@ Every Grok 3 video prompt must pass at least 6 of these 8 checks before delivery
 | Dialogue too long | Speech >15 words per 10s clip produces rushed, garbled audio | Keep to 3-5 seconds per spoken line, max 12-15 words (see `voice-emotion-direction.md`) |
 | Mixing styles in one prompt | Asking for both "photorealistic" and "anime style" produces incoherent output | Commit to one visual style per prompt |
 | Prompting for image generation | Writing prompts that describe what the image should look like, not how it should move | Remember: the image already exists. Prompt for ANIMATION only |
+| Re-describing image elements as motion detail | Wastes prompt weight on what the model already sees in the reference image, diluting actual motion direction | **BAD:** "The supervisor in white ESD coat standing in the factory walkway checks each empty workstation while workers in blue coats operate machines in the background, conveyor belts visible." **GOOD:** "Supervisor slaps clipboard against thigh; aggressive strides down walkway, stopping at each vacant station -- head snaps left, jaw clenches, fists ball at his sides; he spins back toward the line, chest heaving with frustration. Camera tilts down from wall clock to floor level. Clipboard crack on fabric, boots echoing on epoxy, machinery drone, his sharp exhale cutting through factory hum." |
+| Stacking simultaneous UI animations | Grok renders 2-3 animations max; more compete for attention and produce chaos | For dashboard/UI clips, SEQUENCE animations temporally. At 15s use 3-act structure: Element A animates (0-5s) -> Element B responds (5-10s) -> Element C resolves (10-15s). At 6s/10s, animate max 2 elements. |
 
 ---
 

@@ -378,7 +378,46 @@ Post-production VO track?         --> Any platform (voice added in editing)
 
 ---
 
-## 9. Common Voice Direction Mistakes
+## 9. Grok Imagine — Voice Direction Limits (CRITICAL)
+
+> **Grok's voice/emotion control is LIMITED compared to VEO 3.1. Keep it simple.**
+
+### What Works on Grok
+- **ONE emotion per clip** — "confident", "warm", "urgent" — pick one and commit
+- **Simple physical expression** paired with Speech: — "warm smile" or "raised eyebrow"
+- **Short, punchy dialogue** — 8-10 words for 6s, max 12-15 for 10s
+- **Conversational language** — spoken rhythm, not written/formal
+- **Basic ambient audio** — "room tone", "soft hum" — 1-2 layers only
+
+### What Does NOT Work on Grok
+- **Complex emotion progressions** — "uncertain then confident then warm" produces flat/confused delivery
+- **Elaborate adverb chains** — "says with tender vulnerability and quiet determination" gets ignored
+- **Parenthetical voice directions** — "(whispering)" or "(voice breaking)" — Grok doesn't parse these reliably
+- **Multi-sentence dialogue** — long monologues rush and garble. Split into separate clips
+- **Emphasis markers** — "stress on the word 'every'" — Grok doesn't do word-level emphasis
+
+### Grok Voice Direction Template
+```
+[ONE physical expression: "warm smile" or "eyebrow raises" or "nod"]
+Speech: [8-10 words, conversational, punchy]
+[1-2 ambient sounds: "quiet room tone" or "soft office hum"]
+```
+
+### Grok vs VEO 3.1 Voice Comparison
+| Capability | Grok Imagine | VEO 3.1 |
+|-----------|-------------|---------|
+| Emotion control | Basic (via prompt context) | Advanced (adverbs + context) |
+| Emotion progression | NO — one tone per clip | YES — can shift within clip |
+| Word emphasis | NO | Limited |
+| Breath/pause markers | NO | Basic support |
+| Voice quality | Social media grade | Production grade |
+| Best for | Fast social content, prototyping | Professional video, ads, broadcast |
+
+**Rule of thumb:** If your voice direction is more than 1 line, it's too complex for Grok. Simplify or route to VEO 3.1.
+
+---
+
+## 10. Common Voice Direction Mistakes
 
 | Mistake | Fix |
 |---------|-----|
@@ -395,7 +434,7 @@ Post-production VO track?         --> Any platform (voice added in editing)
 
 ---
 
-## Quick Reference Card
+## 11. Quick Reference Card
 
 ```
 DIALOGUE LENGTH:  3-5 seconds per line, max 12-15 words

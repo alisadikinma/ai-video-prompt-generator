@@ -218,7 +218,68 @@ When analyzing a still image for I2V, ask these questions to identify natural mo
 
 ---
 
-## 5. Copy-Paste Motion Combos by Scene Type
+## 5. Grok-Safe Motion Combos (Max 2 Subject Motions)
+
+> **For Grok Imagine: pick ONE primary + ONE secondary motion. That's it.**
+> More than 2 concurrent subject motions produces chaotic, illogical animation.
+
+### Talking Head (Grok-Safe)
+```
+Primary: expression warms into confident smile
+Secondary: subtle nod for emphasis
+Camera: static or very slow push-in
+SFX: warm room ambient, soft hum
+```
+
+### Action Scene (Grok-Safe)
+```
+Primary: sparks fly from impact point
+Secondary: subject flinches/reacts
+Camera: locked with subtle shake
+SFX: impact sound, dramatic bass hit
+```
+
+### Product Showcase (Grok-Safe)
+```
+Primary: light catches surface creating shifting highlights
+Secondary: dust particles drift through spotlight
+Camera: slow orbit around product
+SFX: clean premium whoosh, soft ambient tone
+```
+
+### Carousel / Text Overlay (Grok-Safe)
+```
+Primary: ONE creative motion (parallax depth, light sweep, or element float)
+Secondary: none — keep it minimal for text safety
+Camera: static
+SFX: 1-2 accent sounds matching the motion
+```
+
+### Landscape / Ambient (Grok-Safe)
+```
+Primary: clouds drifting OR water rippling OR foliage swaying (pick ONE)
+Secondary: light shifting across surfaces
+Camera: slow pan or gentle drift
+SFX: environmental ambient (wind, water, birds — pick 2)
+```
+
+### Dashboard / UI (Grok-Safe)
+```
+Primary: data element A activates/glows
+Secondary: element B responds (sequenced AFTER A, not simultaneous)
+Camera: static or slow pan
+SFX: digital chirp, interface tone
+```
+
+### DO NOT combine these for Grok:
+- 3+ facial micro-movements simultaneously
+- Full body motion + hand gestures + expression shifts (pick 2 max)
+- Multiple environmental elements all moving at once
+- Fast action + camera movement + complex SFX layering
+
+---
+
+## 6. Copy-Paste Motion Combos by Scene Type (All Platforms)
 
 ### Talking Head (Creator / Presenter)
 ```
