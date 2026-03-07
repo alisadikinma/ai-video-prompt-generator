@@ -43,7 +43,7 @@
 | `image-analysis-framework.md` | 7-element structured analysis for extracting video-relevant info from images (incl. text detection) |
 | `prompt-templates.md` | Per-platform prompt templates with fill-in sections and examples |
 | `text-preservation-rules.md` | Text preservation for images with baked-in text overlays |
-| `quality-checklist.md` | 8-point video quality gate, per-platform variations, common mistakes |
+| `quality-checklist.md` | 10-point video quality gate (incl. complexity check), per-platform variations, common mistakes |
 | `voice-audio-modes.md` | Content type audio rules: carousel (SFX only) vs short video (creator voice anchor) vs product promo |
 | `voice-emotion-direction.md` | Voice emotion control, natural delivery, anti-robotic techniques, dialogue pacing, platform voice capabilities |
 | `localization-id.md` | Indonesian SFX terms, motion descriptions, cultural context |
@@ -106,10 +106,19 @@ NEVER duplicate visual details already in the image inside the video prompt.
 7. Text Detection (headlines, branding, labels — triggers text preservation)
 
 ### Quality Gate
-- 8-point checklist per video prompt
-- Minimum 6/8 to pass
+- 10-point checklist per video prompt
+- Minimum 7/10 to pass (Grok: 8/10)
 - Auto-revise if below threshold
-- Factors: Motion match, One camera, No re-description, Specific SFX, Duration OK, Text safe, Platform OK, Negative prompt
+- Factors: Motion match, One camera, No re-description, Specific SFX, Duration OK, Text safe, Platform OK, Negative prompt, Zero re-description, **Complexity appropriate**
+
+### Grok Simplicity Rule (CRITICAL — NEW)
+```
+Max 2 subject motions + 1 camera + 1 ambient + 2-3 SFX (~5 elements MAX)
+LESS IS MORE — over-specifying causes chaotic, illogical animation
+Lip-sync: face >=20% frame, MCU/CU, static camera, 8-10 words (6s)
+Physics: simple only (drift, sway) — no collisions, liquid, cloth sim
+Hands: simple gestures only — no finger detail
+```
 
 ## Capabilities
 
@@ -118,7 +127,7 @@ NEVER duplicate visual details already in the image inside the video prompt.
 3. **Multi-platform export** — generate prompts for same image across multiple platforms
 4. **Carousel integration** — if carousel-prompt.md exists, use slide types + emotional arc for context
 5. **Platform routing** — auto-suggest best platform based on content, user can override
-6. **Quality gate** — 8-point scoring, minimum 6/8, auto-revision
+6. **Quality gate** — 10-point scoring, minimum 7/10 (Grok: 8/10), auto-revision
 7. **Text preservation** — detect and preserve text overlays in image-to-video conversion
 8. **SFX/audio direction** — detailed, specific audio cues matching scene content
 9. **Creator identity** (optional) — maintain face/brand consistency from reference images
@@ -150,18 +159,21 @@ Use `/video-add-platform` skill to automate the full 7-step scaffold, or manuall
 
 | Issue | Check |
 |-------|-------|
+| **Illogical/chaotic animation (Grok)** | **Too many concurrent motions — max 2 subject + 1 ambient. Simplify prompt.** |
+| **Lip-sync not working (Grok)** | **Face >=20% frame, MCU/CU, static camera, max 8-10 words, Custom mode, Speech: syntax** |
+| **Weird physics (Grok)** | **Grok can't simulate momentum/gravity/collisions. Use simple motion: drift, sway, settle** |
+| **Hand/finger deformities (Grok)** | **Keep hands simple (open gesture, point) or crop out of frame** |
 | Prompt too long for Grok 3 | Keep under 100 words — first 20-30 words matter most |
 | Prompt too short for VEO | Use 100-150 words for optimal VEO results |
 | Re-describes scene | Only describe MOTION + SOUND — image already has visuals |
-| Multiple camera moves | Pick ONE — never combine competing moves |
+| Multiple camera moves | Pick ONE — never combine competing moves. Grok: use verified terms only |
 | No SFX | Every prompt must have specific audio direction |
-| Generic audio | Be specific: "dramatic orchestral swell" not "add music" |
+| Generic audio | Be specific: "dramatic orchestral swell" not "add music." Grok: max 2-3 SFX layers |
 | Text blurred in video | Slow down camera, add text preservation instruction |
 | Text cropped | Avoid push-in that frames out text areas |
 | Wrong platform | Check platform decision tree — Grok 3 is default |
-| Lip-sync not working (Grok) | Check Speech: syntax in Custom mode, single character only, face >=20% frame |
 | Lip-sync not working (VEO) | Use says: colon syntax, face >=20% frame, MCU/CU shot |
-| Quality too low | Min 6/8 — check each of 8 factors is addressed |
+| Quality too low | Min 7/10 (Grok: 8/10) — check each of 10 factors |
 | Negative prompt in Grok 3 | Grok 3 does NOT support negative prompts — remove them |
 | Duration mismatch | Check global-video-config.md for platform durations |
 | Same camera every image | Vary movements across batch — check camera-movement-library.md |

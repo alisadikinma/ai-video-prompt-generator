@@ -6,7 +6,7 @@
 
 ---
 
-## 1. Grok 3 Basic Template
+## 1. Grok 3 Template
 
 ### Platform Specs
 | Parameter | Value |
@@ -18,39 +18,120 @@
 | Word Count | 50-100 words optimal |
 | Negative Prompts | NOT supported |
 | Audio | Native (SFX + dialogue + music) |
-| Lip-sync | Yes (single character, v1.0+) |
+| Lip-sync | Yes (single character, v1.0+, face >=20% frame, MCU/CU only) |
 | Dialogue | `Speech: [text]` in Custom mode (see `voice-emotion-direction.md`) |
+
+### SIMPLICITY RULE (Grok-Specific)
+```
+Max 2 subject motions (1 primary + 1 secondary)
+1 camera movement (or static)
+1 ambient motion element (optional)
+2-3 SFX (1 foreground + 1 ambient + optional accent)
+TOTAL: ~5 moving/sounding elements MAX
+LESS IS MORE: Grok fills creative gaps — over-specifying causes chaos.
+```
 
 ### Template
 ```
-[MOTION DESCRIPTION — what moves in the visual scene, 2-3 sentences].
-[CAMERA MOVEMENT — one single move: slow push-in / slow pan / static / slight drift / tilt].
-[TEXT PRESERVATION — "all text, headline, branding, and watermark remain sharp and readable throughout" if applicable].
-[DIALOGUE — Speech: [text] if lip-sync needed (optional)].
-[SFX/AUDIO — specific sounds matching the scene and emotional beat].
+[PRIMARY MOTION — the ONE main thing that moves, front-loaded in first 20 words].
+[SECONDARY MOTION — one supporting element, optional].
+Camera [single move: static / slow push-in / slow pan / slight drift / tilt].
+[TEXT PRESERVATION — if image has text: "all text remains sharp and readable throughout"].
+[DIALOGUE — Speech: [8-10 words] if lip-sync needed. Static camera required.].
+[SFX — 2-3 specific named sounds matching the scene].
 ```
 
 ### Formatting Rules
-- First sentence must be the primary motion (most important action)
-- ONE camera movement only. Never combine moves
-- Be specific with SFX -- never write "add sound" or "add music." Name exact sounds
-- If text/branding is baked into the image, explicitly instruct preservation
-- No negative prompts. Reframe negatives as positives: instead of "no blur" write "everything remains sharp"
+- **First sentence = primary motion** (most important action, first 20 words)
+- **ONE camera movement only.** Never combine moves
+- **Max 2 subject motions.** More than 2 concurrent animations = chaos
+- Be specific with SFX — name exact sounds, but limit to 2-3 layers
+- No negative prompts. Reframe: "sharp focus" instead of "no blur"
+- If text/branding in image, explicitly instruct preservation
+- For lip-sync: static camera, face >=20% frame, MCU/CU shot
 
-### Example: Simple (Presenter)
+### Example: Simple (Presenter, 6s)
 ```
-The creator's expression shifts into a warm curious smile, eyebrow raises slightly, one hand gestures gently while speaking. Camera gently drifts to the right. All text, headline, branding, and watermark remain sharp and readable throughout. Soft room ambient, warm conversational tone, subtle background music fade.
-```
-
-### Example: Complex (Action Scene)
-```
-Bullets slam into the bronze shield creating sparks and metal fragments flying outward, the warrior flinches and screams behind the shield, smoke and dust swirl around the impact zone. Camera stays locked with subtle shake from impacts. All text, headline, branding, and watermark remain sharp and readable throughout, the SWIPE text gently slides right repeatedly. Loud rapid gunfire bursts, bullet ricochets on metal shield, shell casings clinking on stone ground, dramatic cinematic bass impact.
+Expression warms into a confident smile, one hand gestures gently. Camera stays static. Soft room ambient, warm conversational tone.
 ```
 
-### Example: Dialogue (Creator Talking Head, 10s)
+### Example: Action Scene (10s)
 ```
-Subject shifts weight slightly, expression warming into genuine confidence, subtle nod as emphasis, right hand opens in presenting gesture. Camera slowly pushes in from medium close-up toward tight close-up. Speech: You can see every worker, right now, on one screen. Warm room ambient, soft HVAC hum behind voice, natural breath sounds between phrases.
+Sparks and metal fragments fly from shield impacts, warrior flinches behind the shield. Camera stays locked with subtle shake. Rapid gunfire bursts, bullet ricochets on metal, dramatic bass impact.
 ```
+
+### Example: Ambient / B-Roll (6s)
+```
+Golden light slowly shifts across glass facades, distant traffic moves along the highway. Camera gently drifts right. Soft city hum, faint airplane engine overhead.
+```
+
+### Example: Carousel Slide with Text (6s)
+```
+Background slowly recedes while foreground cards lift forward creating depth separation. Camera holds static. All text, headlines, and branding remain sharp and readable throughout. Deep bass hum, crisp digital chirps.
+```
+
+### Example: Dialogue / Talking Head (10s)
+```
+Expression warms into genuine confidence, subtle nod for emphasis. Camera slowly pushes in from MCU toward CU. Speech: You can see every worker, right now, on one screen. Warm room ambient, soft HVAC hum.
+```
+
+### Example: Product Demo (15s — 3-act structure)
+```
+Eyebrows rise in challenge to camera; knowing smile breaks through (0-5s); head tilts forward, one hand rises in presenting gesture (5-10s); single slow nod, jaw sets with conviction (10-15s). Camera pushes in steadily from MCU toward tight CU. Speech: Do you actually know where every worker on your floor is right now? Low tension drone, server hum, bass pulse on the nod.
+```
+
+### Template: Product Demo Video — 15s
+```
+Content: Product demo | Voice: Creator lip-sync | Face >=20% frame
+
+[SETUP 0-5s: ONE bold opening motion — stop the scroll];
+[DEVELOP 5-10s: ONE secondary motion responds];
+[PAYOFF 10-15s: Resolution — hold or settle].
+Camera [single sustained movement across full 15s].
+Speech: [max 20-25 words, split into 2-3 short phrases].
+[2-3 SFX: foreground action + ambient atmosphere].
+```
+
+### Grok Lip-Sync Template (Verified Working)
+
+**Prerequisites:** Face >=20% frame, MCU/CU shot, Custom mode, static or very slow camera.
+
+```
+[ONE facial expression shift — smile, nod, or brow raise].
+Camera [static OR very slow push-in toward face].
+Speech: [8-10 words, punchy, conversational — not formal/written].
+[1-2 ambient SFX — room tone, soft background].
+```
+
+**Working examples:**
+
+```
+# 6s — Short CTA
+Warm smile, slight forward lean toward camera. Camera static.
+Speech: Start your free pilot today.
+Soft ambient tone, gentle atmospheric swell.
+```
+
+```
+# 10s — Explanation
+Expression shifts from focused to knowing smile, subtle nod. Camera slowly pushes in from MCU to CU.
+Speech: Every worker, every zone, every second — that is real-time.
+Quiet office ambient, soft HVAC hum.
+```
+
+```
+# 10s — Hook question
+Eyebrow raises, slight head tilt, direct eye contact. Camera static, locked.
+Speech: Do you know where every worker is right now?
+Tension drone, server room hum.
+```
+
+**Anti-patterns (DO NOT):**
+- Camera panning/orbiting during speech (kills sync)
+- More than 15 words in Speech: (garbled output)
+- Wide shot with small face (lip-sync won't trigger)
+- Complex emotion progression (keep to ONE tone)
+- Multiple speakers in same clip (speech applies globally)
 
 ---
 

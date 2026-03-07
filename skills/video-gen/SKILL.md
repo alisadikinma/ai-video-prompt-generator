@@ -62,14 +62,16 @@ Every video must feel alive — natural motion, cinematic camera, immersive audi
 
 ## Hard Rules (NON-NEGOTIABLE)
 
+0. **GROK SIMPLICITY RULE: LESS IS MORE.** Max 2 subject motions + 1 camera + 1 ambient + 2-3 SFX. Over-specifying causes chaotic, illogical animation. See `global-video-config.md` Section 2a.
 1. **GOLDEN RULE: IMAGE = VISUALS, VIDEO = MOTION.** Never re-describe visual elements already in the image. Video prompt describes ONLY what MOVES and what SOUNDS
-2. **ONE camera movement per prompt.** Never combine multiple competing camera moves
-3. **SFX/audio is MANDATORY.** Every video prompt must include specific audio direction — never generic "add sound"
-4. **Grok 3 is PRIMARY.** Default to Grok 3 unless a specific feature requires another platform (lip-sync → VEO, physics → Sora 2, multi-shot → Seedance)
+2. **ONE camera movement per prompt.** Never combine multiple competing camera moves. For Grok, use ONLY verified terms (static, slow push-in, slow pan, tilt, drift, orbit, handheld)
+3. **SFX/audio is MANDATORY.** Every video prompt must include specific audio direction — never generic "add sound." Grok: max 2-3 SFX layers
+4. **Grok 3 is PRIMARY.** Default to Grok 3 unless a specific feature requires another platform (production lip-sync → VEO, physics → Sora 2, multi-shot → Seedance)
 5. **Duration must match content.** 6s for simple/ambient, 10s for standard/action, 15s for complex/dramatic
 6. **Text preservation when applicable.** If image contains text (headlines, branding, labels), include preservation instruction
-7. **Quality gate minimum 6/8.** Every prompt must pass the 8-point quality checklist before output
+7. **Quality gate minimum 7/10.** Every prompt must pass the 10-point quality checklist before output (Grok: 8/10)
 8. **Negative prompts ONLY where supported.** Grok 3 does NOT support negative prompts — never include them for Grok 3
+9. **Grok lip-sync requirements.** Face >=20% frame, MCU/CU shot, static camera, max 8-10 words (6s) / 12-15 words (10s). One emotion per clip. Route to VEO 3.1 for production-grade.
 
 ---
 
@@ -180,15 +182,17 @@ Based on platform, read the platform-specific guide + shared references.
 
 ### Step 4: QUALITY GATE
 
-Score the prompt against the 8-point quality checklist:
+Score the prompt against the 10-point quality checklist:
 
 ```
-### Quality: [N]/8
+### Quality: [N]/10
 ✓ Motion Match | ✓ One Camera | ✓ No Re-description | ✓ Specific SFX
-✓ Duration OK | ✓ Text Safe | ✓ Platform OK | ✓ Negative Prompt
+✓ Duration OK | ✓ Text Safe | ✓ Platform OK | ✓ Negative Prompt | ✓ Zero Re-description | ✓ Complexity OK
 ```
 
-**Minimum 6/8.** If below, auto-revise by adding missing elements before output.
+**Minimum 7/10 (all platforms), 8/10 (Grok).** If below, auto-revise before output.
+
+**Grok complexity check:** Max 2 subject motions + 1 camera + 1 ambient + 2-3 SFX. No complex physics, no detailed hands, no multi-object interactions. If lip-sync: face >=20%, static camera, max 8-10 words.
 
 ### Step 5: OUTPUT
 
@@ -214,9 +218,9 @@ Score the prompt against the 8-point quality checklist:
 | Camera | [movement] |
 | Audio | [SFX summary] |
 
-## Quality: [N]/8
+## Quality: [N]/10
 ✓ Motion Match | ✓ One Camera | ✓ No Re-description | ✓ Specific SFX
-✓ Duration OK | ✓ Text Safe | ✓ Platform OK | ✓ Negative Prompt
+✓ Duration OK | ✓ Text Safe | ✓ Platform OK | ✓ Negative Prompt | ✓ Zero Re-description | ✓ Complexity OK
 ```
 
 If output folder provided → write to `{path}/video-prompt-{platform}.md`
@@ -282,7 +286,7 @@ Platform: [name] | Images: [N] | Duration Total: [sum]s
 - [ ] Duration appropriate for each image
 - [ ] Camera variety across sequence
 - [ ] Consistent audio style across related images
-- [ ] All prompts pass 6/8 quality gate
+- [ ] All prompts pass 7/10 quality gate (Grok: 8/10)
 ```
 
 Output to: `{folder}/video-prompt-{platform}.md`

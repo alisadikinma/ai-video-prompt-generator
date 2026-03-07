@@ -157,7 +157,41 @@ Define once, maintain across all segments:
 
 This profile anchors the AI-generated voice (VEO) or TTS voice (Chatterbox) to maintain consistency.
 
-### 3.4 Platform Routing for Voice Content
+### 3.4 Product Demo — Lip-Sync MANDATORY (Grok 3)
+
+Product demo videos follow the same HOLLYWOOD QUALITY rules as short videos:
+
+- Creator-facing clips: MUST use `Speech: [text]` syntax for lip-sync
+- B-roll / dashboard clips: SFX only (no Speech:)
+- 15s clip budget: max 20-25 words of dialogue
+- Face must be >=20% of frame for reliable lip-sync
+- If production-grade lip-sync needed: route to VEO 3.1
+- Animation: dramatic, cinematic, bold — stop the scroll
+
+### 3.4a Grok Lip-Sync Limitations (CRITICAL)
+
+> **Grok lip-sync is social media grade. Manage expectations.**
+
+| Requirement | Details |
+|------------|---------|
+| Face size | **>=20% of frame** — MCU or CU shot required |
+| Camera during speech | **Static or very slow push-in ONLY** — any other movement kills sync |
+| Dialogue length | **8-10 words (6s), 12-15 words (10s)** — shorter = cleaner |
+| Min words | **3+ words** — fewer triggers silence or gibberish |
+| Emotion | **ONE tone per clip** — no complex progressions |
+| Speakers | **Single character only** — multi-character unreliable |
+| Voice quality | Social media grade — NOT broadcast/production |
+
+**When lip-sync fails on Grok, check these first:**
+1. Is the face large enough? (>=20% of frame)
+2. Is the camera static during Speech:?
+3. Is the dialogue too long? (>15 words)
+4. Are there multiple faces in the scene?
+5. Is the prompt too complex? (Grok simplicity limit: max 2 motions + 1 camera)
+
+**If 2+ of these fail → route to VEO 3.1 instead.**
+
+### 3.5 Platform Routing for Voice Content
 
 ```
 Face segment (best lip-sync)      → VEO 3.1 (production-grade, says: syntax)
@@ -165,10 +199,11 @@ Face segment (budget lip-sync)    → Grok 3 (social media grade, Speech: syntax
 Multi-character dialogue           → Seedance 2.0 or Kling 3.0
 B-roll with narration              → Grok 3 (add narration as audio direction) or VEO 3.1
 B-roll without narration           → Grok 3 (SFX only)
-Product demo                       → Grok 3 (SFX) or Seedance 2.0 (audio sync)
+Product demo (creator face)        → Grok 3 (Speech: syntax) or VEO 3.1 (says: syntax)
+Product demo (B-roll/dashboard)    → Grok 3 (SFX only)
 ```
 
-### 3.5 Script-to-Segment Mapping
+### 3.6 Script-to-Segment Mapping
 
 When converting a script to video prompts:
 
@@ -216,6 +251,6 @@ Auto-detect content type from user context:
 |--------|-------------|-----------|
 | "carousel", "LinkedIn carousel", "IG carousel" | Carousel Animation | SFX only, no voice |
 | "short video", "TikTok", "Reels", "Shorts" | Short Video | Creator voice anchor |
-| "product promo", "product demo", "ad" | Product Promo | Creator voice anchor |
+| "product promo", "product demo", "ad" | Product Promo / Demo | Creator voice anchor |
 | "b-roll", "stock footage", "ambient" | Pure B-Roll | SFX only |
 | No specific signal | Default | Ask user |

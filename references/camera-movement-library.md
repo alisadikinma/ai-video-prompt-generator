@@ -132,7 +132,11 @@ Which camera movement terms are recognized and produce reliable results on each 
 **Legend:** Yes = verified working, -- = unverified or unreliable on that platform.
 
 **Platform notes:**
-- **Grok 3:** Keep movements simple. Best with: static, slow push-in, slow pull-out, slow pan, tilt, slight drift, handheld. ONE movement per prompt mandatory.
+- **Grok 3 (CRITICAL — use ONLY verified terms):**
+  - **VERIFIED (use these):** `static shot`, `fixed camera`, `smooth dolly push-in`, `slow dolly-in`, `dolly-out`, `slow pull-back`, `slight drift`, `slow pan left/right`, `tilt up/down`, `orbit shot`, `slow zoom in/out`, `follow shot`, `handheld camera`
+  - **UNVERIFIED (avoid):** locked-off, gentle dolly, tracking shot, truck, whip pan, crane, 180-degree arc, Steadicam, aerial drone, Dutch angle, documentary-style, shaky cam
+  - **RULE:** ONE movement per prompt. Keep speed SLOW. Fast movements cause artifacts and blur text.
+  - **For lip-sync scenes:** Use ONLY `static shot` or `slow dolly push-in` — other movements kill lip-sync accuracy.
 - **VEO 3.1:** Full library supported. All VEO-verified terms in this document produce reliable results.
 - **Sora 2:** Strong movement support. ONE camera move + ONE subject action per shot. Beat-based timing recommended.
 - **Kling 3.0:** Reliable with standard movements. Avoid highly specific compound terms.
