@@ -22,6 +22,7 @@ Identify who or what is the primary subject of the image.
 | **Expression** | Current facial expression, emotional state | Determines whether to hold, shift, or intensify expression |
 | **Gaze Direction** | Where eyes are looking | Determines natural eye movement options |
 | **Scale in Frame** | How much of frame the subject occupies | Affects lip sync viability (face must be 20%+ of frame for dialogue) |
+| **Face Role** | Is this the creator/presenter or a non-creator character? | **CRITICAL for voice anchoring — non-creator faces cause Grok voice gender hijack. Flag for mandatory voice anchor in prompt** |
 
 ---
 
@@ -133,6 +134,7 @@ Use this template to structure your analysis before writing the video prompt. Fi
 - **Expression:** [current emotional expression]
 - **Gaze:** [direction eyes are looking]
 - **Scale:** [percentage of frame occupied by subject/face]
+- **Face Role:** [CREATOR (presenter/narrator) or NON-CREATOR (character in scene) — if NON-CREATOR, voice anchor is MANDATORY in prompt]
 
 ### 2. MOTION CUES
 - **Frozen Action:** [any mid-action elements]

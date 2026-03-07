@@ -110,6 +110,51 @@ The creator's voice must be **consistent and present throughout the ENTIRE video
 3. **Narration continues on B-roll** — voice continues as voiceover even when face not on screen
 4. **No awkward silence** — every segment has either speech or ambient (never dead silence)
 5. **Voice tone consistency** — same energy, pace, and personality across all segments
+6. **Voice gender anchoring** — explicitly state creator voice gender in EVERY off-screen narration prompt (see 3.1a)
+
+### 3.1a Voice Gender Anchoring (CRITICAL — Prevents Voice Hijack)
+
+> **Problem:** Grok uses visible faces in the image to determine voice characteristics for `Speech:`. When a non-creator face (e.g., female worker, different person) is visible in a B-roll image, Grok generates voice matching THAT face — not the creator's voice. This breaks voice consistency across the video.
+
+**Rule: EVERY off-screen narration prompt MUST explicitly anchor the creator's voice gender and characteristics.**
+
+| Scenario | Risk | Fix |
+|----------|------|-----|
+| B-roll with NO faces visible | Low — Grok picks neutral voice | Still add voice anchor for consistency |
+| B-roll with CREATOR face visible | Low — Grok matches creator | Add voice anchor as safety |
+| B-roll with NON-CREATOR face visible | **HIGH — Grok matches wrong face** | **MANDATORY voice anchor** |
+| B-roll with MULTIPLE faces visible | **HIGH — Grok picks random face** | **MANDATORY voice anchor** |
+
+**Grok 3 syntax — off-screen narration with voice anchor:**
+```
+A [gender] narrator voice. Speech: [narration text]
+```
+
+**Examples:**
+```
+# BAD — no voice anchor, female supervisor visible in image
+Speech: Night shift. Three AM. Your supervisor finds an operator asleep.
+→ Grok sees female face → generates female voice → breaks male creator anchor
+
+# GOOD — explicit voice anchor
+A male narrator voice. Speech: Night shift. Three AM. Your supervisor finds an operator asleep.
+→ Grok forced to use male voice regardless of visible faces
+
+# GOOD — with voice quality
+A deep confident male voice narrates. Speech: Every worker tracked. Every second counted.
+→ Explicit gender + tone anchoring
+```
+
+**VEO 3.1 syntax — off-screen narration with voice anchor:**
+```
+Male narrator says: "[narration text]"
+```
+
+**Implementation checklist:**
+1. Define creator voice gender ONCE in Creator Voice Profile at top of output file
+2. In EVERY off-screen narration prompt, prefix Speech: with `A [gender] narrator voice.`
+3. For lip-sync clips (creator face on-screen), voice anchor is optional (face anchors it)
+4. When non-creator faces are visible in image, voice anchor is **MANDATORY**
 
 ### 3.2 Segment Audio Rules
 

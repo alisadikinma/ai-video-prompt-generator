@@ -105,37 +105,68 @@ Speech: [max 20-25 words, split into 2-3 short phrases].
 ```
 [ONE simple expression — smile, nod, OR brow raise. MAX 1, never stack].
 Camera [static OR very slow push-in toward face].
-Speech: [8-10 words, punchy, conversational — not formal/written].
+A [gender] voice. Speech: [8-10 words, punchy, conversational — not formal/written].
 [1-2 ambient SFX — room tone, soft background].
 ```
 
 **Working examples:**
 
 ```
-# 6s — Short CTA
+# 6s — Short CTA (lip-sync, creator on-screen)
 Warm smile, slight forward lean toward camera. Camera static.
-Speech: Start your free pilot today.
+A male voice. Speech: Start your free pilot today.
 Soft ambient tone, gentle atmospheric swell.
 ```
 
 ```
-# 10s — Explanation
+# 10s — Explanation (lip-sync, creator on-screen)
 Knowing smile, subtle nod. Camera slowly pushes in from MCU to CU.
-Speech: Every worker, every zone, every second — that is real-time.
+A male voice. Speech: Every worker, every zone, every second — that is real-time.
 Quiet office ambient, soft HVAC hum.
 ```
 
 ```
-# 10s — Hook question
+# 10s — Hook question (lip-sync, creator on-screen)
 Eyebrow raises, direct eye contact. Camera static, locked.
-Speech: Do you know where every worker is right now?
+A male voice. Speech: Do you know where every worker is right now?
 Tension drone, server room hum.
+```
+
+### Grok Off-Screen Narration Template (Voice Anchor MANDATORY)
+
+**CRITICAL: Grok uses visible faces in the image to determine voice. When non-creator faces are visible, Grok generates the WRONG voice gender. Always add voice anchor.**
+
+```
+[PRIMARY MOTION — scene action, front-loaded].
+[SECONDARY MOTION — optional].
+Camera [single move].
+A [gender] narrator voice. Speech: [narration text — max 12-15 words for 10s].
+[2-3 SFX — specific named sounds].
+```
+
+**Working examples:**
+
+```
+# 10s — B-roll with female supervisor visible (creator is MALE)
+Flashlight beam sweeps into the gap between machines, supervisor's free hand moves to her hip.
+Camera tracks laterally from behind the supervisor's shoulder.
+A male narrator voice. Speech: Night shift. Three AM. Your supervisor finds an operator asleep.
+Flashlight hum, resigned exhale, factory machinery cycling.
+```
+
+```
+# 6s — B-roll with workers visible (creator is MALE)
+Long cigarette smoke exhaled lazily upward, one engineer nudges his colleague.
+Camera stays locked in static wide shot.
+A male narrator voice. Speech: Break ended seven minutes ago. Nobody is moving.
+Exhaust fan whirring, cigarette exhale, muffled phone audio.
 ```
 
 **Anti-patterns (DO NOT):**
 - **Multiple facial expressions + Speech:** — "eyebrows snap + smile breaks + hand rises" kills lip-sync
 - **Face turning away** — "turns to acknowledge dashboard" breaks face visibility
 - **Speech: buried mid-paragraph** — keep Speech: as its own clearly separated sentence
+- **No voice anchor on B-roll** — Grok picks voice from visible face, not creator
 - Camera panning/orbiting during speech (kills sync)
 - More than 15 words in Speech: (garbled output)
 - Wide shot with small face (lip-sync won't trigger)

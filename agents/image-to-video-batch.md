@@ -35,6 +35,8 @@ For each image in the folder (sorted by filename):
 - **Audio consistency**: Maintain coherent audio style/mood across related images
 - **Emotional arc**: If carousel context available, follow the emotional arc
 - **Duration logic**: Match duration to content (6s ambient, 10s action, 15s climax)
+- **Voice anchor consistency**: For voiced content (short video / product promo), EVERY prompt with Speech: must include `A [gender] voice.` (lip-sync) or `A [gender] narrator voice.` (off-screen narration) — from first image to last. This prevents Grok from using visible non-creator faces to determine voice gender.
+- **No image skipping**: Process ALL images in the folder. Never skip images as "redundant" — every image must have a video prompt. Differentiate similar images with varied camera, motion, or emotional beats.
 
 ### Output Format
 

@@ -451,6 +451,8 @@ GOOD: "Warm confident smile, slight nod.
 | Ignoring physical expression | Sync gesture to speech: `hand opens as he says` |
 | Multiple speakers same clip | Generate separate clips per character |
 | No breath/pause markers | Add: `pauses briefly`, `natural breath between phrases` |
+| **Voice gender changes mid-video** | **Non-creator face in image hijacks voice. Add voice anchor: `A [gender] narrator voice.` before Speech:** |
+| **No voice anchor on B-roll** | **EVERY off-screen narration prompt needs explicit gender anchor — Grok has no cross-clip voice memory** |
 
 ---
 

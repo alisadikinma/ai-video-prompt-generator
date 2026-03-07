@@ -82,6 +82,13 @@ Keep `Speech:` clearly separated in the prompt flow — do NOT bury it inside a 
 - Voice consistency is per-clip only — no cross-clip continuity
 - For production-grade lip-sync → route to **VEO 3.1**
 
+**Voice gender hijack prevention (CRITICAL):**
+- Grok uses visible faces in the image to determine voice characteristics for `Speech:`
+- If a female face is visible but creator is male → Grok generates female voice
+- **Fix:** Always prefix off-screen narration with voice anchor: `A [gender] narrator voice. Speech: [text]`
+- For lip-sync clips (creator face on-screen), the creator's face anchors the voice naturally
+- See `voice-audio-modes.md` Section 3.1a for full rules
+
 **Common lip-sync failures:**
 | Symptom | Cause | Fix |
 |---------|-------|-----|
@@ -94,6 +101,8 @@ Keep `Speech:` clearly separated in the prompt flow — do NOT bury it inside a 
 | Robotic voice | No emotion context in prompt | Add ONE simple physical expression: "warm smile" or "confident posture" |
 | Both characters talk | Multi-character scene | Generate separate clips per speaker |
 | Silent output | <3 words in Speech: | Use at least 3-4 words minimum |
+| **Wrong voice gender** | **Non-creator face visible in image** | **Add voice anchor: "A [gender] narrator voice." before Speech:** |
+| Voice sounds different per clip | Grok has no cross-clip voice memory | Add explicit voice anchor in every off-screen narration prompt |
 
 ### Audio Generation Notes (v1.0+)
 - Aurora generates audio tokens in the same forward pass as video tokens (shared latent space)

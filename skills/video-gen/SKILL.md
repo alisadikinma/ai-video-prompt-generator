@@ -73,6 +73,8 @@ Every video must feel alive — natural motion, cinematic camera, immersive audi
 8. **Negative prompts ONLY where supported.** Grok 3 does NOT support negative prompts — never include them for Grok 3
 9. **Grok lip-sync requirements.** Face >=20% frame, MCU/CU shot, static camera, max 8-10 words (6s) / 12-15 words (10s). One emotion per clip. Route to VEO 3.1 for production-grade.
 10. **Grok lip-sync expression limit (CRITICAL).** Max 1 facial expression direction when Speech: is present — multiple expressions compete with lip-sync and WIN (mouth won't move). Face must stay toward camera throughout (no "turns to look at screen"). Keep Speech: clearly separated in prompt, not buried mid-paragraph.
+11. **Voice gender anchoring (CRITICAL).** EVERY prompt with Speech: MUST include explicit voice gender anchor — `A [gender] voice.` for lip-sync clips, `A [gender] narrator voice.` for off-screen narration. This prevents Grok from using visible non-creator faces to determine voice gender (voice hijack). Apply from FIRST image to LAST image for consistency across the entire video.
+12. **No image skipping.** Process ALL images in the folder. Never skip images as "redundant" — every image the user provides must have a video prompt. If images seem similar, vary the camera movement, motion, or emotional beat to differentiate them.
 
 ---
 
@@ -183,15 +185,15 @@ Based on platform, read the platform-specific guide + shared references.
 
 ### Step 4: QUALITY GATE
 
-Score the prompt against the 10-point quality checklist:
+Score the prompt against the 11-point quality checklist:
 
 ```
-### Quality: [N]/10
+### Quality: [N]/11
 ✓ Motion Match | ✓ One Camera | ✓ No Re-description | ✓ Specific SFX
-✓ Duration OK | ✓ Text Safe | ✓ Platform OK | ✓ Negative Prompt | ✓ Zero Re-description | ✓ Complexity OK
+✓ Duration OK | ✓ Text Safe | ✓ Platform OK | ✓ Negative Prompt | ✓ Zero Re-description | ✓ Complexity OK | ✓ Voice Anchor
 ```
 
-**Minimum 7/10 (all platforms), 8/10 (Grok).** If below, auto-revise before output.
+**Minimum 7/11 (all platforms), 9/11 (Grok with voice).** If below, auto-revise before output.
 
 **Grok complexity check:** Max 2 subject motions + 1 camera + 1 ambient + 2-3 SFX. No complex physics, no detailed hands, no multi-object interactions. If lip-sync: face >=20%, static camera, max 8-10 words.
 
@@ -219,9 +221,9 @@ Score the prompt against the 10-point quality checklist:
 | Camera | [movement] |
 | Audio | [SFX summary] |
 
-## Quality: [N]/10
+## Quality: [N]/11
 ✓ Motion Match | ✓ One Camera | ✓ No Re-description | ✓ Specific SFX
-✓ Duration OK | ✓ Text Safe | ✓ Platform OK | ✓ Negative Prompt | ✓ Zero Re-description | ✓ Complexity OK
+✓ Duration OK | ✓ Text Safe | ✓ Platform OK | ✓ Negative Prompt | ✓ Zero Re-description | ✓ Complexity OK | ✓ Voice Anchor
 ```
 
 If output folder provided → write to `{path}/video-prompt-{platform}.md`

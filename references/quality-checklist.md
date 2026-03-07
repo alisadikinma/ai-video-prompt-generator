@@ -18,22 +18,23 @@
 | 8 | **Negative prompt included** | Quality exclusions specified (where platform supports it) | IF SUPPORTED |
 | 9 | **Zero re-description** | Prompt contains NO descriptions of static visual elements already in the source image (clothing, colors, positions, environment setup). Every word describes MOTION or SOUND exclusively. | ALL |
 | 10 | **Scene complexity appropriate** | Grok: max 2 subject motions + 1 camera + 1 ambient + 2-3 SFX. No complex physics, no multi-object interactions, no detailed hand/finger motion. VEO/Sora: higher complexity OK. | GROK |
+| 11 | **Voice anchor present** | Every Speech: prompt has explicit voice gender anchor (`A [gender] voice.` or `A [gender] narrator voice.`). Prevents Grok from using visible non-creator faces to determine voice. MANDATORY for all clips in voiced content (lip-sync AND off-screen narration). | IF VOICE |
 
-**Minimum: 7/10 (all platforms), 8/10 (Grok).** Revise before output if below threshold.
+**Minimum: 7/11 (all platforms), 9/11 (Grok with voice).** Revise before output if below threshold.
 
 ---
 
 ## 2. Quality Output Format
 
 ```
-### Quality: [N]/10
+### Quality: [N]/11
 ✓ Motion Match | ✓ One Camera | ✓ No Re-description | ✓ Specific SFX
-✓ Duration OK | ✓ Text Safe | ✓ Platform OK | ✓ Negative Prompt | ✓ Zero Re-description | ✓ Complexity OK
+✓ Duration OK | ✓ Text Safe | ✓ Platform OK | ✓ Negative Prompt | ✓ Zero Re-description | ✓ Complexity OK | ✓ Voice Anchor
 ```
 
 If a check fails:
 ```
-### Quality: [N]/10
+### Quality: [N]/11
 ✓ Motion Match | ✗ One Camera (has push-in AND pan) | ✓ No Re-description | ...
 → FIX: Remove pan, keep push-in only
 ```
@@ -57,6 +58,7 @@ If a check fails:
 - [ ] **No detailed hand/finger motion** (keep hands simple or out of frame)
 - [ ] **Lip-sync check** (if Speech: used): face >=20% frame, MCU/CU, static camera, max 8-10 words (6s) / 12-15 words (10s)
 - [ ] **Lip-sync expression limit** (if Speech: used): MAX 1 facial expression direction — multiple expressions compete with lip-sync and win. Face must stay toward camera throughout. Speech: clearly separated in prompt, not buried mid-paragraph
+- [ ] **Voice anchor present** (if Speech: used): `A [gender] voice.` before Speech: on lip-sync clips, `A [gender] narrator voice.` before Speech: on off-screen narration clips — prevents voice gender hijack from visible non-creator faces
 
 ### VEO 3.1
 - [ ] Duration: 4s / 6s / 8s

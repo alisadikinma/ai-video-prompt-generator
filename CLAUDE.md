@@ -106,10 +106,10 @@ NEVER duplicate visual details already in the image inside the video prompt.
 7. Text Detection (headlines, branding, labels — triggers text preservation)
 
 ### Quality Gate
-- 10-point checklist per video prompt
-- Minimum 7/10 to pass (Grok: 8/10)
+- 11-point checklist per video prompt
+- Minimum 7/11 to pass (Grok with voice: 9/11)
 - Auto-revise if below threshold
-- Factors: Motion match, One camera, No re-description, Specific SFX, Duration OK, Text safe, Platform OK, Negative prompt, Zero re-description, **Complexity appropriate**
+- Factors: Motion match, One camera, No re-description, Specific SFX, Duration OK, Text safe, Platform OK, Negative prompt, Zero re-description, **Complexity appropriate**, **Voice anchor present**
 
 ### Grok Simplicity Rule (CRITICAL)
 ```
@@ -130,6 +130,27 @@ RULE: Max 1 simple expression + Speech:. Never stack.
   - Speech: must be clearly separated in prompt, not buried mid-paragraph
   - BAD:  "Eyebrows snap up, smile breaks, hand rises. Speech: text"
   - GOOD: "Warm smile, slight nod. Speech: text"
+```
+
+### Voice Gender Anchoring (CRITICAL — Prevents Voice Hijack)
+```
+Grok uses visible faces in images to determine voice for Speech:.
+Non-creator face visible → Grok generates WRONG voice gender.
+
+RULE: EVERY Speech: prompt MUST have explicit voice gender anchor.
+  Lip-sync (creator face on-screen):     "A [gender] voice. Speech: text"
+  Off-screen narration (B-roll):          "A [gender] narrator voice. Speech: text"
+  Apply from FIRST image to LAST image — no exceptions.
+
+  BAD:  "Speech: Night shift. Three AM." (female supervisor visible → female voice)
+  GOOD: "A male narrator voice. Speech: Night shift. Three AM." (forced male voice)
+```
+
+### No Image Skipping
+```
+Process ALL images in the folder. Never skip as "redundant."
+Every image the user provides MUST have a video prompt.
+Differentiate similar images with varied camera, motion, or emotional beats.
 ```
 
 ## Capabilities
@@ -174,6 +195,7 @@ Use `/video-add-platform` skill to automate the full 7-step scaffold, or manuall
 | **Illogical/chaotic animation (Grok)** | **Too many concurrent motions — max 2 subject + 1 ambient. Simplify prompt.** |
 | **Lip-sync not working (Grok)** | **Face >=20% frame, MCU/CU, static camera, max 8-10 words, Custom mode, Speech: syntax** |
 | **Lip-sync mouth not moving (Grok)** | **Too many facial expressions competing with lip-sync — max 1 expression + Speech:. Face must stay toward camera. Speech: clearly separated, not buried mid-paragraph** |
+| **Voice gender changes mid-video (Grok)** | **Non-creator face visible in image hijacks Grok's voice. Add `A [gender] voice.` (lip-sync) or `A [gender] narrator voice.` (off-screen) before Speech: in EVERY prompt — first to last** |
 | **Weird physics (Grok)** | **Grok can't simulate momentum/gravity/collisions. Use simple motion: drift, sway, settle** |
 | **Hand/finger deformities (Grok)** | **Keep hands simple (open gesture, point) or crop out of frame** |
 | Prompt too long for Grok 3 | Keep under 100 words — first 20-30 words matter most |
