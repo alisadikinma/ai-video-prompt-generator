@@ -17,7 +17,7 @@ Standalone Claude Code plugin that converts any image to platform-optimized vide
 - Single image or batch folder processing
 - Structured 7-element image analysis via Claude Vision (incl. text detection)
 - Platform-specific prompt optimization
-- 8-point video quality gate (min 6/8)
+- 10-point video quality gate (min 7/10, Grok: 8/10)
 - Text preservation for images with baked-in text
 - 13+ SFX/audio categories (incl. enterprise/industrial)
 - Unified camera movement library
@@ -56,7 +56,7 @@ Or via **Manage Plugins UI** → **Marketplaces** tab → paste `alisadikinma/ai
 | Agent | Description |
 |-------|-------------|
 | `image-to-video-batch` | Batch processing folders of images |
-| `quality-reviewer` | Parallel quality gate verification (8-point scoring) |
+| `quality-reviewer` | Parallel quality gate verification (10-point scoring) |
 
 ## Quick Start
 

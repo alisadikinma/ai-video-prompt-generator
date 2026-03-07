@@ -72,6 +72,7 @@ Every video must feel alive — natural motion, cinematic camera, immersive audi
 7. **Quality gate minimum 7/10.** Every prompt must pass the 10-point quality checklist before output (Grok: 8/10)
 8. **Negative prompts ONLY where supported.** Grok 3 does NOT support negative prompts — never include them for Grok 3
 9. **Grok lip-sync requirements.** Face >=20% frame, MCU/CU shot, static camera, max 8-10 words (6s) / 12-15 words (10s). One emotion per clip. Route to VEO 3.1 for production-grade.
+10. **Grok lip-sync expression limit (CRITICAL).** Max 1 facial expression direction when Speech: is present — multiple expressions compete with lip-sync and WIN (mouth won't move). Face must stay toward camera throughout (no "turns to look at screen"). Keep Speech: clearly separated in prompt, not buried mid-paragraph.
 
 ---
 

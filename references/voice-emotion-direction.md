@@ -384,12 +384,17 @@ Post-production VO track?         --> Any platform (voice added in editing)
 
 ### What Works on Grok
 - **ONE emotion per clip** — "confident", "warm", "urgent" — pick one and commit
-- **Simple physical expression** paired with Speech: — "warm smile" or "raised eyebrow"
+- **MAX 1 facial expression** paired with Speech: — "warm smile" OR "raised eyebrow", never both
 - **Short, punchy dialogue** — 8-10 words for 6s, max 12-15 for 10s
 - **Conversational language** — spoken rhythm, not written/formal
 - **Basic ambient audio** — "room tone", "soft hum" — 1-2 layers only
+- **Face stays toward camera** — no "turns to look at screen" during Speech:
+- **Speech: clearly separated** in prompt — not buried mid-paragraph
 
 ### What Does NOT Work on Grok
+- **Multiple facial expression directions + Speech:** — expressions COMPETE with lip-sync and WIN. "Eyebrows snap up, knowing smile breaks through, hand rises" + Speech: = lip-sync fails (mouth doesn't move)
+- **Face turning away during Speech:** — "turns briefly to acknowledge dashboard" breaks >=20% face visibility
+- **Speech: buried in dense paragraph** — Grok may not parse it cleanly. Keep Speech: as a clearly separated sentence
 - **Complex emotion progressions** — "uncertain then confident then warm" produces flat/confused delivery
 - **Elaborate adverb chains** — "says with tender vulnerability and quiet determination" gets ignored
 - **Parenthetical voice directions** — "(whispering)" or "(voice breaking)" — Grok doesn't parse these reliably
@@ -398,9 +403,24 @@ Post-production VO track?         --> Any platform (voice added in editing)
 
 ### Grok Voice Direction Template
 ```
-[ONE physical expression: "warm smile" or "eyebrow raises" or "nod"]
+[ONE simple expression: "warm smile" OR "slight nod" OR "brow raise" — MAX 1, never stack]
+Camera [static OR very slow push-in].
 Speech: [8-10 words, conversational, punchy]
 [1-2 ambient sounds: "quiet room tone" or "soft office hum"]
+```
+
+### Expression vs Lip-Sync Conflict (CRITICAL)
+```
+Grok must choose: animate EXPRESSIONS or animate LIP-SYNC.
+Multiple expression directions + Speech: = expressions win, lip-sync fails.
+
+BAD:  "Eyebrows snap up, knowing smile breaks, hand rises.
+       Speech: Do you know where every worker is?"
+       → 3 facial motions compete with lip-sync → mouth doesn't move
+
+GOOD: "Warm confident smile, slight nod.
+       Speech: Do you know where every worker is?"
+       → 1 expression, lip-sync gets priority → mouth moves correctly
 ```
 
 ### Grok vs VEO 3.1 Voice Comparison

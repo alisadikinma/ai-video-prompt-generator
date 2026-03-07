@@ -72,12 +72,16 @@ Background slowly recedes while foreground cards lift forward creating depth sep
 
 ### Example: Dialogue / Talking Head (10s)
 ```
-Expression warms into genuine confidence, subtle nod for emphasis. Camera slowly pushes in from MCU toward CU. Speech: You can see every worker, right now, on one screen. Warm room ambient, soft HVAC hum.
+Warm confident smile, subtle nod. Camera slowly pushes in from MCU toward CU.
+Speech: You can see every worker, right now, on one screen.
+Warm room ambient, soft HVAC hum.
 ```
 
-### Example: Product Demo (15s — 3-act structure)
+### Example: Product Demo with lip-sync (10s)
 ```
-Eyebrows rise in challenge to camera; knowing smile breaks through (0-5s); head tilts forward, one hand rises in presenting gesture (5-10s); single slow nod, jaw sets with conviction (10-15s). Camera pushes in steadily from MCU toward tight CU. Speech: Do you actually know where every worker on your floor is right now? Low tension drone, server hum, bass pulse on the nod.
+Knowing smile, slight forward lean. Camera pushes in very slowly from MCU toward tight CU.
+Speech: Do you actually know where every worker on your floor is?
+Low tension drone, server hum, bass pulse.
 ```
 
 ### Template: Product Demo Video — 15s
@@ -96,8 +100,10 @@ Speech: [max 20-25 words, split into 2-3 short phrases].
 
 **Prerequisites:** Face >=20% frame, MCU/CU shot, Custom mode, static or very slow camera.
 
+**CRITICAL: Max 1 facial expression.** Multiple expression directions compete with lip-sync and win — mouth won't move. Face must stay toward camera throughout.
+
 ```
-[ONE facial expression shift — smile, nod, or brow raise].
+[ONE simple expression — smile, nod, OR brow raise. MAX 1, never stack].
 Camera [static OR very slow push-in toward face].
 Speech: [8-10 words, punchy, conversational — not formal/written].
 [1-2 ambient SFX — room tone, soft background].
@@ -114,19 +120,22 @@ Soft ambient tone, gentle atmospheric swell.
 
 ```
 # 10s — Explanation
-Expression shifts from focused to knowing smile, subtle nod. Camera slowly pushes in from MCU to CU.
+Knowing smile, subtle nod. Camera slowly pushes in from MCU to CU.
 Speech: Every worker, every zone, every second — that is real-time.
 Quiet office ambient, soft HVAC hum.
 ```
 
 ```
 # 10s — Hook question
-Eyebrow raises, slight head tilt, direct eye contact. Camera static, locked.
+Eyebrow raises, direct eye contact. Camera static, locked.
 Speech: Do you know where every worker is right now?
 Tension drone, server room hum.
 ```
 
 **Anti-patterns (DO NOT):**
+- **Multiple facial expressions + Speech:** — "eyebrows snap + smile breaks + hand rises" kills lip-sync
+- **Face turning away** — "turns to acknowledge dashboard" breaks face visibility
+- **Speech: buried mid-paragraph** — keep Speech: as its own clearly separated sentence
 - Camera panning/orbiting during speech (kills sync)
 - More than 15 words in Speech: (garbled output)
 - Wide shot with small face (lip-sync won't trigger)

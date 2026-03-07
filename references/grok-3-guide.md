@@ -37,6 +37,44 @@
 - Use **Custom mode** with `Speech:` prefix
 - **Short dialogue only:** 8-10 words for 6s, max 12-15 words for 10s
 - Min 3 words — fewer triggers silence or gibberish
+- **Max 1 facial expression** — multiple expression directions compete with lip-sync and win (see below)
+- **Face must stay toward camera** — turning away breaks face visibility threshold
+
+**The Expression vs Lip-Sync Conflict (CRITICAL):**
+```
+Grok must choose: animate facial EXPRESSIONS or animate LIP-SYNC.
+When you specify multiple expression directions AND Speech:,
+expressions win and lip-sync fails (mouth doesn't move properly).
+
+RULE: For lip-sync clips, use MAX 1 simple expression + Speech:.
+       Do NOT stack "eyebrows snap + smile breaks + hand rises + Speech:"
+
+BAD:  "Eyebrows snap up in sharp challenge, then a knowing smile
+       breaks through; one hand rises in a controlled gesture.
+       Speech: Do you know where every worker is?"
+       → Too many facial motions competing with lip-sync
+
+GOOD: "Warm confident smile, slight nod. Camera static.
+       Speech: Do you know where every worker is?"
+       → ONE expression, lip-sync gets priority
+
+BAD:  "turns briefly to acknowledge the dashboard behind him.
+       Speech: Every blue dot is a real person."
+       → Face turns AWAY from camera, breaks >=20% visibility
+
+GOOD: "Open hand gestures toward monitor, eyes stay on camera.
+       Speech: Every blue dot is a real person."
+       → Face stays visible, lip-sync works
+```
+
+**Prompt structure for lip-sync:**
+```
+[ONE simple expression — smile, nod, or brow raise. MAX 1.]
+Camera [static OR very slow push-in].
+Speech: [8-15 words, punchy, conversational].
+[1-2 ambient SFX — room tone, background].
+```
+Keep `Speech:` clearly separated in the prompt flow — do NOT bury it inside a dense paragraph.
 
 **Quality expectations:**
 - Social media grade — NOT production-grade
@@ -48,9 +86,12 @@
 | Symptom | Cause | Fix |
 |---------|-------|-----|
 | Mouth doesn't move | Face too small in frame | Use MCU/CU, face >=20% of frame |
+| Mouth doesn't move | **Too many facial expression directions** | **Max 1 simple expression + Speech:. Expressions compete with lip-sync** |
+| Mouth doesn't move | **Face turns away from camera** | **Keep face toward camera throughout. No "turns to look at screen"** |
 | Garbled/rushed speech | Too many words | Cut to 8-10 words max |
 | Lip-sync out of sync | Camera moving during speech | Use static camera or very slow push-in |
-| Robotic voice | No emotion context in prompt | Add simple physical expression: "warm smile, confident posture" |
+| Lip-sync out of sync | **Speech: buried in dense paragraph** | **Separate Speech: clearly — own sentence, not mid-paragraph** |
+| Robotic voice | No emotion context in prompt | Add ONE simple physical expression: "warm smile" or "confident posture" |
 | Both characters talk | Multi-character scene | Generate separate clips per speaker |
 | Silent output | <3 words in Speech: | Use at least 3-4 words minimum |
 

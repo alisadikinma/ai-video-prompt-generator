@@ -111,13 +111,25 @@ NEVER duplicate visual details already in the image inside the video prompt.
 - Auto-revise if below threshold
 - Factors: Motion match, One camera, No re-description, Specific SFX, Duration OK, Text safe, Platform OK, Negative prompt, Zero re-description, **Complexity appropriate**
 
-### Grok Simplicity Rule (CRITICAL — NEW)
+### Grok Simplicity Rule (CRITICAL)
 ```
 Max 2 subject motions + 1 camera + 1 ambient + 2-3 SFX (~5 elements MAX)
 LESS IS MORE — over-specifying causes chaotic, illogical animation
 Lip-sync: face >=20% frame, MCU/CU, static camera, 8-10 words (6s)
 Physics: simple only (drift, sway) — no collisions, liquid, cloth sim
 Hands: simple gestures only — no finger detail
+```
+
+### Grok Lip-Sync Expression Limit (CRITICAL)
+```
+Multiple facial expression directions COMPETE with lip-sync and WIN.
+Grok must choose: animate expressions OR animate lip-sync — not both.
+
+RULE: Max 1 simple expression + Speech:. Never stack.
+  - Face must stay toward camera (no "turns to look at screen")
+  - Speech: must be clearly separated in prompt, not buried mid-paragraph
+  - BAD:  "Eyebrows snap up, smile breaks, hand rises. Speech: text"
+  - GOOD: "Warm smile, slight nod. Speech: text"
 ```
 
 ## Capabilities
@@ -161,6 +173,7 @@ Use `/video-add-platform` skill to automate the full 7-step scaffold, or manuall
 |-------|-------|
 | **Illogical/chaotic animation (Grok)** | **Too many concurrent motions — max 2 subject + 1 ambient. Simplify prompt.** |
 | **Lip-sync not working (Grok)** | **Face >=20% frame, MCU/CU, static camera, max 8-10 words, Custom mode, Speech: syntax** |
+| **Lip-sync mouth not moving (Grok)** | **Too many facial expressions competing with lip-sync — max 1 expression + Speech:. Face must stay toward camera. Speech: clearly separated, not buried mid-paragraph** |
 | **Weird physics (Grok)** | **Grok can't simulate momentum/gravity/collisions. Use simple motion: drift, sway, settle** |
 | **Hand/finger deformities (Grok)** | **Keep hands simple (open gesture, point) or crop out of frame** |
 | Prompt too long for Grok 3 | Keep under 100 words — first 20-30 words matter most |

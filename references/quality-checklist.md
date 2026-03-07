@@ -56,6 +56,7 @@ If a check fails:
 - [ ] **No complex physics** (multi-object collisions, liquid, cloth simulation)
 - [ ] **No detailed hand/finger motion** (keep hands simple or out of frame)
 - [ ] **Lip-sync check** (if Speech: used): face >=20% frame, MCU/CU, static camera, max 8-10 words (6s) / 12-15 words (10s)
+- [ ] **Lip-sync expression limit** (if Speech: used): MAX 1 facial expression direction — multiple expressions compete with lip-sync and win. Face must stay toward camera throughout. Speech: clearly separated in prompt, not buried mid-paragraph
 
 ### VEO 3.1
 - [ ] Duration: 4s / 6s / 8s
@@ -134,6 +135,9 @@ When generating video prompts for multiple images (batch/carousel):
 | Complex physics in Grok prompt | Grok can't simulate momentum, gravity, collisions reliably. Keep motion simple |
 | Detailed hand/finger motion (Grok) | Produces 6 fingers, merged limbs. Keep hands simple or crop out |
 | Camera moving during lip-sync (Grok) | Use static or very slow push-in only when Speech: is present |
+| Multiple expressions + lip-sync (Grok) | **Max 1 facial expression when Speech: is present — expressions compete with lip-sync** |
+| Face turns away during lip-sync (Grok) | **Face must stay toward camera throughout Speech: — no "turns to look at screen"** |
+| Speech: buried in paragraph (Grok) | **Keep Speech: as a clearly separated sentence — not mid-paragraph** |
 | Prompt too short for VEO 3.1 | Use 100-150 words for optimal VEO results |
 | Missing audio exclusions (VEO) | Always add "no subtitles, no audience sounds, no text overlays" |
 | Lip-sync face too small (VEO) | Face must be >=20% of frame, use MCU or CU |
