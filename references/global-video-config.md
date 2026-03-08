@@ -24,9 +24,9 @@
 | `TERTIARY` | Kling 3.0 | Multi-shot sequences, voice reference, cinematic visuals |
 
 ```
-DEFAULT PLATFORM: Grok Imagine (Grok 3)
-OVERRIDE ONLY WHEN: need production-grade lip-sync (VEO 3.1), complex physics (Sora 2),
-                     multi-shot native (Kling 3.0/Seedance 2.0), or 1080p+ resolution
+RULE: ALWAYS ask the user which platform(s) they want BEFORE generating prompts.
+RECOMMEND: Grok Imagine (Grok 3) as primary — fastest, cheapest, lip-sync + native audio.
+NEVER silently default without asking. User may want multiple platforms.
 ```
 
 > **Version note:** Grok specs reflect Grok Imagine v1.0 (Feb 2026). Kling specs reflect v3.0 (Feb 2026).

@@ -67,7 +67,7 @@ Every video must feel alive — natural motion, cinematic camera, immersive audi
 2. **GOLDEN RULE: IMAGE = VISUALS, VIDEO = MOTION.** Never re-describe visual elements already in the image. Video prompt describes ONLY what MOVES and what SOUNDS
 3. **ONE camera movement per prompt.** Never combine multiple competing camera moves. For Grok, use ONLY verified terms (static, slow push-in, slow pan, tilt, drift, orbit, handheld)
 4. **SFX/audio is MANDATORY.** Every video prompt must include specific audio direction — never generic "add sound." Grok: max 2-3 SFX layers
-5. **Grok 3 is PRIMARY.** Default to Grok 3 unless a specific feature requires another platform (production lip-sync → VEO, physics → Sora 2, multi-shot → Seedance)
+5. **ASK PLATFORM FIRST.** ALWAYS ask the user which platform(s) they want before generating. Recommend Grok 3 as default, but let the user choose. Never silently default without asking.
 6. **ONE duration per clip.** Analyze narration length + story complexity → pick 6s, 10s, or 15s. NEVER generate multiple duration variants for the same clip.
 7. **Text preservation when applicable.** If image contains text (headlines, branding, labels), include preservation instruction
 8. **Quality gate minimum 9/13.** Every prompt must pass the 13-point quality checklist before output (Grok with voice: 11/13)
@@ -101,7 +101,7 @@ Every video must feel alive — natural motion, cinematic camera, immersive audi
 Ask the user:
 1. **Image path** — single image file path
 2. **Content type** — carousel animation (SFX only) / short video (voice anchor) / product promo (voice anchor) / pure b-roll (SFX only)
-3. **Target platform** — default Grok 3 (or user specifies VEO/Sora/Kling/Seedance)
+3. **Target platform(s)** — MUST ASK. Recommend Grok 3 as primary, but always confirm. User may want multiple platforms (e.g., "Grok 3 + VEO 3.1")
 4. **Duration preference** — or auto-detect based on content
 5. **Output folder** (optional) — write to file or print to console
 6. **Context** (optional) — additional info about what the image is for
@@ -155,22 +155,19 @@ Read the image using Claude's multimodal Read tool. Extract structured 7-element
 
 ### Step 2: PLATFORM ROUTING
 
-**Default: Grok 3** unless user specifies or content requires otherwise.
+**MUST ASK the user which platform(s) they want.** Recommend Grok 3 as primary with rationale. Never silently default.
 
 ```
-Platform Decision Tree:
-├── DEFAULT → Grok 3 (PRIMARY — fastest, cheapest, lip-sync + native audio)
-├── Need BEST lip-sync/dialogue? → VEO 3.1 (production-grade)
-├── Need budget lip-sync? → Grok 3 (social media grade, Speech: syntax)
-├── Complex physics/elaborate motion? → Sora 2
-├── Need highest resolution (2K)? → Seedance 2.0
-├── Multi-shot narrative + audio? → Seedance 2.0 or Kling 3.0
-├── Multi-character dialogue? → Seedance 2.0 or Kling 3.0
-├── Motion fluidity priority? → Kling 3.0
-└── User override? → use specified platform
+Platform Recommendation Guide (present to user):
+├── Grok 3 (RECOMMENDED) — fastest, cheapest, lip-sync + native audio
+├── VEO 3.1 — best lip-sync, production-grade dialogue, 1080p
+├── Sora 2 — complex physics, elaborate motion
+├── Seedance 2.0 — multi-shot, audio sync, up to 2K
+├── Kling 3.0 — motion fluidity, multi-shot, voice reference
+└── Multiple platforms — generate separate prompts per platform
 ```
 
-Present recommendation to user with brief rationale. User can override.
+Ask the user, present recommendation with brief rationale, then proceed with their choice.
 
 ### Step 3: PROMPT GENERATION
 

@@ -93,9 +93,13 @@ Trust the model — it knows how humans move. Over-specifying overrides natural 
 See global-video-config.md Section 2b for full philosophy.
 ```
 
-### Platform Priority
+### Platform Selection (MUST ASK)
 ```
-🟢 PRIMARY   → Grok 3 (default for ALL image-to-video conversion)
+ALWAYS ask the user which platform(s) they want BEFORE generating prompts.
+Recommend Grok 3 as primary, but never silently default without asking.
+User may want multiple platforms (e.g., "Grok 3 + VEO 3.1").
+
+🟢 PRIMARY   → Grok 3 (recommended default)
 🟡 SECONDARY → VEO 3.1 (lip-sync, dialogue), Seedance 2.0 (multi-shot, audio sync)
 🔵 TERTIARY  → Sora 2 (complex physics), Kling 3.0 (motion fluidity, multi-shot)
 ```
