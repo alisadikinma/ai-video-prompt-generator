@@ -17,7 +17,10 @@ Standalone Claude Code plugin that converts any image to platform-optimized vide
 - Single image or batch folder processing (never skips images)
 - Structured 7-element image analysis via Claude Vision (incl. text detection + face role)
 - Platform-specific prompt optimization with content type awareness
-- 11-point video quality gate (min 7/11, Grok with voice: 9/11)
+- Intention-driven prompting — direct WHAT happens, not HOW each body part moves
+- 13-point video quality gate (min 9/13, Grok with voice: 11/13)
+- Story intention + state change required for every clip
+- Emotion defaults to SUBTLE — escalate only for deliberate climax
 - Voice gender anchoring — prevents Grok voice hijack from non-creator faces
 - Grok simplicity rule — max 2 subject motions + 1 camera + 1 ambient + 2-3 SFX
 - Lip-sync expression limit — max 1 facial expression with `Speech:`
@@ -61,7 +64,7 @@ Or via **Manage Plugins UI** → **Marketplaces** tab → paste `alisadikinma/ai
 | Agent | Description |
 |-------|-------------|
 | `image-to-video-batch` | Batch processing folders of images with continuity + voice consistency |
-| `quality-reviewer` | Parallel quality gate verification (11-point scoring) |
+| `quality-reviewer` | Parallel quality gate verification (13-point scoring) |
 
 ## Quick Start
 
@@ -79,6 +82,14 @@ NEVER duplicate visual details already in the image.
 ```
 
 ## Key Rules
+
+**Intention-Driven Prompting** — Every prompt answers: "In this clip, [subject] [does ONE thing]." Direct intentions, not body parts. Trust the model — it knows how humans move.
+
+**State Change** — Every clip has a transformation: start state → end state = the story. No state change = no story.
+
+**Emotion = Subtle by Default** — Default to subtle ("quiet smile", "slight nod"). Escalate only for deliberate climax moments.
+
+**One Duration Per Clip** — Analyze storyline complexity → pick ONE duration (6s/10s/15s). Never generate multiple variants.
 
 **Grok Simplicity** — Less is more. Max ~5 elements per prompt. Over-specifying causes chaotic animation.
 
@@ -118,7 +129,7 @@ references/                    16 reference docs (read on-demand)
 | `image-analysis-framework.md` | 7-element structured image analysis |
 | `prompt-templates.md` | Per-platform prompt templates with examples |
 | `text-preservation-rules.md` | Text preservation for baked-in text overlays |
-| `quality-checklist.md` | 11-point quality gate, per-platform variations |
+| `quality-checklist.md` | 13-point quality gate, per-platform variations |
 | `voice-audio-modes.md` | Content type audio rules + voice gender anchoring |
 | `voice-emotion-direction.md` | Voice emotion control, anti-robotic techniques |
 | `localization-id.md` | Indonesian SFX terms, motion descriptions |
