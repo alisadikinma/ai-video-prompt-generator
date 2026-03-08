@@ -43,7 +43,7 @@
 | `image-analysis-framework.md` | 7-element structured analysis for extracting video-relevant info from images (incl. text detection) |
 | `prompt-templates.md` | Per-platform prompt templates with fill-in sections and examples |
 | `text-preservation-rules.md` | Text preservation for images with baked-in text overlays |
-| `quality-checklist.md` | 10-point video quality gate (incl. complexity check), per-platform variations, common mistakes |
+| `quality-checklist.md` | 13-point video quality gate (incl. complexity, state change, emotion default), per-platform variations, common mistakes |
 | `voice-audio-modes.md` | Content type audio rules: carousel (SFX only) vs short video (creator voice anchor) vs product promo |
 | `voice-emotion-direction.md` | Voice emotion control, natural delivery, anti-robotic techniques, dialogue pacing, platform voice capabilities |
 | `localization-id.md` | Indonesian SFX terms, motion descriptions, cultural context |
@@ -78,6 +78,21 @@ VIDEO prompt = MOTION ONLY (camera movement, micro-motion, audio/SFX)
 NEVER duplicate visual details already in the image inside the video prompt.
 ```
 
+### Prompt Philosophy — Intention-Driven (CRITICAL)
+```
+Every prompt answers: "In this clip, [subject] [does ONE thing]."
+Every clip has a state change: [start state] → [end state] = the story.
+Emotion defaults to SUBTLE — escalate only for deliberate climax moments.
+Duration = ONE choice based on storyline complexity, never multiple variants.
+
+Direct INTENTIONS, not body parts:
+  BAD:  "jaw clenches, fists ball, head snaps left, strides aggressively"
+  GOOD: "quiet frustration as he surveys the empty stations"
+
+Trust the model — it knows how humans move. Over-specifying overrides natural behavior.
+See global-video-config.md Section 2b for full philosophy.
+```
+
 ### Platform Priority
 ```
 🟢 PRIMARY   → Grok 3 (default for ALL image-to-video conversion)
@@ -106,10 +121,10 @@ NEVER duplicate visual details already in the image inside the video prompt.
 7. Text Detection (headlines, branding, labels — triggers text preservation)
 
 ### Quality Gate
-- 11-point checklist per video prompt
-- Minimum 7/11 to pass (Grok with voice: 9/11)
+- 13-point checklist per video prompt
+- Minimum 9/13 to pass (Grok with voice: 11/13)
 - Auto-revise if below threshold
-- Factors: Motion match, One camera, No re-description, Specific SFX, Duration OK, Text safe, Platform OK, Negative prompt, Zero re-description, **Complexity appropriate**, **Voice anchor present**
+- Factors: Story intention clear, One camera, No re-description, Specific SFX, Duration matches storyline, Text safe, Platform OK, Negative prompt, Zero re-description, **Complexity appropriate**, **Voice anchor present**, **State change present**, **Emotion subtle by default**
 
 ### Grok Simplicity Rule (CRITICAL)
 ```
@@ -160,7 +175,7 @@ Differentiate similar images with varied camera, motion, or emotional beats.
 3. **Multi-platform export** — generate prompts for same image across multiple platforms
 4. **Carousel integration** — if carousel-prompt.md exists, use slide types + emotional arc for context
 5. **Platform routing** — auto-suggest best platform based on content, user can override
-6. **Quality gate** — 10-point scoring, minimum 7/10 (Grok: 8/10), auto-revision
+6. **Quality gate** — 13-point scoring, minimum 9/13 (Grok with voice: 11/13), auto-revision
 7. **Text preservation** — detect and preserve text overlays in image-to-video conversion
 8. **SFX/audio direction** — detailed, specific audio cues matching scene content
 9. **Creator identity** (optional) — maintain face/brand consistency from reference images
@@ -192,7 +207,9 @@ Use `/video-add-platform` skill to automate the full 7-step scaffold, or manuall
 
 | Issue | Check |
 |-------|-------|
-| **Illogical/chaotic animation (Grok)** | **Too many concurrent motions — max 2 subject + 1 ambient. Simplify prompt.** |
+| **Illogical/chaotic animation (Grok)** | **Too many concurrent motions — max 2 subject + 1 ambient. Simplify prompt. Check intention-driven philosophy.** |
+| **Unnatural/robotic acting** | **Over-directed body-part choreography. Use intention-driven prompting: direct WHAT happens, not HOW each body part moves. See global-video-config.md Section 2b** |
+| **Multiple duration variants generated** | **Pick ONE duration based on storyline complexity. Never generate 6s/10s/15s variants for same clip** |
 | **Lip-sync not working (Grok)** | **Face >=20% frame, MCU/CU, static camera, max 8-10 words, Custom mode, Speech: syntax** |
 | **Lip-sync mouth not moving (Grok)** | **Too many facial expressions competing with lip-sync — max 1 expression + Speech:. Face must stay toward camera. Speech: clearly separated, not buried mid-paragraph** |
 | **Voice gender changes mid-video (Grok)** | **Non-creator face visible in image hijacks Grok's voice. Add `A [gender] voice.` (lip-sync) or `A [gender] narrator voice.` (off-screen) before Speech: in EVERY prompt — first to last** |
@@ -208,7 +225,7 @@ Use `/video-add-platform` skill to automate the full 7-step scaffold, or manuall
 | Text cropped | Avoid push-in that frames out text areas |
 | Wrong platform | Check platform decision tree — Grok 3 is default |
 | Lip-sync not working (VEO) | Use says: colon syntax, face >=20% frame, MCU/CU shot |
-| Quality too low | Min 7/10 (Grok: 8/10) — check each of 10 factors |
+| Quality too low | Min 9/13 (Grok with voice: 11/13) — check each of 13 factors |
 | Negative prompt in Grok 3 | Grok 3 does NOT support negative prompts — remove them |
 | Duration mismatch | Check global-video-config.md for platform durations |
 | Same camera every image | Vary movements across batch — check camera-movement-library.md |

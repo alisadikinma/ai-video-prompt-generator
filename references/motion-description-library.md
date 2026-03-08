@@ -3,6 +3,9 @@
 
 > **CORE PRINCIPLE: For I2V, describe MOTION only, never visuals. The model already sees the image.**
 > The image contains all visual details (face, wardrobe, environment, lighting, color, composition). The video prompt tells the model only what MOVES and what SOUNDS.
+>
+> **INTENTION-DRIVEN PRINCIPLE: Direct INTENTIONS, not body parts.**
+> Tell the model WHAT happens, not HOW each body part moves. "Quiet frustration" produces more natural motion than "jaw clenches, fists ball, head snaps left." The model was trained on millions of real human videos — it knows how humans express emotions. Trust it. See `global-video-config.md` Section 2b.
 
 ---
 
@@ -222,6 +225,9 @@ When analyzing a still image for I2V, ask these questions to identify natural mo
 
 > **For Grok Imagine: pick ONE primary + ONE secondary motion. That's it.**
 > More than 2 concurrent subject motions produces chaotic, illogical animation.
+>
+> **INTENTION-DRIVEN:** Write the intention first, then map to motion combo. Never start by stacking body-part movements.
+> Example: Intention "supervisor discovers empty stations" → Primary: walks + scans, Secondary: shoulders drop. NOT "strides aggressively, clipboard slaps thigh, head snaps left, jaw clenches, fists ball."
 
 ### Talking Head (Grok-Safe)
 ```

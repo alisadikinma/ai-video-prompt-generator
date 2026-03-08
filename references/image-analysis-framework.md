@@ -188,10 +188,16 @@ Use this template to structure your analysis before writing the video prompt. Fi
 
 ---
 
+### STORY INTENTION (MANDATORY — answer before writing prompt)
+- **One Intention:** "In this clip, [subject] [does ONE thing]."
+- **State Change:** [start state] → [end state]
+- **Emotion Level:** SUBTLE (default) / MODERATE (payoff) / STRONG (climax only)
+- **Duration:** [6s/10s/15s] based on narration length + story complexity — ONE choice, not multiple
+
 ### MOTION PLAN
 - **Camera Movement:** [selected single movement + speed]
-- **Subject Motion (intensity):** [LOW/MED/HIGH — specific motions]
-- **Ambient Motion:** [what moves in the environment]
+- **Subject Motion (intensity):** [LOW/MED/HIGH — described as intention, not body-part choreography]
+- **Ambient Motion:** [what moves in the environment — or leave to model]
 - **Audio Direction:** [environmental sounds + exclusions]
 - **What Naturally Moves:** [list from framework below]
 ```

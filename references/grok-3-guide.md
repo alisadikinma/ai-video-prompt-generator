@@ -171,16 +171,27 @@ NEVER re-describe static elements already visible in the image.
 1. **Image already contains the scene** -- do NOT re-describe static elements (characters, backgrounds, objects, colors, lighting)
 2. **Prompt describes ONLY what MOVES and what SOUNDS** -- motion, camera, audio
 3. **Keep it short and direct** -- 2-4 sentences, approximately 50-100 words
-4. **First 20-30 words are weighted most heavily** -- front-load the primary motion and subject action
+4. **First 20-30 words are weighted most heavily** -- front-load the primary intention
 5. **Negative prompts do NOT work** -- never write "no blur" or "avoid shaking"; instead write "sharp focus" or "steady camera"
 6. **One camera movement per prompt** -- never combine multiple competing camera moves
 7. **SFX/audio direction is mandatory** -- always include specific sound cues, never just "add sound"
 8. **Use positive, additive language exclusively** -- every word must describe what IS happening
+9. **INTENTION-DRIVEN PROMPTING (CRITICAL)** -- direct WHAT happens, not HOW each body part moves. "Quiet frustration" produces more natural motion than "jaw clenches, fists ball, head snaps left." The model was trained on millions of real human videos — trust it to fill in natural micro-expressions and body mechanics.
+10. **EMOTION DEFAULTS TO SUBTLE** -- "a quiet smile", "slight nod", "shoulders drop" — NOT "strides aggressively", "slams clipboard", "head snaps." Escalate to dramatic ONLY for deliberate climax moments.
+11. **EVERY CLIP HAS A STATE CHANGE** -- define start state → end state before writing. "Scanning → disappointed", "composed → pointed." If nothing transforms, there's no story.
+12. **ONE DURATION PER CLIP** -- analyze storyline complexity and pick 6s, 10s, or 15s. Never generate multiple duration variants for the same clip.
 
 ### The Prompt Formula
 
 ```
-[Primary action — first 20 words] + [Camera movement — within first 2 sentences] + [Secondary motion] + [Text preservation if applicable] + [Speech: if dialogue] + [SFX/audio direction]
+PRE-PROMPT (answer before writing):
+  1. INTENTION: "In this clip, [subject] [does ONE thing]."
+  2. STATE CHANGE: [start] → [end]
+  3. EMOTION: SUBTLE (default) / MODERATE / STRONG
+  4. DURATION: [6s/10s/15s] from storyline complexity
+
+PROMPT STRUCTURE:
+  [Intention — first 20 words, what happens] + [Camera — one move] + [Text preservation if needed] + [Speech: if dialogue] + [SFX — 2-3 specific sounds]
 ```
 
 Camera movement MUST appear within the first 2 sentences, not buried after motion descriptions.
@@ -607,6 +618,9 @@ Every Grok 3 video prompt must pass at least 6 of these 8 checks before delivery
 | Mistake | Why It Fails | Fix |
 |---------|-------------|-----|
 | Re-describing the entire scene | Image already contains the visuals; re-describing confuses the model and wastes prompt weight | Describe ONLY what MOVES and what SOUNDS |
+| **Over-directed body-part choreography** | **"Jaw clenches, fists ball, head snaps left" — model executes each mechanically, producing robotic stiff motion** | **Direct intentions: "quiet frustration" lets the model animate naturally from training data** |
+| **Theatrical/exaggerated acting** | **"Strides aggressively, clipboard slapping thigh" — model over-acts, stomping/thrashing unnaturally** | **Default to SUBTLE: "walks the aisle, scanning stations" — natural, human** |
+| **Multiple duration variants for same clip** | **Generating 6s + 10s + 15s options wastes time and shows lack of storyline understanding** | **Pick ONE duration based on narration length + story complexity** |
 | Multiple camera movements | Grok tries to execute all of them, producing jerky or conflicting motion | Pick ONE camera movement per prompt |
 | No SFX direction | Model generates silent or random ambient audio | Always include specific, named audio cues |
 | Generic audio ("add music") | Produces vague, unfitting background sound | Be specific: "dramatic orchestral swell" or "rapid gunfire bursts" |

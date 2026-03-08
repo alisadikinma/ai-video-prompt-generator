@@ -1,41 +1,44 @@
 # Video Quality Checklist
 
-> 8-point scoring system for every video prompt. Minimum 6/8 to pass. Auto-revise if below threshold.
+> 13-point scoring system for every video prompt. Minimum 9/13 to pass (Grok with voice: 11/13). Auto-revise if below threshold.
 
 ---
 
-## 1. Video Quality Gate — 8 Points
+## 1. Video Quality Gate — 13 Points
 
 | # | Factor | Check | Required |
 |---|--------|-------|----------|
-| 1 | **Motion matches content** | Motion intensity matches the scene's emotional tone (subtle for calm, dramatic for action) | ALL |
+| 1 | **Story intention clear** | Prompt has ONE clear intention answerable as "In this clip, [subject] [does one thing]." Motion intensity matches scene's emotional tone. No competing intentions. | ALL |
 | 2 | **ONE camera movement** | Single camera movement only — no competing moves | ALL |
 | 3 | **No visual re-description** | Prompt describes MOTION + SOUND only, never re-describes static image elements | ALL |
 | 4 | **Specific SFX/audio** | Audio direction is detailed and specific (not generic "add sound") | ALL |
-| 5 | **Duration appropriate** | Duration matches content complexity (6s simple, 10s standard, 15s complex) | ALL |
+| 5 | **Duration matches storyline** | Duration fits narration length + story beat complexity (6s short/simple, 10s medium, 15s dramatic). ONE duration per clip — never multiple variants. | ALL |
 | 6 | **Text preservation** | If image has text: headlines, branding readable throughout | IF TEXT |
 | 7 | **Platform constraints met** | Duration, resolution, prompt length within platform limits | ALL |
 | 8 | **Negative prompt included** | Quality exclusions specified (where platform supports it) | IF SUPPORTED |
 | 9 | **Zero re-description** | Prompt contains NO descriptions of static visual elements already in the source image (clothing, colors, positions, environment setup). Every word describes MOTION or SOUND exclusively. | ALL |
 | 10 | **Scene complexity appropriate** | Grok: max 2 subject motions + 1 camera + 1 ambient + 2-3 SFX. No complex physics, no multi-object interactions, no detailed hand/finger motion. VEO/Sora: higher complexity OK. | GROK |
 | 11 | **Voice anchor present** | Every Speech: prompt has explicit voice gender anchor (`A [gender] voice.` or `A [gender] narrator voice.`). Prevents Grok from using visible non-creator faces to determine voice. MANDATORY for all clips in voiced content (lip-sync AND off-screen narration). | IF VOICE |
+| 12 | **State change present** | Clip has a clear transformation from start state to end state (e.g., "scanning → disappointment", "still → alive"). If you can't name the state change, the prompt has no story. | ALL |
+| 13 | **Emotion = subtle by default** | Emotion direction defaults to SUBTLE ("quiet smile", "slight nod") unless clip is a deliberate dramatic climax. No over-acting, no theatrical rage, no body-part choreography. Intentions, not body parts. | ALL |
 
-**Minimum: 7/11 (all platforms), 9/11 (Grok with voice).** Revise before output if below threshold.
+**Minimum: 9/13 (all platforms), 11/13 (Grok with voice).** Revise before output if below threshold.
 
 ---
 
 ## 2. Quality Output Format
 
 ```
-### Quality: [N]/11
-✓ Motion Match | ✓ One Camera | ✓ No Re-description | ✓ Specific SFX
-✓ Duration OK | ✓ Text Safe | ✓ Platform OK | ✓ Negative Prompt | ✓ Zero Re-description | ✓ Complexity OK | ✓ Voice Anchor
+### Quality: [N]/13
+✓ Story Intention | ✓ One Camera | ✓ No Re-description | ✓ Specific SFX
+✓ Duration OK | ✓ Text Safe | ✓ Platform OK | ✓ Negative Prompt | ✓ Zero Re-description
+✓ Complexity OK | ✓ Voice Anchor | ✓ State Change | ✓ Subtle Emotion
 ```
 
 If a check fails:
 ```
-### Quality: [N]/11
-✓ Motion Match | ✗ One Camera (has push-in AND pan) | ✓ No Re-description | ...
+### Quality: [N]/13
+✓ Story Intention | ✗ One Camera (has push-in AND pan) | ✓ No Re-description | ...
 → FIX: Remove pan, keep push-in only
 ```
 
@@ -44,9 +47,12 @@ If a check fails:
 ## 3. Per-Platform Checklist Variations
 
 ### Grok 3 (PRIMARY — Grok Imagine v1.0+)
-- [ ] Duration: 6s (default), 10s (action), 15s (cinematic)
+- [ ] **Story intention clear** — ONE sentence: "In this clip, [subject] [does one thing]"
+- [ ] **State change defined** — start state → end state named before writing prompt
+- [ ] **Emotion = subtle by default** — no over-acting, no body-part choreography
+- [ ] Duration matches storyline complexity (6s short, 10s medium, 15s dramatic) — ONE duration, not multiple
 - [ ] Orientation matches source image aspect ratio
-- [ ] **First 20-30 words = primary motion** (front-loaded, most important action)
+- [ ] **First 20-30 words = primary intention** (front-loaded, most important action)
 - [ ] No negative prompt used (Grok doesn't support it)
 - [ ] **Max 2 subject motions** (1 primary + 1 secondary) — no stacking 5+ animations
 - [ ] ONE camera movement only (Grok-verified terms: static, slow push-in, slow pan, tilt, drift, orbit, handheld)
@@ -115,7 +121,9 @@ When generating video prompts for multiple images (batch/carousel):
 - [ ] Camera variety across sequence (not all same movement)
 - [ ] Consistent audio style/mood across related images
 - [ ] Platform constraints met for ALL prompts
-- [ ] All prompts pass 7/9 quality gate
+- [ ] Each prompt has clear story intention and state change
+- [ ] Emotion defaults to subtle — no over-acting or body-part choreography
+- [ ] All prompts pass 9/13 quality gate (Grok with voice: 11/13)
 
 ---
 
@@ -144,3 +152,8 @@ When generating video prompts for multiple images (batch/carousel):
 | Missing audio exclusions (VEO) | Always add "no subtitles, no audience sounds, no text overlays" |
 | Lip-sync face too small (VEO) | Face must be >=20% of frame, use MCU or CU |
 | Dialogue too long (VEO) | Max 12-15 words per 8s clip |
+| **Over-directed acting (theatrical)** | **Direct INTENTIONS not body parts. "Quiet frustration" not "jaw clenches, fists ball, head snaps left"** |
+| **No state change in clip** | **Every clip needs start state → end state. If nothing transforms, there's no story** |
+| **Multiple duration variants** | **Pick ONE duration based on storyline complexity — never generate 6s + 10s + 15s for same clip** |
+| **Body-part choreography** | **"Eyebrows snap, smile breaks, hand rises" → robotic. Use "reacts with quiet wonder" instead** |
+| **B-roll over-choreographed** | **Describe the MOMENT, not the choreography. "Steam curls from mug, morning light" not "steam rises + camera pushes + papers flutter"** |

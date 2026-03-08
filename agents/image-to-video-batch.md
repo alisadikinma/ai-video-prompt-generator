@@ -21,13 +21,18 @@ For each image in the folder (sorted by filename):
 1. **READ** the image using Read tool (Claude multimodal vision)
 2. **ANALYZE** using the 7-element framework from `references/image-analysis-framework.md`:
    - Subject, Motion Cues, Camera/Composition, Lighting, Environment, Mood/Style, Text Detection
-3. **SELECT** camera movement from `references/camera-movement-library.md`
+3. **DEFINE STORY INTENTION** (MANDATORY before writing prompt):
+   - One Intention: "In this clip, [subject] [does ONE thing]."
+   - State Change: [start state] → [end state]
+   - Emotion Level: SUBTLE (default) / MODERATE (payoff) / STRONG (climax only)
+   - Duration: ONE choice (6s/10s/15s) based on narration length + story complexity
+4. **SELECT** camera movement from `references/camera-movement-library.md`
    - VARY camera movements across the sequence — don't use the same one for every image
-4. **DESCRIBE** motion from `references/motion-description-library.md`
-5. **ADD** SFX/audio from `references/sfx-audio-vocabulary.md`
-6. **APPLY** text preservation from `references/text-preservation-rules.md` (only if image has text)
-7. **FORMAT** using `references/prompt-templates.md` for the target platform
-8. **SCORE** against `references/quality-checklist.md` (minimum 6/8)
+5. **WRITE** prompt using intention-driven approach — direct WHAT happens, not HOW each body part moves. Trust the model to fill in natural human behavior. See `global-video-config.md` Section 2b.
+6. **ADD** SFX/audio from `references/sfx-audio-vocabulary.md`
+7. **APPLY** text preservation from `references/text-preservation-rules.md` (only if image has text)
+8. **FORMAT** using `references/prompt-templates.md` for the target platform
+9. **SCORE** against `references/quality-checklist.md` (minimum 9/13, Grok with voice: 11/13)
 
 ### Continuity Rules
 
@@ -48,7 +53,7 @@ Write to `{input-folder}/video-prompt-{platform}.md` with:
 
 ### Quality Gate
 
-Every prompt must score 6/8 minimum. If below, revise before including in output.
+Every prompt must score 9/13 minimum (Grok with voice: 11/13). If below, revise before including in output. Every prompt must have clear story intention, state change, and default-subtle emotion.
 
 ## Reference Files
 

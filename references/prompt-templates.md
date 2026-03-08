@@ -4,6 +4,9 @@
 > **GOLDEN RULE: IMAGE = ALL VISUALS, VIDEO = MOTION ONLY.**
 > The source image already contains every visual detail -- face, wardrobe, environment, lighting, color, composition. The video prompt describes exclusively what MOVES and what SOUNDS. Never re-describe static visual elements that exist in the image.
 
+> **PROMPT PHILOSOPHY: INTENTION-DRIVEN, NOT OVER-DIRECTED.**
+> Every prompt starts with ONE clear intention and ONE state change. Write like a cinematographer's note — terse, visual, one moment. Direct INTENTIONS ("quiet frustration") not BODY PARTS ("jaw clenches, fists ball"). Default emotion = SUBTLE. Trust the model to fill in natural human behavior from its training data. See `global-video-config.md` Section 2b.
+
 ---
 
 ## 1. Grok 3 Template
@@ -31,10 +34,17 @@ TOTAL: ~5 moving/sounding elements MAX
 LESS IS MORE: Grok fills creative gaps — over-specifying causes chaos.
 ```
 
+### Pre-Prompt Checklist (MANDATORY — answer before writing)
+```
+1. STORY INTENTION: "In this clip, [subject] [does ONE thing]."
+2. STATE CHANGE:    [start state] → [end state]
+3. EMOTION LEVEL:   SUBTLE (default) / MODERATE (payoff) / STRONG (climax only)
+4. DURATION:        [6s/10s/15s] based on narration length + story complexity
+```
+
 ### Template
 ```
-[PRIMARY MOTION — the ONE main thing that moves, front-loaded in first 20 words].
-[SECONDARY MOTION — one supporting element, optional].
+[INTENTION — what happens in this clip, front-loaded in first 20 words. Direct the WHAT, not the HOW.].
 Camera [single move: static / slow push-in / slow pan / slight drift / tilt].
 [TEXT PRESERVATION — if image has text: "all text remains sharp and readable throughout"].
 [DIALOGUE — Speech: [8-10 words] if lip-sync needed. Static camera required.].
@@ -42,44 +52,58 @@ Camera [single move: static / slow push-in / slow pan / slight drift / tilt].
 ```
 
 ### Formatting Rules
-- **First sentence = primary motion** (most important action, first 20 words)
+- **First sentence = story intention** (what happens, first 20 words)
+- **Direct intentions, not body parts.** "Quiet frustration" not "jaw clenches, fists ball"
 - **ONE camera movement only.** Never combine moves
 - **Max 2 subject motions.** More than 2 concurrent animations = chaos
+- **Emotion defaults to SUBTLE.** Escalate only for deliberate dramatic moments
 - Be specific with SFX — name exact sounds, but limit to 2-3 layers
 - No negative prompts. Reframe: "sharp focus" instead of "no blur"
 - If text/branding in image, explicitly instruct preservation
 - For lip-sync: static camera, face >=20% frame, MCU/CU shot
 
-### Example: Simple (Presenter, 6s)
+### Example: Presenter — quiet confidence (6s)
 ```
-Expression warms into a confident smile, one hand gestures gently. Camera stays static. Soft room ambient, warm conversational tone.
-```
-
-### Example: Action Scene (10s)
-```
-Sparks and metal fragments fly from shield impacts, warrior flinches behind the shield. Camera stays locked with subtle shake. Rapid gunfire bursts, bullet ricochets on metal, dramatic bass impact.
+Intention: Presenter settles into confidence. State: neutral → warm confidence.
+Warm smile, gentle nod. Camera static. Soft room ambient, warm tone.
 ```
 
-### Example: Ambient / B-Roll (6s)
+### Example: Action — shield under fire (10s)
 ```
-Golden light slowly shifts across glass facades, distant traffic moves along the highway. Camera gently drifts right. Soft city hum, faint airplane engine overhead.
-```
-
-### Example: Carousel Slide with Text (6s)
-```
-Background slowly recedes while foreground cards lift forward creating depth separation. Camera holds static. All text, headlines, and branding remain sharp and readable throughout. Deep bass hum, crisp digital chirps.
+Intention: Warrior endures an assault. State: braced → shaken but holding.
+Sparks fly from shield impacts, warrior flinches behind the shield. Camera locked with subtle shake. Rapid gunfire bursts, ricochets on metal, dramatic bass impact.
 ```
 
-### Example: Dialogue / Talking Head (10s)
+### Example: B-Roll — city at dusk (6s)
 ```
-Warm confident smile, subtle nod. Camera slowly pushes in from MCU toward CU.
+Intention: City breathes in golden hour. State: still → gently alive.
+Golden light shifts across glass facades. Camera drifts right. Soft city hum, faint airplane overhead.
+```
+
+### Example: B-Roll — factory floor empty (10s)
+```
+Intention: Supervisor discovers empty stations. State: scanning → quiet disappointment.
+Supervisor walks the empty aisle, scanning vacant stations. Quiet frustration. Camera tracks alongside, steady. Factory hum, boots on epoxy, distant conveyor rhythm.
+```
+
+### Example: Carousel with Text (6s)
+```
+Intention: Depth reveals the content. State: flat → layered.
+Background recedes while foreground cards lift forward. Camera static. All text remains sharp and readable throughout. Deep bass hum, crisp digital chirps.
+```
+
+### Example: Dialogue — creator explaining (10s)
+```
+Intention: Creator shares a key insight. State: composed → genuinely proud.
+Warm smile, subtle nod. Camera slowly pushes in from MCU toward CU.
 Speech: You can see every worker, right now, on one screen.
 Warm room ambient, soft HVAC hum.
 ```
 
-### Example: Product Demo with lip-sync (10s)
+### Example: Dialogue — hook question (10s)
 ```
-Knowing smile, slight forward lean. Camera pushes in very slowly from MCU toward tight CU.
+Intention: Creator challenges the viewer. State: calm → pointed.
+Knowing half-smile, one eyebrow raised. Camera pushes in very slowly.
 Speech: Do you actually know where every worker on your floor is?
 Low tension drone, server hum, bass pulse.
 ```
@@ -137,8 +161,7 @@ Tension drone, server room hum.
 **CRITICAL: Grok uses visible faces in the image to determine voice. When non-creator faces are visible, Grok generates the WRONG voice gender. Always add voice anchor.**
 
 ```
-[PRIMARY MOTION — scene action, front-loaded].
-[SECONDARY MOTION — optional].
+[INTENTION — what happens, described as a moment, not choreography].
 Camera [single move].
 A [gender] narrator voice. Speech: [narration text — max 12-15 words for 10s].
 [2-3 SFX — specific named sounds].
@@ -148,18 +171,20 @@ A [gender] narrator voice. Speech: [narration text — max 12-15 words for 10s].
 
 ```
 # 10s — B-roll with female supervisor visible (creator is MALE)
-Flashlight beam sweeps into the gap between machines, supervisor's free hand moves to her hip.
-Camera tracks laterally from behind the supervisor's shoulder.
+Intention: Supervisor discovers a sleeping worker. State: searching → resigned.
+Flashlight beam sweeps into the gap between machines. Quiet resignation.
+Camera tracks laterally behind the supervisor's shoulder.
 A male narrator voice. Speech: Night shift. Three AM. Your supervisor finds an operator asleep.
-Flashlight hum, resigned exhale, factory machinery cycling.
+Flashlight hum, factory machinery cycling.
 ```
 
 ```
 # 6s — B-roll with workers visible (creator is MALE)
-Long cigarette smoke exhaled lazily upward, one engineer nudges his colleague.
-Camera stays locked in static wide shot.
+Intention: Break room defiance. State: lingering → nobody cares.
+Cigarette smoke drifts upward. Nobody moves.
+Camera stays locked, static wide shot.
 A male narrator voice. Speech: Break ended seven minutes ago. Nobody is moving.
-Exhaust fan whirring, cigarette exhale, muffled phone audio.
+Exhaust fan whirring, muffled phone audio.
 ```
 
 **Anti-patterns (DO NOT):**

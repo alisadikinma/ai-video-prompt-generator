@@ -76,6 +76,127 @@ GROK SIMPLICITY RULE:
 
 ---
 
+## 2b. Prompt Philosophy — Intention-Driven Prompting (CRITICAL)
+
+> **The fundamental shift: from "directing every detail" to "setting clear intentions."**
+> AI video models are NOT a film crew. They are a single entity executing everything at once.
+> Over-specifying competing instructions produces chaotic, unnatural, robotic results.
+> Under-specifying strategically lets the model use its training data (millions of real human videos) to fill in natural details.
+
+### The One Intention Rule
+
+Every prompt must be answerable in ONE sentence:
+```
+"In this clip, [subject] [does ONE thing]."
+```
+
+Everything else (camera, ambient, SFX) SUPPORTS that single intention — never competes.
+
+| Approach | Example | Result |
+|----------|---------|--------|
+| BAD: Multiple intentions | "She turns, notices camera, raises eyebrow, smirks, tosses hair, walks toward lens" | Chaotic, rushed, unnatural |
+| GOOD: One intention | "She glances toward camera with quiet confidence" | Natural, focused, compelling |
+| BAD: Body-part choreography | "Eyebrows snap up, smile breaks, hand rises, weight shifts to left foot" | Robotic execution of discrete actions |
+| GOOD: Intention-driven | "Reacts with quiet surprise" | Model fills in natural micro-expressions from training data |
+
+### The State Change Rule
+
+Every clip must have a TRANSFORMATION — what changes between frame 1 and last frame?
+
+```
+STATE CHANGE = THE STORY
+Start state → End state = narrative arc, even in 6 seconds.
+```
+
+| Start State | End State | Story | Duration |
+|-------------|-----------|-------|----------|
+| Focused concentration | Satisfied smile | Discovery | 6s |
+| Still, quiet room | Alive with activity | Awakening | 10s |
+| Confident posture | Forward lean, open gesture | Invitation | 6s |
+| Walking, scanning | Pauses, shoulders drop | Disappointment | 10s |
+| Tense, rigid | Relaxes, exhales | Relief | 6s |
+
+**If you can't name the state change, the prompt has no story.**
+
+### Cinematographer's Note Voice
+
+Write prompts like a STORYBOARD NOTE — terse, visual, one moment per frame.
+NOT like a novel, NOT like a screenplay, NOT like a Hollywood director briefing.
+
+```
+BAD (Hollywood director — over-directed):
+"Supervisor strides aggressively down the walkway, clipboard slapping against
+his thigh, head snaps left scanning each empty station, jaw clenches tight,
+fists ball at his sides; he spins back toward the line, chest heaving with
+frustration. Camera tilts down from wall clock to floor level."
+
+GOOD (Cinematographer's note — intention-driven):
+"Supervisor walks the empty aisle, scanning vacant stations. Quiet frustration.
+Camera tracks alongside, steady. Factory hum, boots on epoxy, distant conveyor."
+```
+
+### Direct Intentions, Not Body Parts
+
+Tell the model WHAT happens, not HOW each body part moves. The model was trained on millions of real human videos — it knows how humans move.
+
+| Approach | Prompt | Why |
+|----------|--------|-----|
+| BAD: Body-part directing | "Alis naik, mata melebar, mulut terbuka, tangan ke dada" | Mechanical, robotic execution |
+| GOOD: Intention directing | "Reacts with quiet wonder" | Model fills in natural micro-expressions |
+| BAD: Choreography | "Steps forward with left foot, shifts weight, extends right arm" | Stiff, unnatural sequence |
+| GOOD: Intention | "Steps closer, reaching out" | Natural weight transfer and motion |
+
+### Emotion Default = Subtle
+
+Default to SUBTLE emotion. Escalate ONLY for deliberate dramatic moments.
+
+| Level | Example | When to Use |
+|-------|---------|-------------|
+| **SUBTLE** (DEFAULT) | "a quiet smile", "slight nod" | 80% of clips — most natural |
+| **MODERATE** | "breaks into warm grin", "leans forward with interest" | Payoff moments, reveals |
+| **STRONG** | "erupts with laughter", "slams table" | Climax ONLY — use sparingly |
+
+**Current default error:** Plugin defaults to STRONG/MODERATE. Fix: default to SUBTLE, let the model's training produce natural human behavior.
+
+### Duration = Storyline Complexity (NOT Options)
+
+Duration is determined by the STORYLINE of each clip, not offered as multiple options.
+
+```
+RULE: Analyze the narration text and story beat, then pick ONE duration.
+  - Short narration (≤10 words) + simple moment → 6s
+  - Medium narration (11-15 words) + moderate complexity → 10s
+  - Long narration (16-25 words) + dramatic/cinematic beat → 15s
+  - NEVER generate multiple duration variants for the same clip
+```
+
+### B-Roll = Describe the Moment, Not Choreograph It
+
+For B-roll scenes, describe the SCENE STATE and let the model bring it to life.
+
+```
+BAD (choreographed):
+"Steam rises from coffee mug, camera pushes in, papers flutter,
+light shifts from window, dust particles drift through beam"
+
+GOOD (scene state — documentary observer):
+"Steam curls from coffee mug on cluttered desk. Early morning light.
+Quiet office hum, distant keyboard."
+```
+
+### Trust the Model
+
+AI video models are trained on millions of real-world videos. They know:
+- How humans walk, breathe, blink, react
+- How light behaves on surfaces
+- How fabric moves in wind
+- How environments sound
+
+**When you over-specify, you OVERRIDE this knowledge with worse instructions.**
+Leave supporting details (ambient motion, secondary expressions, physics) unspecified when possible. The model's default behavior is often more natural than explicit direction.
+
+---
+
 ## 3. Content Type Animation Rules (CRITICAL)
 
 | Content Type | Animation Style | Voice / Lip-sync | Design Preservation | Headlines |
@@ -136,9 +257,9 @@ NON-CAROUSEL = Hollywood quality animation + voiceover lip-sync + creative freed
 
 | Setting | Value |
 |---------|-------|
-| `quality_gate_points` | 9 |
-| `minimum_pass` | 7/9 |
-| `auto_revise_below` | 7/9 |
+| `quality_gate_points` | 13 |
+| `minimum_pass` | 9/13 (all platforms), 11/13 (Grok with voice) |
+| `auto_revise_below` | 9/13 (all platforms), 11/13 (Grok with voice) |
 
 ---
 
